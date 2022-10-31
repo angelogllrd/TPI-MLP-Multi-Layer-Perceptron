@@ -80,8 +80,10 @@ Para evitar la instalación de las librerias, podemos obtener el .exe usando [**
   pip install auto-py-to-exe
   auto-py-to-exe
   ```
-  ![autopy](https://user-images.githubusercontent.com/51035369/199046470-f7a59d19-6258-423f-ac75-3876d7c3eb2e.png)
-
+<p align="center">
+<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199046470-f7a59d19-6258-423f-ac75-3876d7c3eb2e.png">
+</p>
+  
 O directamente con **pyinstaller** (lo que usa Auto PY to EXE):
   ```
   pip install pyinstaller
