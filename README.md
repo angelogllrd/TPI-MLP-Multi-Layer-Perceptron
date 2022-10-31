@@ -1,5 +1,5 @@
 # Análisis MLP (Multi-Layer Perceptron) 
-TPI del año 2022 para la materia Inteligencia Artificial de la UTN FRRe 
+TPI del año 2022 para la materia Inteligencia Artificial de la UTN FRRe. 
 
 ## Consigna
 <details><summary>Ver consigna</summary>
@@ -64,7 +64,7 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 - **Qt Designer** (para abrir y editar la UI) 
   - Opción 1: https://build-system.fman.io/qt-designer-download
   - Opción 2: 
-    - En Windows (si la versión de Python es 3.11, cambiar \Python3xx por \Python310):
+    - En Windows (si la versión de Python es 3.10, cambiar \Python3xx por \Python310):
       ```
       pip install PySide6
       %USERPROFILE%\AppData\Local\Programs\Python\Python3xx\Lib\site-packages\PySide6\designer.exe
