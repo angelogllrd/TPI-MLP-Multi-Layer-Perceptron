@@ -864,7 +864,7 @@ class UI(QMainWindow):
                             sumErrorEpoca += error
 
                             # No se cuantas epocas me llevara el entrenamiento, por lo que muestro el progreso por cada epoca
-                            prog = ceil(contFilas*100/(len(dataset_entr_actual)-1))
+                            prog = ceil(contFilas*100/len(dataset_entr_actual))
                             self.progressBar_entrenamiento.setValue(prog)
 
                         errorEpoca = sumErrorEpoca / len(dataset_entr_actual)
@@ -904,15 +904,14 @@ class UI(QMainWindow):
                     
                     # Itero "nroEpocas" veces el dataset_entr_actual
                     for epoca in range(nroEpocas):
-                        if nroEpocas > 1: # Para evitar division por cero en la cuenta de abajo
-                            prog = ceil(epoca*100/(nroEpocas-1))
+                        if nroEpocas > 1:
+                            prog = ceil((epoca+1)*100/nroEpocas)
                             self.progressBar_entrenamiento.setValue(prog)
-                        else: # Si se ingresa 1 sola epoca, se pausa la barra de progreso 0.01 seg para no hacerlo tan rapido
+                        else: # Si se ingresa 1 sola epoca, se pausa la barra de progreso 0.02 seg para no hacerlo tan rapido
+                            self.progressBar_entrenamiento.reset()
                             self.progressBar_entrenamiento.setValue(50)
                             sleep(0.02)
                             self.progressBar_entrenamiento.setValue(100)
-                            sleep(0.02)
-                            self.progressBar_entrenamiento.reset()
                         sumErrorEpoca = 0 # Acumula error de 1 epoca
 
                         # Itero cada patron del dataset_entr_actual
@@ -1170,7 +1169,7 @@ class UI(QMainWindow):
             contFilas += 1
             self.mostrarLetra(patron[:-3], self.labels_matriz2) # Muestro la letra en 2da matriz de pixeles
             self.clasificarPatron(patron[:-3], self.label_clasificacion2, True) # Muestro clasificacion de la letra
-            prog = ceil(contFilas*100/(len(dataset)-1)) # Calculo progreso
+            prog = ceil(contFilas*100/len(dataset)) # Calculo progreso
             self.progressBar_probarpatrones.setValue(prog) # Grafico progreso
             QtTest.QTest.qWait(50) # Genero delay para animar la graficacion de la matriz de pixeles
         
