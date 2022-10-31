@@ -187,14 +187,14 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE):
   - `inicializarPatrones()`: Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0, usando las posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99).
   - `imprimirMatriz()`: Recibe un patrón e imprime la matriz de pixeles.
   - `generarDistorsion()`: Distorsiona el patron pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0).
-  - `generarDataset()`: Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación generados como se explica [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/edit/main/README.md#estructura-de-los-datasets).
+  - `generarDataset()`: Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación generados como se explica [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-los-datasets).
   - `cargarDataset()`: Se usa en la 1ra pestaña, con el boton "Cargar". Toma un dataset completo (con los 100, 500 o 1000 ejemplos) y extrae los demás datasets usando la misma lógica que `generarDataset()`.
   - `convertirStringADataset()`: Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt.
   - `imprimirDataset1()`: Imprime el dataset en forma gráfica (matrices de los patrones), usando `imprimirMatriz()`.
   - `imprimirDataset2()`: Imprime el dataset en forma tabular.
   - `restarDatasets()`: Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación.
 - **Creación de la red y de funciones para el algoritmo**:
-  - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/edit/main/README.md#estructura-de-la-red-neuronal).
+  - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-la-red-neuronal).
   - `imprimirRed1()`: Muestra el contenido de la red en su estado actual, por cada capa (no se la usa).
   - `imprimirRed2()`: Igual que la anterior, pero muestra la red de forma más ordenada.
   - `inicializarPesos()`: Corresponde al Paso 1. Inicializa los pesos de la red con valores pequeños aleatorios (entre -0.5 y 0.5)
