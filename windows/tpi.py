@@ -1006,11 +1006,12 @@ class UI(QMainWindow):
         ypoints10 = np.array(listaErrores10)
         ypoints20 = np.array(listaErrores20)
         ypoints30 = np.array(listaErrores30)
-        plt.plot(ypoints10)
-        plt.plot(ypoints20)
-        plt.plot(ypoints30)
+        plt.plot(ypoints10, label="Entr. sin conj. val. 10")
+        plt.plot(ypoints20, label="Entr. sin conj. val. 20")
+        plt.plot(ypoints30, label="Entr. sin conj. val. 30")
         plt.xlabel("Epocas")
-        plt.ylabel("MSE")
+        plt.ylabel("MSE promedio")
+        plt.legend()
         plt.show()
 
     def hacerTest(self):
