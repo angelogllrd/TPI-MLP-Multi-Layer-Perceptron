@@ -678,6 +678,7 @@ class UI(QMainWindow):
     def mostrarPorConsola(self, texto):
         # Muestra en la parte derecha de la UI un texto
         self.consola.appendPlainText(texto)
+        self.consola.moveCursor(QTextCursor.End)
 
     # METODOS PARA LA PRIMERA PESTAÑA
 
