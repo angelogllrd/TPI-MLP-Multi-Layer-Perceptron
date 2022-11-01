@@ -142,7 +142,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE):
 - Pestaña **"Entrenamiento y test"**:
 
 <p align="center">
-<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/199070265-6040b245-452e-4091-beac-90a88f93e12b.png">
+<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199070265-6040b245-452e-4091-beac-90a88f93e12b.png">
 </p>
 
   - **Sección 1**: 
@@ -165,17 +165,17 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE):
     - Estos botones permiten visualizar el contenido de la red (botón "Red"), o de los diferentes conjuntos (Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%) en forma tabular y gráfica:
     
 <p align="center">
-<img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/199070476-3fccaa1d-72a2-4558-aedc-1e15a695f080.png">
+<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199070476-3fccaa1d-72a2-4558-aedc-1e15a695f080.png">
 </p>   
 
 <p align="center">
-<img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/199070579-d14adbfb-a99a-478f-adc6-8c1bcab16a80.png">
+<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199070579-d14adbfb-a99a-478f-adc6-8c1bcab16a80.png">
 </p>    
     
 - Pestaña **"Probar patrón"**:
 
 <p align="center">
-<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/199076433-cb38abc1-64de-46a2-ad34-66e08c9b5251.png">
+<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199076433-cb38abc1-64de-46a2-ad34-66e08c9b5251.png">
 </p>
 
   - **Sección 7**: 
