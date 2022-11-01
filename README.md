@@ -50,7 +50,7 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 - Debe ser una aplicación de escritorio.
 </details>
 
-## Ejecución del .py - Requerimientos
+## Requerimientos para ejecutar el .py
 - [**Python 3**](https://www.python.org/downloads/)
 - [**pip**](https://pypi.org/project/pip/) (ya incluido con el instalador de Windows). En Linux:
   ```
@@ -62,20 +62,25 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
   pip install PyQt5
   ```
 - **Qt Designer** (para abrir y editar la UI) 
-  - Opción 1: https://build-system.fman.io/qt-designer-download
-  - Opción 2: 
-    - En Windows (si la versión de Python es 3.10, cambiar \Python3xx por \Python310):
+  - Windows
+    - Opción 1: https://build-system.fman.io/qt-designer-download
+    - Opción 2: (Si la versión de Python es 3.10, cambiar \Python3xx por \Python310)
       ```
       pip install PySide6
       %USERPROFILE%\AppData\Local\Programs\Python\Python3xx\Lib\site-packages\PySide6\designer.exe
       ```
+  - Linux:
+    ```
+    sudo apt-get install qttools5-dev-tools
+    designer
+    ```
 - **Matplotlib** (Para las gráficas de errores vs epocas)
   ```
   pip install matplotlib
   ```
   
-## Ejecución con .exe (Windows)
-Para evitar la instalación de las librerias, podemos obtener el .exe usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
+## Ejecutable (Windows y Linux)
+Para evitar la instalación de las librerias, podemos obtener un ejecutable usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
   pip install auto-py-to-exe
   auto-py-to-exe
