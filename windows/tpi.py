@@ -954,15 +954,15 @@ class UI(QMainWindow):
                         inicializarPesos(self.red)
                         # Si algún patrón tuvo error por encima del aceptable, comienzo una nueva época
                         while errorNoAceptable:  
+                            nroEpocas += 1
+                            if nroEpocas > 200: # Cuido que el entrenamiento termine en algún momento si no está convergiendo
+                                self.mostrarPorConsola('>>Mas de 200 épocas...')
+                                self.mostrarPorConsola('>>La red no se establizó')
+                                nroEpocas -= 1
+                                break
                             errorNoAceptable = False                      
                             sumErrorEntr = 0 # Acumula los errores de entrenamiento de 1 época
-                            nroEpocas += 1
                             contFilas = 0 # Para graficar el progreso
-                            # print('Epoca ' + str(nroEpocas))
-                            if nroEpocas > 100:
-                                self.mostrarPorConsola('>>Mas de 100 epocas...')
-                                self.mostrarPorConsola('>>La red no se establizó')
-                                break
                             
                             # Itero cada patrón del dataset_entr_actual
                             for fila in dataset_entr_actual:
@@ -972,20 +972,29 @@ class UI(QMainWindow):
                                 calcularTerminosErrorRed(self.funcionDeActivacionSal, self.funcionDeActivacionOc, self.red)
                                 actualizarPesosRed(self.alfa, self.beta, self.red)
                                 errorEntr = calcularMSE(self.red)
-                                if errorEntr > errorAcep:
-                                    errorNoAceptable = True
-                                    # print('Error que superó:', errorEntr)
                                 sumErrorEntr += errorEntr
+
+                                # # Uso esto cuando el error aceptable es para cada patrón del dataset (como el algoritmo del libro)
+                                # if errorEntr > errorAcep:
+                                #     errorNoAceptable = True
+                                #     # print('Epoca ' + str(nroEpocas))
+                                #     # print('Error que superó:', errorEntr)
 
                                 # No se cuántas épocas me llevará el entrenamiento, por lo que muestro el progreso por cada época
                                 prog = ceil(contFilas*100/len(dataset_entr_actual))
                                 self.progressBar_entrenamiento.setValue(prog)
 
-                            # Terminé una epoca, calculo y guardo errores de entrenamiento y validación de la época
+                            # Terminé una época, calculo y guardo errores de entrenamiento y validación de la época
                             errorEntrEpoca = sumErrorEntr / len(dataset_entr_actual)
                             listaErroresEntrEpoca.append(errorEntrEpoca)
                             errorValEpoca = self.probarDataset(conjunto_val)[3]
                             listaErroresValEpoca.append(errorValEpoca)
+
+                            # Uso esto cuando el error aceptable es para toda la época (error global)
+                            if errorEntrEpoca > errorAcep:
+                                errorNoAceptable = True
+                                # print('Epoca ' + str(nroEpocas))
+                                # print('Error que superó:', errorEntrEpoca)
 
                         # Terminé entrenamiento para el conjunto de validación actual. Guardo listas de errores y muestro resultados
                         if conjunto_val is self.conjunto_val_10:
@@ -1246,6 +1255,10 @@ class UI(QMainWindow):
         plt.tick_params(axis='both', labelsize=8)
         plt.xticks(ticks=range(len(lErroresEntr10)), labels=range(1,len(lErroresEntr10)+1)) # Para que la numeración del eje x comience en 1
         plt.legend(fontsize=8)
+        tam = len(lErroresEntr10)
+        if tam > 70: # Si el número de épocas es muy grande, muestro los valores del eje x en forma vertical para que no se solapen
+            plt.xticks(rotation='vertical')
+            plt.tick_params(axis='x', labelsize=5)
 
         # Gráfico 2
         yEntr = np.array(lErroresEntr20)
@@ -1257,6 +1270,10 @@ class UI(QMainWindow):
         plt.tick_params(axis='both', labelsize=8)
         plt.xticks(ticks=range(len(lErroresEntr20)), labels=range(1,len(lErroresEntr20)+1))
         plt.legend(fontsize=8)
+        tam = len(lErroresEntr20)
+        if tam > 70:
+            plt.xticks(rotation='vertical')
+            plt.tick_params(axis='x', labelsize=5)
 
         # Gráfico 3
         yEntr = np.array(lErroresEntr30)
@@ -1269,6 +1286,10 @@ class UI(QMainWindow):
         plt.tick_params(axis='both', labelsize=8)
         plt.xticks(ticks=range(len(lErroresEntr30)), labels=range(1,len(lErroresEntr30)+1))
         plt.legend(fontsize=8)
+        tam = len(lErroresEntr30)
+        if tam > 70:
+            plt.xticks(rotation='vertical')
+            plt.tick_params(axis='x', labelsize=5)
 
         plt.show()
 
@@ -1353,7 +1374,7 @@ class UI(QMainWindow):
 
     def tratarLetra(self, patron, letra):
         # Se llama cuando se presiona el botón de una letra
-        self.mostrarPorConsola('>>Letra ' + letra + ' seleccionada')
+        self.mostrarPorConsola('>>Letra "' + letra + '" seleccionada')
         self.setLetraIngresada(letra)
         self.mostrarLetra(patron, self.labels_matriz1)
 
@@ -1397,7 +1418,7 @@ class UI(QMainWindow):
             if distorsion == 0:
                 self.mostrarPorConsola(">>No hubo distorsión")
             else:    
-                self.mostrarPorConsola('>>Letra ' + letra + ' distorsionada un ' + str(distorsion) + '%')        
+                self.mostrarPorConsola('>>Letra "' + letra + '" distorsionada un ' + str(distorsion) + '%')        
             usado = self.comprobarPatron(patron, letra) # Compruebo si el patrón fue usado para entrenar
             if usado:
                 self.lineEdit_usado.setText('Si')
@@ -1491,7 +1512,7 @@ class UI(QMainWindow):
             dataset.append(patron)
             i += 1
 
-        # Grafico patrones distorsionados y clasificación, uno detras de otro, con algunos mseg de pausa entre cada uno
+        # Grafico patrones distorsionados y clasificación, uno detrás de otro, con algunos mseg de pausa entre cada uno
         contFilas = 0 # Para graficar el progreso
         for patron in dataset:
             contFilas += 1
@@ -1581,6 +1602,7 @@ class UI_dialog_red(QDialog):
         centerPoint = QDesktopWidget().availableGeometry().center()
         qtRectangle.moveCenter(centerPoint)
         self.move(qtRectangle.topLeft())
+
 
 
 
