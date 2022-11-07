@@ -229,7 +229,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
      
        ![2022-11-07 22_41_23-Window](https://user-images.githubusercontent.com/51035369/200433365-47550610-7b0d-4d1f-b8d1-f53df033d2b6.png)
        
-       - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código en las líneas 977 a 981 y comentando las líneas 993 a 997, el entrenamiento terminará cuando el error de entrenamiento de cada patrón esté por debajo del error aceptable en una época.
+       - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código en las líneas 977 a 981 y comentando las líneas 993 a 997, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
          
          ![2022-11-07 22_19_34-Window](https://user-images.githubusercontent.com/51035369/200433406-97d428b6-5f5f-4192-8afe-b0cfc01294ac.png)
          
