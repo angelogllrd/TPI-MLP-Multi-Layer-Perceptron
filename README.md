@@ -273,7 +273,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
      - Luego, tenemos 2 opciones:
        - **Sección 7: Generar y clasificar un patrón con distorsión aleatoria**
 
-           ![image](https://user-images.githubusercontent.com/51035369/200438465-7d208803-fb71-48de-9d07-6194e049a4d0.png)
+           ![image](https://user-images.githubusercontent.com/51035369/200440431-32251ae2-33b1-4f0b-8f45-317418c28496.png)
 
            - Seleccionar una letra con uno de los 3 botones (se muestra la letra en la matriz de pixeles).
            - Seleccionar la distorsión a generar. **ACLARACIÓN**: El programa comprueba si el patrón distorsionado resultante es uno de los patrones usados para entrenar la red. Si lo fué, se muestra "Si" en el label "¿Patrón usado para entrenar?", mientras que si no, se muestra "No".
