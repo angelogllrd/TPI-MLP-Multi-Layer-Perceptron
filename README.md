@@ -177,7 +177,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 <img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/200420528-22a0e6ab-053c-4b71-9c45-edbc71fb3964.png">
 </p>    
     
-- Pestaña **"Probar patrón"**:
+### Pestaña **"Probar patrón"**:
 
 <p align="center">
 <img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200421015-fc7198c9-91b7-43ce-a1b2-78863d0b8406.png">
