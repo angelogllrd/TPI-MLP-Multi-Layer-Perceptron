@@ -85,10 +85,10 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
   ```
 </details>
 
-## Ejecutable (Windows y Linux)
-<details><summary>Ver Ejecutable (Windows y Linux)</summary>
+## Generación del ejecutable (Windows y Linux)
+<details><summary>Ver Generación del ejecutable</summary>
   
-Para evitar la instalación de las librerias, podemos obtener un ejecutable usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
+Para evitar la instalación de las librerias podemos obtener un ejecutable, tanto en Windows como en Linux, usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
   pip install auto-py-to-exe
   auto-py-to-exe
@@ -136,7 +136,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/51035369/199052629-9b68372d-e04a-4bd3-a900-6aaade3f6f61.png">
 </p>
 
-- La división del dataset de 100, 500 o 1000 ejemplos que se genera en los diferentes conjuntos se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entrenamiento:
+- La división en los diferentes conjuntos del dataset de 100, 500 o 1000 ejemplos que se genera se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entrenamiento:
 
 <p align="center">
 <img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200467674-015903ee-75a2-40b4-823c-736185a5db8f.png">
@@ -168,8 +168,8 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
     - **salidaDeseada**: Valor de uno de los 3 últimos elementos del patrón.
 </details>
   
-## Partes de la aplicación de escritorio
-<details><summary>Ver Partes de la aplicación de escritorio</summary>
+## Partes de la aplicación
+<details><summary>Ver Partes de la aplicación</summary>
   
 > Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1WtA38S4O7MvZgWZLr3xD9tKdn52uQ3Ge/view?usp=sharing) / [Linux](https://drive.google.com/file/d/1CCp0kANpVLxpkK-MhyXm5l_y_MWBBv3B/view?usp=sharing)
 
@@ -281,8 +281,8 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
            ![2022-11-07 22_42_09-Window](https://user-images.githubusercontent.com/51035369/200434007-12138a54-c41c-4a38-ae2e-0d3ca24ad65e.png)
 
        - **Gráficos de MSE promedio vs. Épocas:** Cada gráfico representa el Error de entrenamiento y Error de validación por cada época.
-       
-           ![Figure_1](https://user-images.githubusercontent.com/51035369/200434033-6bbcf586-0fc9-4d07-8829-3a07a5d9a751.png)
+
+           ![Figure_1](https://user-images.githubusercontent.com/51035369/200580615-7399fd81-2541-4265-be1a-7b22d5c7bc80.png)
 
      - Se habilita una parte de la **Sección 4** y la **Sección 7**.
      
@@ -294,8 +294,8 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
        ![2022-11-07 23_19_17-Window](https://user-images.githubusercontent.com/51035369/200436074-77db6ca6-f7e6-4ef1-a793-6f40a487ff8f.png)
 
      - Se muestran los resultados (Clasificaciones correctas, números de casos de prueba, y la precisión, calculada a partir de los dos primeros), junto con el gráfico de los Errores por cada patrón.
-     
-       ![Figure_1](https://user-images.githubusercontent.com/51035369/200439614-6f25f033-53aa-4384-aca5-deb6557cd9ed.png)
+
+       ![Figure_1](https://user-images.githubusercontent.com/51035369/200580836-fecba0e6-7d30-4c2f-9131-4eb72c2f4219.png)
 
        ![2022-11-07 23_19_41-Window](https://user-images.githubusercontent.com/51035369/200436701-53e568e9-a6e4-42d2-914e-9bf8730f51e3.png)
 
@@ -328,78 +328,96 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   
 - Importación de librerias necesarias (PyQt5, sys, os, random, time, math, matplotlib, numpy).
 - `resource_path()`: Función para no tener problemas con las rutas en la conversion a .exe. Todos los paths que referencian a archivos externos se pasan a esta función. 
-- **Funciones para la creación e impresión de patrones y datasets**:
+- **FUNCIONES PARA LA CREACIÓN E IMPRESIÓN DE PATRONES Y DATASETS**:
   - `inicializarPatrones()`: Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0, usando las posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99).
-  - `imprimirMatriz()`: Recibe un patrón e imprime la matriz de pixeles.
+  - `imprimirMatriz()`: Recibe un patrón e imprime la matriz de pixeles (en formato de string)
   - `generarDistorsion()`: Distorsiona el patron pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0).
   - `generarDataset()`: Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación generados como se explica [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-los-datasets).
   - `cargarDataset()`: Se usa en la 1ra pestaña, con el boton "Cargar". Toma un dataset completo (con los 100, 500 o 1000 ejemplos) y extrae los demás datasets usando la misma lógica que `generarDataset()`.
   - `convertirStringADataset()`: Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt.
-  - `imprimirDataset1()`: Imprime el dataset en forma gráfica (matrices de los patrones), usando `imprimirMatriz()`.
+  - `imprimirDataset1()`: Imprime el dataset en forma gráfica (matrices de los patrones en formato de string), usando `imprimirMatriz()`.
   - `imprimirDataset2()`: Imprime el dataset en forma tabular.
   - `restarDatasets()`: Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación.
-- **Creación de la red y de funciones para el algoritmo**:
+- **CREACIÓN DE LA RED Y DE FUNCIONES PARA EL ALGORITMO**:
   - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-la-red-neuronal).
   - `imprimirRed1()`: Muestra el contenido de la red en su estado actual, por cada capa (no se la usa).
   - `imprimirRed2()`: Igual que la anterior, pero muestra la red de forma más ordenada.
-  - `inicializarPesos()`: Corresponde al Paso 1. Inicializa los pesos de la red con valores pequeños aleatorios (entre -0.5 y 0.5)
-  - `aplicarPatronDeEntrada()`: Corresponde al Paso 2. Presenta un patrón de entrada del dataset, copiándolo a la salida de las neuronas de la capa de entrada. También inserta las salidas deseadas (3 últimos elementos del patrón) en las salidas deseadas de las neuronas de entrada.
-  - `calcularSalidasRed()`: Corresponde al Paso 3. Propaga las entradas y calcular las salidas de la red.
+  - `inicializarPesos()`: Corresponde al **Paso 1**. Inicializa los pesos de la red con valores pequeños aleatorios (entre -0.5 y 0.5)
+  - `aplicarPatronDeEntrada()`: Corresponde al **Paso 2**. Presenta un patrón de entrada del dataset, copiándolo a la salida de las neuronas de la capa de entrada. También inserta las salidas deseadas (3 últimos elementos del patrón) en las salidas deseadas de las neuronas de salida.
+  - `calcularSalidasRed()`: Corresponde al **Paso 3**. Propaga las entradas y calcula las salidas de la red.
   - `calcularNetNeurona()`: Calcula el net de cada neurona. Usado en `calcularSalidasRed()`.
   - `calcularSalidaNeurona()`: Calcula la salida de cada neurona, dependiendo de la capa y la función de transferencia asociada. Usado en `calcularSalidasRed()`.
   - `funcionLineal()`: Recibe el net y devuelve el resultado de la función lineal.
   - `funcionSigmoidal()`: Recibe el net y devuelve el resultado de la función sigmoidal. Además, trata los casos cuando el net pasado es menor a -709.78271, lo que provoca un overflow en la representación en coma flotante.
-  - `calcularTerminosErrorRed()`: Corresponde al Paso 4. Calcula los términos de error para neuronas de salida y ocultas, comenzando por las de salida (propagación de errores hacia atrás).
+  - `calcularTerminosErrorRed()`: Corresponde al **Paso 4**. Calcula los términos de error para neuronas de salida y ocultas, comenzando por las de salida (propagación de errores hacia atrás).
   - `calcularTerminoError()`: Determina un termino de error en base a la capa actual, la neurona actual, y el numero de esa neurona. Usada en `calcularTerminosErrorRed()`.
   - `derivadaFuncionSigmoidal()`: Calcula la derivada de la función sigmoidal. Usada en `calcularTerminoError()`.
-  - `actualizarPesosRed()`: Corresponde al Paso 5. Actualiza los pesos de la red.
-  - `calcularMSE()`: Corresponde al Paso 6. Calcula el error cuadrático medio entre la salida obtenida y la deseada.
-- **UI, definición de clases, atributos y métodos**:
+  - `actualizarPesosRed()`: Corresponde al **Paso 5**. Actualiza los pesos de la red.
+  - `calcularMSE()`: Corresponde al **Paso 6**. Calcula el error cuadrático medio entre la salida obtenida y la deseada.
+- **UI, DEFINICIÓN DE CLASES, ATRIBUTOS Y MÉTODOS**:
   - `class UI()`: Clase correspondiente a la ventana principal.
     - `uic.loadUi()`: Carga el archivo .ui de la ventana principal.
     - `initUI()`: Hace inicializaciones como: poner nombre a la ventana, centrarla, mostrar en el panel de la derecha la instrucción inicial, colocar el ícono a la ventana, y mostrar la ventana.
-    - Antes de los demás métodos, existen secciones para definir atributos:
+    - **ATRIBUTOS, ACCIONES DISPARADAS, INICIALIZACIONES, DESACTIVACIONES:**
       - "Labels": Se crea listas con los objetos label de cada matriz de pixeles de la segunda pestaña. Más adelante, recorrer estas listas es lo que permite pintar los patrones en la matriz.
-      - "Acciones disparadas por push buttons": Se definen a qué métodos llama cada push button cuando es presionado.
-      - "Acciones disparadas por spin boxes": Se define el método llamado cuando cambia el valor de un spin box.
+      - "Acciones disparadas por pushbuttons": Se define a qué métodos llama cada pushbutton cuando es presionado.
+      - "Acciones disparadas por spinboxes": Se define el método llamado cuando cambia el valor de un spinbox.
+      - "Acciones disparadas por radiobuttons": Se define el método llamado cuando se selecciona un radiobutton.
       - "Acciones disparadas por sliders": Se define el método llamado cuando se mueve un slider.
-      - "Desactivación inicial de label+spinbox de tamaño de capa oculta 2": Activa la opción de tamaño de la 2da capa oculta, si el spinbox de número de capa ocultas está en 2, o la desactiva si vuelve a 1.  
-      - Desactivación inicial del label y botones para mostrar red y datasets: Descativa los botones de la esquina inferior derecha, que sirven para mostrar el contenido de la red y los datasets.
-      - Desactivaciones iniciales de la 2da pestaña: Desactiva los elementos de la segunda pestaña, hasta que no se haga el entrenamiento.
-      - Inicialización de letra ingresada: Más adelante sirve para saber si ya se presionó o no alguno de los botones de las letras de la segunda pestaña.
-    - `center()`: Sirve para centrar la ventana en la pantalla. Llamado en `initUI()`.
-    - `mostrarPorConsola()`: Concatena un string al contenido ya existente en el panel negro de la derecha
-    - Métodos para la primera pestaña:
-      - `generarDataset()`: Verifica si alguno de los radio buttons (100, 500 o 1000) se seleccionó y genera los datasets correspondientes. Llamado por el botón "Generar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
-      - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt en la misma ruta del .py. Llamado por el botón "Guardar".
-      - `cargarDataset()`: Carga un .txt de un dataset guardado previamente, y genera los datasets correspondientes. Llamado por el botón "Cargar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
-      - `tratarSpinBoxCapaOculta2()`: Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del número de capas ocultas. Llamado por el evento de cambio de valor del spin box de dicho valor.
-      - `crearRed()`: Toma los parámetros seleccionados para la red, y crea la estructur. Activa la sección de "Entrenamiento" y el botón de la esquina inferior derecha "Red" para ver el contenido de la red.
-      - `entrenarRed()`: De acuerdo a la opción seleccionada, realiza el entrenamiento hasta que el error ingresado resulte aceptablemmente pequeño para cada uno de los patrones del dataset, o durante un número fijo de épocas o patrones. Una vez finalizado el entrenamiento, arroja los resultados. Llamado por el botón "Entrenar". Activa la sección de "Hacer test" y las secciones de la segunda pestaña.
-      - `vaciarRed()`: Asigna al atributo "red" una estructura de red vacia. Se usa para resetear la red en cada entrenamiento. Llamado dentro de `entrenarRed()`.
-      - `probarDataset()`: Calcula la precisión de la clasificación de los patrones de un dataset, y retorna dicha precisión y el número de clasificaciones correctas.
-      - `probarPatron()`: Presenta un patrón a la red, calcula la salida, comprueba si la salida obtenida es igual a la deseada, y devuelve 1 o 0 dependiendo de la coincidencia, las salidas obtenida convertidas a binario, y las salidas sin convertir.
-      - `graficarErrores()`: Genera un gráfico comparando los MSE contra las épocas. Llamado por `entrenarRed()`.
-      - `hacerTest()`: Calcula la precisión en la clasificación del conjunto de test. Llamado por el botón "Hacer test".
-    - Métodos para la segunda pestaña:
-      - `tratarLineEditSlider()`: Traslada el valor del slider al line edit de la derecha, a medida que se lo mueve.
-      - `tratarLetra()`: Llamado al presionar el botón de alguna de las letras (botones "b", "d", y "f"). Hace que se muestre por "consola" la letra seleccionada, que se muestre en la matriz de pixeles, y guarda dicha letra en su respectivo atributo.
-      - `setLetraIngresada`: Guarda la letra seleccionada. Llamado en `tratarLetra()`.
-      - `getLetraIngresada()`: Devuelve la letra seleccionada previamente.
-      - `mostrarLetra()`: Pinta una matriz de pixeles de acuerdo al patrón pasado.
-      - `borrarLetra()`: Pone en blanco una matriz de pixeles.
-      - `generarDistorsion()`: Muestra la letra distorsionada en la 1ra matriz. Llamado al presionar el botón "Distorsionar". 
-      - `copiarPatron()`: Devuelve una copia del patrón sin distorsionar de la letra pasada.
-      - `guardarPatronDistorsionado()`: Guarda una copia del patrón distorsionado en su correspondiente atributo, para que esté disponible a la hora de clasificar.
-      - `comprobarPatron()`: Comprueba si un patrón fue usado para el entrenamiento.
-      - `clasificarPatron()`: Presenta un patrón a la red y muestra la letra que representa la salida de la misma. Llamado por el botón "Clasificar".
-      - `probarPatrones()`: Clasifica un número dado de patrones aleatorios y muestra la precisión resultante. Llamado con el botón "Probar patrones"
-    - Métodos para ver contenido de la red y de datasets:
-      - `verDataset`: Abre una ventana con el dataset pasado mostrado en forma tabular y gráfica, usando `imprimirDataset1()` e `imprimirDataset2()`.
-      - `verRed()`: Abre una ventana que muestra la estructura y contenido actual de la red, usando `imprimirRed2()`.
+      - "Acciones disparadas por comboboxes": Se define el método llamado cuando se selecciona un elemento de la lista de un combobox.
+      - "Desactivaciones iniciales de sección Arquitectura de la red": Desactivaciones necesarias de elementos de la Sección 2.
+      - "Desactivaciones iniciales de sección Entrenamiento": Desactivaciones necesarias de elementos de la Sección 3.
+      - "Desactivaciones iniciales de sección Test": Desactivaciones necesarias de elementos de la Sección 4.
+      - "Desactivación inicial del label y botones para mostrar red y datasets": Desactivaciones necesarias de elementos de la Sección 6.
+      - "Desactivaciones iniciales de la segunda pestaña": Desactiva necesarias de elementos de la Sección 8 y Sección 9.
+      - "Inicialización de letra ingresada": Más adelante sirve para saber si ya se presionó o no alguno de los botones de las letras de la segunda pestaña.
+      - "Definición de arquitecturas predefinidas": Se define una tupla de diccionarios con las características de las arquitecturas dadas en el TPI.
+      - "Inicialización de combobox de arquitecturas predefinidas": Se cargan (listan) las arquitecturas predefinidas del item anterir en el combobox de la Sección 2.
+    - **MÉTODOS DE CLASE:**
+        - `center()`: Sirve para centrar la ventana en la pantalla. Llamado en `initUI()`.
+        - `mostrarPorConsola()`: Concatena un string al contenido ya existente en el panel negro de la derecha.
+      - **MÉTODOS PARA LA PRIMERA PESTAÑA:**
+        - `desactivarEsto()`: Recibe una tupla de cosas de la interfaz para desactivar.
+        - `activarEsto()`: Recibe una tupla de cosas de la interfaz para activar.
+        - `generarDataset()`: Verifica si alguno de los radio buttons (100, 500 o 1000) se seleccionó y genera los datasets correspondientes. Llamado por el botón "Generar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
+        - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt en la misma ruta del ejecutable. Llamado por el botón "Guardar".
+        - `cargarDataset()`: Carga un .txt de un dataset guardado previamente con la aplicación, y genera los datasets correspondientes. Llamado por el botón "Cargar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
+        - `desactivarSeñales()`: Bloquea las señales producidas por cambios de valores en los parámetros de la Sección 2 (cambios en spinboxes, combobox de función de transferencia, textedit de alfa y beta), para que los cambios en dichos valores producidos automáticamente **por la aplicación** cuando se selecciona una arquitectura predefinida de la lista del combobox de dicha Sección 2 no dispare la detección que se hace al cambiar dichos valores **manualmente** (dicha detección pretende detectar si la configuración manual de la arquitectura coincide con una predefinida y seleccionarla en la lista), lo que generaría resultados no deseados. De esta manera, la detección solamente se produce cuando los cambios de parámetros son manuales.
+        - `tratarArquitecturaPredefinida()`: Carga automáticamente los parámetros de la arquitectura predefinida seleccionada en el combobox de la Sección 2. Usa `desactivarSeñales()` para desactivar la detección del cambio de valor en los parámetros, cambia los valores, y vuelve a activar las señales.
+        - `tratarCambioParametrosArq()`: Por un lado comprueba, ante un cambio de parámetro de la Sección 2, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona en la lista del combobox. Por el otro, activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, llamando a `tratarSpinBoxCapaOculta2()`.
+        - `tratarSpinBoxCapaOculta2()`: Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del número de capas ocultas.
+        - `crearRed()`: Toma los parámetros seleccionados para la red, y crea la estructura. Activa parte de la Sección 3 (Entrenamiento) y el botón de la esquina inferior derecha "Red actual" para ver el contenido de la red.
+        - `entrenarRed()`: Realiza 3 entrenamientos, en cada uno considerando un conjunto de validación diferente. De acuerdo a la condición de fin seleccionada, realiza cada entrenamiento hasta que el Error de entrenamiento (MSE promedio de una época) sea menor que el error aceptable ingresado, o durante un número fijo de épocas o iteraciones. Dentro de cada entrenamiento y por cada época también se calcula el Error de validación. Una vez finalizados los 3 entrenamientos, arroja los resultados por cada uno (épocas que consumió, Error de entrenamiento y Error de validación de la última época). Llamada por el botón "Entrenar". Activa parte de la Sección 4 (Hacer test) y la Sección 7.
+        - `guardarRedEntrenada()`: Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista en los comboboex de las Secciones 4 y 7. Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura en el combobox de la Sección 2 y obtiene el texto que la describe. Si no, forma la descripción. Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier momento. Llamada dentro de `entrenarRed()`.
+        - `esArquitecturaPredefinida()`: Comprueba si la red actual tiene una arquitectura predefinida. Si la tiene, retorna el string que la describe, tal como está en el combobox de la Sección 2. Si no, retorna string vacío. En ambos casos, retorna en segundo lugar la estructura de la arquitectura (necesaria par actualizar atributos al cargar una red). Llamada dentro de `guardarRedEntrenada()`.
+        - `finalizarEntrenamiento()`: Agrupa operaciones comunes a los entrenamientos con las dos condiciones de fin, para evitar repetición de código. Llamada dentro de `entrenarRed()`.
+        - `vaciarRed()`: Asigna al atributo "red" una estructura de red vacía. Se usa para resetear la red en cada entrenamiento. Llamado dentro de `entrenarRed()`.
+        - `probarDataset()`: Calcula las clasificaciones correctas de los patrones de un dataset, la precisión, el error promedio y obtiene la lista de errores o MSEs, y retorna esos cuatro elementos. Llamada dentro de `hacerTest()`, `probarPatrones()`, y `entrenarRed()`.
+        - `probarPatron()`: Presenta un patrón a la red, calcula la salida, comprueba si la salida obtenida es igual a la deseada, y devuelve 1 o 0 dependiendo de la coincidencia, el error, y las salidas obtenidas convertidas a binario, y sin convertir. Llamada dentro de `probarDataset()`, y `clasificarPatron()`.
+        - `graficarErrores()`: Genera un 3 gráficos, uno por cada uno de los 3 entrenamientos que se hacen al presionar el botón "Entrenar", comparando Errores de entrenamiento y Validación contra las épocas. Llamado por `entrenarRed()`.
+        - `hacerTest()`: Toma del combobox la red guardada seleccionada, prueba el dataset de test en ella, muestra resultados de precisión, y el gráfico de error de test. Llamada por el botón "Hacer test".
+        - `tratarComboboxTest()`: Llamada cuando se selecciona del combobox de la Sección 4 una red entrenada. Activa el resto de la sección "Test", carga como red actual la red seleccionada en el combobox, y resguarda el dataset de test correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test.
+        - `cargarRedSeleccionada()`: Llamada cuando se selecciona del combobox de la Sección 4 o de la Sección 7 una red entrenada. Carga en la red actual la red seleccionada en el combobox pasado, y retorna los datasets de entrenamiento, test y validación usados en el entrenamiento de la red cargada. Llamada en `tratarComboboxTest()` y en `tratarComboboxProbarpatron()`.
+      - **MÉTODOS PARA LA SEGUNDA PESTAÑA:**
+        - `tratarComboboxProbarpatron()`:  Llamada cuando se selecciona del combobox de la Sección 7 una red entrenada. Activa nuevas funciones de la pestaña "Probar patrón", carga como red actual la red seleccionada en el combobox, y resguarda los datasets de entrenamiento y validación correspondiente al entrenamiento de la red cargada para poder usarlos en `comprobarPatron()`.
+        - `tratarLineEditSlider()`: Traslada el valor del slider al line edit de la derecha, a medida que se lo mueve.
+        - `tratarLetra()`: Llamado al presionar el botón de alguna de las letras (botones "b", "d", y "f"). Hace que se muestre por "consola" la letra seleccionada, que se muestre en la matriz de pixeles, y guarda dicha letra en su respectivo atributo.
+        - `setLetraIngresada`: Guarda la letra seleccionada. Llamada en `tratarLetra()`.
+        - `getLetraIngresada()`: Devuelve la letra seleccionada previamente. Llamada por `generarDistorsion()`.
+        - `mostrarLetra()`: Pinta una matriz de pixeles de acuerdo al patrón pasado. Llamada por `tratarLetra()`, `generarDistorsion()`, y `probarPatrones()`.
+        - `borrarLetra()`: Pone en blanco una matriz de pixeles. Llamada por `mostrarLetra()`.
+        - `generarDistorsion()`: Muestra la letra distorsionada en la 1ra matriz. Llamado al presionar el botón "Distorsionar" y por `probarPatrones()`.
+        - `copiarPatron()`: Devuelve una copia del patrón sin distorsionar de la letra pasada. Llamada por `generarDistorsion()` y por `probarPatrones()`.
+        - `guardarPatronDistorsionado()`: Guarda una copia del patrón distorsionado en su correspondiente atributo, para que esté disponible a la hora de clasificar. Llamada por `generarDistorsion()`.
+        - `comprobarPatron()`: Comprueba si un patrón fue usado para el entrenamiento. Llamada por `generarDistorsion()` y `probarPatrones()`.
+        - `clasificarPatron()`: Presenta un patrón a la red y muestra la letra que representa la salida de la misma. Llamado por el botón "Clasificar" y por `probarPatrones()`.
+        - `probarPatrones()`: Clasifica un número dado de patrones aleatorios y muestra la precisión resultante. Llamado con el botón "Probar patrones".
+      - **MÉTODOS PARA VER CONTENIDO DE LA RED Y DE DATASETS**:
+        - `verDataset`: Abre una ventana con el dataset pasado mostrado en forma tabular y gráfica, usando `imprimirDataset1()` e `imprimirDataset2()`.
+        - `verRed()`: Abre una ventana que muestra la estructura y contenido actual de la red, usando `imprimirRed2()`.
   - `class UI_dialog_dataset()`: Clase correspondiente a la ventana de visualización de los datasets.
   - `class UI_dialog_red()`: Clase correspondiente a la ventana de visualización de la red.
-- Programa principal:
+- **PROGRAMA PRINCIPAL**:
   - Se inicializan los patrones de cada letra.
   - Se inicializa la app
   
