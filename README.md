@@ -135,6 +135,19 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <p align="center">
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/51035369/199052629-9b68372d-e04a-4bd3-a900-6aaade3f6f61.png">
 </p>
+
+- La división del dataset de 100, 500 o 1000 ejemplos que se genera en los diferentes conjuntos se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entranamiento:
+
+<p align="center">
+<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200467674-015903ee-75a2-40b4-823c-736185a5db8f.png">
+</p>
+
+- En la aplicación, cuando entrenamos, en realidad se llevan a cabo 3 entrenamientos, considerando en cada uno un conjunto de validación distinto:
+
+<p align="center">
+<img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/200467941-5e48c161-cdfa-4c06-ab93-7407f342247c.png">
+</p>
+
 </details>
 
 ## Estructura de la red neuronal
