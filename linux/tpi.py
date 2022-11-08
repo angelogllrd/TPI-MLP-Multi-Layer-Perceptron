@@ -58,7 +58,7 @@ def inicializarPatrones():
 
 
 def imprimirMatriz(patron):
-    # Recibe un patrón e imprime la matriz de pixeles
+    # Recibe un patrón e imprime la matriz de pixeles (en formato de string)
     UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(' __________ ') # print(' __________ ')
     for f in range(10):
         fila = '|'
@@ -342,7 +342,7 @@ def convertirStringADataset(string):
 
 
 def imprimirDataset1(dataset):
-    # Imprime el dataset en forma gráfica (matrices de los patrones)
+    # Imprime el dataset en forma gráfica (matrices de los patrones en formato de string)
     for fila in range(len(dataset)):
         UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(str(fila+1))
         imprimirMatriz(dataset[fila])
@@ -375,7 +375,7 @@ def imprimirDataset2(dataset):
 
 
 def restarDatasets(aEste, restaleEste):
-    # Quita de un dataset filas de otro (lo uso para restar al conjunto de entrenamiento los de validación)
+    # Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación
     aEste2 = aEste[:] # Para no modificar la lista "aEste" original, la copio en una nueva y elimino lo que quiero de la copia
     for fila in restaleEste:
         aEste2.remove(fila) # No hace falta comprobar que "fila" este en "aEste" porque son filas extraidas originalmente de "aEste"
@@ -433,7 +433,7 @@ def imprimirRed1(red):
 
 
 def imprimirRed2(red):
-    # Muestra el contenido de la red en su estado actual, por cada capa, de forma más ordenada (ocupa más espacio)
+    # Muestra el contenido de la red en su estado actual, por cada capa, de forma más ordenada
     for capa in range(len(red)):
         if capa == 0:
             UIWindow.window_red.plainTextEdit_red.appendPlainText('Capa de entrada:') # print('\nCapa de entrada:')
@@ -679,10 +679,10 @@ class UI(QMainWindow):
         self.graphicsView.setStyleSheet('border: 1px solid rgb(208, 208, 208);')
         self.graphicsView_2.setStyleSheet('border: 1px solid rgb(208, 208, 208);')
 
-        # Inicialización de letra ingresada (se usa en segunda pestaña)
+        # Inicialización de letra ingresada
         self.letraIngresada = ''
 
-        # Defino arquitecturas predefinidas
+        # Definición de arquitecturas predefinidas
         self.arquitecturasPredefinidas = ({'capasOcultas': 1, 'neurOcultas': (5,), 'funcTransf': 'Lineal', 'alfa': 0.5, 'beta': 0.5},
                                           {'capasOcultas': 1, 'neurOcultas': (5,), 'funcTransf': 'Lineal', 'alfa': 0.5, 'beta': 0.9},
                                           {'capasOcultas': 1, 'neurOcultas': (10,), 'funcTransf': 'Lineal', 'alfa': 0.5, 'beta': 0.5},
@@ -728,13 +728,13 @@ class UI(QMainWindow):
 
 
     def desactivarEsto(self, cosas):
-        # Recibe una tupla de cosas para desactivar
+        # Recibe una tupla de cosas de la interfaz para desactivar
         for cosa in cosas:
             cosa.setEnabled(False)
 
 
     def activarEsto(self, cosas):
-        # Recibe una tupla de cosas para activar
+        # Recibe una tupla de cosas de la interfaz para activar
         for cosa in cosas:
             if not cosa.isEnabled():
                 cosa.setEnabled(True)
@@ -830,7 +830,7 @@ class UI(QMainWindow):
 
 
     def tratarCambioParametrosArq(self):
-        # Por un lado comprueba, ante un cambio de parametro, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona.
+        # Por un lado comprueba, ante un cambio de parámetro, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona.
         # Por el otro, activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del valor del número de capas ocultas.
 
         # Si selecciono 1 capa oculta, no debe tener en cuenta las neuronas de la 2da. capa. Si seleccione 2, si.
@@ -1181,7 +1181,7 @@ class UI(QMainWindow):
 
 
     def finalizarEntrenamiento(self):
-        # Lo que se hace al terminar el entrenamiento ya sea por error aceptable o número de épocas
+        # Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
         self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron))
 
