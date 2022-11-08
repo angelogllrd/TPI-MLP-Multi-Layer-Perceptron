@@ -123,7 +123,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/51035369/199055338-a007ef82-d296-41e8-af7e-33b57a095ecb.png">
 </p>
 
-- Los datasets de test y validación se crean incluyendo ejemplos de cada porción, lo mas similares posibles en tamaño.
+- Los datasets de test y validación se crean incluyendo ejemplos de cada porción, lo mas similares posibles en cantidad.
 - Se estableció que el porcentaje de ejemplos para test debe ser uno que haga divisible por 4 (4 porciones representativas) el número de ejemplos de test para 100, 500 y 1000 ejemplos. Este porcentaje se calculó en un 8%, número que permite que los restantes ejemplos del dataset alcancen para formar todos los conjuntos de validación representativos para los 3 datasets, según los siguientes cálculos:
 
 <p align="center">
@@ -136,7 +136,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/51035369/199052629-9b68372d-e04a-4bd3-a900-6aaade3f6f61.png">
 </p>
 
-- La división del dataset de 100, 500 o 1000 ejemplos que se genera en los diferentes conjuntos se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entranamiento:
+- La división del dataset de 100, 500 o 1000 ejemplos que se genera en los diferentes conjuntos se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entrenamiento:
 
 <p align="center">
 <img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200467674-015903ee-75a2-40b4-823c-736185a5db8f.png">
