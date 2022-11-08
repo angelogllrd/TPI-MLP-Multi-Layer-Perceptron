@@ -142,10 +142,10 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200467674-015903ee-75a2-40b4-823c-736185a5db8f.png">
 </p>
 
-- En la aplicación, cuando entrenamos, en realidad se llevan a cabo 3 entrenamientos, considerando en cada uno un conjunto de validación distinto:
+- En la aplicación, cuando entrenamos, en realidad se llevan a cabo 3 entrenamientos, uno detrás del otro, considerando en cada uno un conjunto de validación distinto:
 
 <p align="center">
-<img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/200467941-5e48c161-cdfa-4c06-ab93-7407f342247c.png">
+<img width="50%" height="50%" src="[https://user-images.githubusercontent.com/51035369/200467941-5e48c161-cdfa-4c06-ab93-7407f342247c.png](https://user-images.githubusercontent.com/51035369/200468587-6c6788d5-aaf9-486e-8c34-dc07740d7e4d.png)">
 </p>
 
 </details>
