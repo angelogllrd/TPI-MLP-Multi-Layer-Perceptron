@@ -1,8 +1,10 @@
 # Análisis MLP (Multi-Layer Perceptron) 
-TPI del año 2022 para la materia Inteligencia Artificial de la UTN FRRe. 
+TPI del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
+
+![2022-11-08 00_12_32-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/200443223-3d869881-bd41-43cf-9246-96f443e610d9.png)
 
 ## Consigna
-<details><summary>Ver consigna</summary>
+<details><summary>Ver Consigna</summary>
 
 #### Objetivos:
 1. Implementar el algoritmo MLP.
@@ -51,6 +53,9 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 </details>
 
 ## Requerimientos para ejecutar el .py
+<details><summary>Ver Requerimientos para ejecutar el .py</summary>
+
+  
 - [**Python 3**](https://www.python.org/downloads/)
 - [**pip**](https://pypi.org/project/pip/) (ya incluido con el instalador de Windows). En Linux:
   ```
@@ -78,8 +83,11 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
   ```
   pip install matplotlib
   ```
-  
+</details>
+
 ## Ejecutable (Windows y Linux)
+<details><summary>Ver Ejecutable (Windows y Linux)</summary>
+  
 Para evitar la instalación de las librerias, podemos obtener un ejecutable usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
   pip install auto-py-to-exe
@@ -102,7 +110,10 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
   ```
   self.setWindowIcon(QIcon(resource_path('icons\\icon2.ico')))
   ```
+</details>
+
 ## Estructura de los datasets
+<details><summary>Ver Estructura de los datasets</summary>
 - Como se pide en la consigna, los datasets se generan cumpliendo el 10% sin distorsión, y el restante 90% distorsionado entre 1% y 30%. 
 - Los datasets se representan usando listas de listas, donde cada sublista es un patrón de entrada o fila del dataset con 103 elementos (1s y 0s), donde los primeros 100 corresponden al patrón y los últimos 3 a las clases, una para cada letra (b, d y f).
 - Para asegurar que los conjuntos de test y validación sean representativos, se genera de la siguiente manera, quedando 4 porciones de cada tipo de ejemplo:
@@ -123,8 +134,11 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 <p align="center">
 <img width="70%" height="70%" src="https://user-images.githubusercontent.com/51035369/199052629-9b68372d-e04a-4bd3-a900-6aaade3f6f61.png">
 </p>
+</details>
 
 ## Estructura de la red neuronal
+<details><summary>Ver Estructura de la red neuronal</summary>
+
 - La red se representa también usando lista de listas, donde cada sublista es una capa. 
 - Cada neurona dentro cada capa se representa mediante un diccionario, cuyos items varían dependiendo de qué capa se trate.
   - Las neuronas de la capa de entrada solamente tienen salida (que son iguales a las entradas).
@@ -136,8 +150,11 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
     - **delta**: Almacena el cálculo del término de error de la neurona.
   - Las neuronas de la capa de salida almacenan, además de lo anterior:
     - **salidaDeseada**: Valor de uno de los 3 últimos elementos del patrón.
+</details>
   
 ## Partes de la aplicación de escritorio
+<details><summary>Ver Partes de la aplicación de escritorio</summary>
+  
 > Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1WtA38S4O7MvZgWZLr3xD9tKdn52uQ3Ge/view?usp=sharing) / [Linux](https://drive.google.com/file/d/1CCp0kANpVLxpkK-MhyXm5l_y_MWBBv3B/view?usp=sharing)
 
 La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** y **"Probar patrón"**.
@@ -191,8 +208,10 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
   - En la parte derecha, con el botón "Clasificar" se ingresa el patrón a la red seleccionada, se muestra la letra representada por la salida de la red, y las salidas obtenidas por cada neurona de salida (yb, yd, e yf).
 - **Sección 9**:
   - Parecida a la sección de arriba, pero permite clasificar un cierto número de patrones (de letras aleatorias, con distorsión aleatoria entre 0 y 30%), comprobando que no hayan sido usados para entrenar, y arroja los resultados de precisión.
-
+</details>
+  
 ## Instrucciones de uso de la aplicación
+<details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
 > Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1WtA38S4O7MvZgWZLr3xD9tKdn52uQ3Ge/view?usp=sharing) / [Linux](https://drive.google.com/file/d/1CCp0kANpVLxpkK-MhyXm5l_y_MWBBv3B/view?usp=sharing)
 
@@ -286,9 +305,11 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
            - Ingresar el número de patrones distorsionados a generar.
            - Presionar el botón "Probar patrones". Se muestra a la izquierda la matriz de pixeles con cada patrón generado, junto con la letra clasificada a la derecha. **ACLARACIÓN**: Al igual que en la Sección 7, se comprueba si cada patrón generado fué usado en el entrenamiento de la red, y solamente se usan aquellos que no lo fueron.
            - Se muestran los resultados de precisión.
-
+</details>
 
 ## Estructuración del código
+<details><summary>Ver Estructuración del código</summary>
+  
 - Importación de librerias necesarias (PyQt5, sys, os, random, time, math, matplotlib, numpy).
 - `resource_path()`: Función para no tener problemas con las rutas en la conversion a .exe. Todos los paths que referencian a archivos externos se pasan a esta función. 
 - **Funciones para la creación e impresión de patrones y datasets**:
@@ -365,3 +386,5 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 - Programa principal:
   - Se inicializan los patrones de cada letra.
   - Se inicializa la app
+  
+</details>
