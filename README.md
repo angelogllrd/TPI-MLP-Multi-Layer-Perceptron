@@ -139,6 +139,8 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 
 ## Estructura de la red neuronal
 <details><summary>Ver Estructura de la red neuronal</summary>
+  
+![Sin título](https://user-images.githubusercontent.com/51035369/200445224-a6db6196-6b31-460a-9cc0-2c842a4532eb.png)
 
 - La red se representa también usando lista de listas, donde cada sublista es una capa. 
 - Cada neurona dentro cada capa se representa mediante un diccionario, cuyos items varían dependiendo de qué capa se trate.
