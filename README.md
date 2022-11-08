@@ -139,13 +139,13 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 - La división en los diferentes conjuntos del dataset de 100, 500 o 1000 ejemplos que se genera se puede ilustrar con uno de 100, considerando que siempre tomamos 8% para test y el restante para entrenamiento:
 
 <p align="center">
-<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200467674-015903ee-75a2-40b4-823c-736185a5db8f.png">
+<img width="90%" height="90%" src="https://user-images.githubusercontent.com/51035369/200608949-5079d736-9e4d-4de4-bb27-749ae0509809.png">
 </p>
 
 - En la aplicación, cuando entrenamos, en realidad se llevan a cabo 3 entrenamientos, uno detrás del otro, considerando en cada uno un conjunto de validación distinto:
 
 <p align="center">
-<img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/200468587-6c6788d5-aaf9-486e-8c34-dc07740d7e4d.png">
+<img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/200468587-6c6788d5-aaf9-486e-8c34-dc07740d7e4d.png">
 </p>
 
 </details>
