@@ -114,6 +114,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 
 ## Estructura de los datasets
 <details><summary>Ver Estructura de los datasets</summary>
+
 - Como se pide en la consigna, los datasets se generan cumpliendo el 10% sin distorsión, y el restante 90% distorsionado entre 1% y 30%. 
 - Los datasets se representan usando listas de listas, donde cada sublista es un patrón de entrada o fila del dataset con 103 elementos (1s y 0s), donde los primeros 100 corresponden al patrón y los últimos 3 a las clases, una para cada letra (b, d y f).
 - Para asegurar que los conjuntos de test y validación sean representativos, se genera de la siguiente manera, quedando 4 porciones de cada tipo de ejemplo:
