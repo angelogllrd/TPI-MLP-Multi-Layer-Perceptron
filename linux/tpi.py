@@ -58,8 +58,8 @@ def inicializarPatrones():
 
 
 def imprimirMatriz(patron):
-    # Recibe un patrón e imprime la matriz de pixeles (en formato de string)
-    UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(' __________ ') # print(' __________ ')
+    # Recibe un patrón e imprime la matriz de pixeles con * en cada pixel pintado. Se la usa solamente para pruebas
+    print(' __________ ')
     for f in range(10):
         fila = '|'
         for c in range(10):
@@ -67,8 +67,8 @@ def imprimirMatriz(patron):
                 fila += ' '
             else:
                 fila += '*'
-        UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(fila+'|') # print(fila+'|')
-    UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(' ¯¯¯¯¯¯¯¯¯¯ ') # print(' ¯¯¯¯¯¯¯¯¯¯ ')
+        print(fila+'|')
+    print(' ¯¯¯¯¯¯¯¯¯¯ ')
 
 
 def generarDistorsion(patron, porc):
@@ -192,7 +192,6 @@ def generarDataset(ejemplos):
         
         # # Para probar
         # print('Cantidad de ejemplos del conjunto de validacion de', int(porc_valid*100),'%:', len(conj))
-        # imprimirDataset1(conj)
 
         # Asigno el conjunto en su correspondiente variable
         if porc_valid == 0.1:
@@ -341,22 +340,97 @@ def convertirStringADataset(string):
     return dataset
 
 
-def imprimirDataset1(dataset):
-    # Imprime el dataset en forma gráfica (matrices de los patrones en formato de string)
-    for fila in range(len(dataset)):
-        UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(str(fila+1))
-        imprimirMatriz(dataset[fila])
+def imprimirDatasetGraficoConAsteriscos(dataset):
+    # Imprime el dataset en forma gráfica (matrices de los patrones) con * en cada pixel pintado, dispuesto en "cant_filas" 
+    # filas de "patrones_por_fila" patrones
+    
+    dataset_copia = dataset[:]
+    str_total = '' # String que contiene todas las matrices ordenadas de acuerdo al número de patrones_por_fila
+    patrones_por_fila = 10
+    cant_filas = ceil(len(dataset_copia)/patrones_por_fila)
+    nro_patron = 1 # Contador para poner números a las matrices
+    
+    for i in range(cant_filas):
+        patrones_de_fila = dataset_copia[:patrones_por_fila]
+        for nro in range(len(patrones_de_fila)):
+            if nro_patron < 10:
+                str_total += '     ' + str(nro_patron) + '     '
+            elif nro_patron < 100:
+                str_total += '     ' + str(nro_patron) + '    '
+            else:
+                str_total += '     ' + str(nro_patron) + '   '
+            nro_patron += 1
+        str_total += '\n'
+        str_total += ' __________' * len(patrones_de_fila) + '\n'
+        for f in range(10):
+            for patron in range(len(patrones_de_fila)):
+                fila = '|'
+                for c in range(10):
+                    if patrones_de_fila[patron][f*10+c] == 0: # f*10+c transforma una posición fila-columna a una posición 0-99 del patrón
+                        fila += ' '
+                    else:
+                        fila += '*'
+                if patron == len(patrones_de_fila)-1:
+                    str_total += fila+'|' + '\n'
+                else:
+                    str_total += fila
+        str_total += ' ¯¯¯¯¯¯¯¯¯¯' * len(patrones_de_fila) + '\n'
+        dataset_copia = dataset_copia[patrones_por_fila:]
+    UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(str_total)
 
 
-def imprimirDataset2(dataset):
+def imprimirDatasetGraficoConPosiciones(dataset):
+    # Imprime el dataset en forma gráfica (matrices de los patrones) con la posición en cada pixel pintado, dispuesto en 
+    # "cant_filas" filas de "patrones_por_fila" patrones
+    
+    dataset_copia = dataset[:]
+    str_total = '' # String que contendrá todo lo que se muestra
+    patrones_por_fila = 5
+    cant_filas = ceil(len(dataset_copia)/patrones_por_fila)
+    nro_patron = 1 # Contador para poner números a las matrices
+    
+    for i in range(cant_filas):
+        patrones_de_fila = dataset_copia[:patrones_por_fila]
+        for nro in range(len(patrones_de_fila)):
+            if nro_patron < 10:
+                str_total += '          ' + str(nro_patron) + '          '
+            elif nro_patron < 100:
+                str_total += '          ' + str(nro_patron) + '         '
+            else:
+                str_total += '          ' + str(nro_patron) + '        '
+            nro_patron += 1
+        str_total += '\n'
+        str_total += ' ____________________' * len(patrones_de_fila) + '\n'
+        for f in range(10):
+            for patron in range(len(patrones_de_fila)):
+                fila = '|'
+                for c in range(10):
+                    if patrones_de_fila[patron][f*10+c] == 0: # f*10+c transforma una posición fila-columna a una posición 0-99 del patrón
+                        fila += '  '
+                    else:
+                        if f == 0:
+                            fila += str(f*10+c) + ' '
+                        else:
+                            fila += str(f*10+c)
+                if patron == len(patrones_de_fila)-1:
+                    str_total += fila+'|' + '\n'
+                else:
+                    str_total += fila
+        str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯' * len(patrones_de_fila) + '\n'
+        dataset_copia = dataset_copia[patrones_por_fila:]
+    UIWindow.window_dataset.plainTextEdit_grafico.appendPlainText(str_total)
+
+
+def imprimirDatasetTabular(dataset):
     # Imprime el dataset en forma tabular
+    str_total = '' # String que contendrá todo lo que se muestra
     nombres_col1 = '     '
     for i in range(10):
         nombres_col1 += str(i)+'         '
-    UIWindow.window_dataset.plainTextEdit_tabular.appendPlainText(nombres_col1) # print('\n'+nombres_col1)
+    str_total += nombres_col1 + '\n'
     nombres_col2 = '     ' + '0123456789'*10 + ' yb yd yf'
-    UIWindow.window_dataset.plainTextEdit_tabular.appendPlainText(nombres_col2) # print(nombres_col2)
-    UIWindow.window_dataset.plainTextEdit_tabular.appendPlainText('     ' + '-'*109) # print('-'*109)
+    str_total += nombres_col2 + '\n'
+    str_total += '     ' + '-'*109 + '\n'
     
     for fila in range(len(dataset)):
         if fila+1 < 10:
@@ -371,7 +445,8 @@ def imprimirDataset2(dataset):
         for pixel in range(len(dataset[fila])-3):
             str_fila += str(dataset[fila][pixel])
         str_fila += '  ' + str(dataset[fila][-3]) + '  ' + str(dataset[fila][-2]) + '  ' + str(dataset[fila][-1])
-        UIWindow.window_dataset.plainTextEdit_tabular.appendPlainText(str_fila) # print(str_fila)
+        str_total += str_fila + '\n'
+    UIWindow.window_dataset.plainTextEdit_tabular.appendPlainText(str_total)
 
 
 def restarDatasets(aEste, restaleEste):
@@ -420,30 +495,32 @@ def crearRed(neuronasDeEntrada, nroCapasOcultas, neuronasPorCapaOculta, neuronas
     return red
 
 
-def imprimirRed1(red):
+def imprimirRed(red):
     # Muestra el contenido de la red en su estado actual, por cada capa
+    str_total = ''
     for capa in range(len(red)):
         if capa == 0:
-            print('Capa de entrada:')
+            str_total += '\n _______________\n'
+            str_total += '|CAPA DE ENTRADA|\n'
+            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
         elif capa == len(red)-1:
-            print('\nCapa de salida:')
+            str_total += '\n\n ______________\n'
+            str_total += '|CAPA DE SALIDA|\n'
+            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
         else:
-            print('\nCapa oculta ' + str(capa) + ':')
-        print(red[capa])
-
-
-def imprimirRed2(red):
-    # Muestra el contenido de la red en su estado actual, por cada capa, de forma más ordenada
-    for capa in range(len(red)):
-        if capa == 0:
-            UIWindow.window_red.plainTextEdit_red.appendPlainText('Capa de entrada:') # print('\nCapa de entrada:')
-        elif capa == len(red)-1:
-            UIWindow.window_red.plainTextEdit_red.appendPlainText('\nCapa de salida:') # print('\nCapa de salida:')
-        else:
-            UIWindow.window_red.plainTextEdit_red.appendPlainText('\nCapa oculta ' + str(capa) + ':') # print('\nCapa oculta ' + str(capa) + ':')
-        for i in range(len(red[capa])):
-            UIWindow.window_red.plainTextEdit_red.appendPlainText('   Neur. ' + str(i)) # print('\tNeur.', i)
-            UIWindow.window_red.plainTextEdit_red.appendPlainText('      '+ str(red[capa][i])) # print('\t\t',red[capa][i])
+            str_total += '\n\n _____________\n'
+            str_total += '|CAPA OCULTA ' + str(capa) + '|' + '\n'
+            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
+        for neurona in range(len(red[capa])):
+            if neurona+1 > 9:
+                subray = '     ¯¯¯¯¯¯¯¯¯¯'
+            else:
+                subray = '     ¯¯¯¯¯¯¯¯¯'                
+            str_total += '\n     Neurona ' + str(neurona+1) + '\n'
+            str_total += subray + '\n'
+            for contenido in range(len(red[capa][neurona])):
+                str_total += '        ' + '* ' + list(red[capa][neurona].keys())[contenido] + ': ' + str(list(red[capa][neurona].values())[contenido]) + '\n'
+    UIWindow.window_red.plainTextEdit_red.appendPlainText(str_total)
 
 
 def inicializarPesos(red):
@@ -697,6 +774,7 @@ class UI(QMainWindow):
             self.comboBox_arquitectura.setItemData(arq, self.arquitecturasPredefinidas[arq])
 
 
+
     # MÉTODOS DE CLASE
     # ----------------
                 
@@ -723,10 +801,6 @@ class UI(QMainWindow):
         self.consola.moveCursor(QTextCursor.End)
 
 
-    
-    # MÉTODOS PARA LA PRIMERA PESTAÑA
-
-
     def desactivarEsto(self, cosas):
         # Recibe una tupla de cosas de la interfaz para desactivar
         for cosa in cosas:
@@ -738,6 +812,10 @@ class UI(QMainWindow):
         for cosa in cosas:
             if not cosa.isEnabled():
                 cosa.setEnabled(True)
+
+
+
+    # MÉTODOS PARA LA PRIMERA PESTAÑA
 
  
     def generarDataset(self):
@@ -913,7 +991,7 @@ class UI(QMainWindow):
         # Creo la red
         self.red = crearRed(self.tamCapaEnt, self.capasOcultas, self.neuronasPorCapa, self.tamCapaSal)
         # # Para probar
-        # imprimirRed1(self.red)
+        # imprimirRed(self.red)
 
         # Habilito el entrenamiento y botón para ver red
         self.activarEsto((self.groupBox_entrenamiento, self.pushButton_verred))
@@ -1542,8 +1620,8 @@ class UI(QMainWindow):
         self.window_dataset.show()
         self.window_dataset.plainTextEdit_tabular.clear()
         self.window_dataset.plainTextEdit_grafico.clear()
-        imprimirDataset2(dataset)
-        imprimirDataset1(dataset)
+        imprimirDatasetTabular(dataset)
+        imprimirDatasetGraficoConAsteriscos(dataset)
         self.window_dataset.plainTextEdit_tabular.moveCursor(QTextCursor.Start)
         self.window_dataset.plainTextEdit_grafico.moveCursor(QTextCursor.Start)
         
@@ -1552,7 +1630,7 @@ class UI(QMainWindow):
         self.window_red = UIDialog_red
         self.window_red.show()
         self.window_red.plainTextEdit_red.clear()
-        imprimirRed2(self.red)
+        imprimirRed(self.red)
         self.window_red.plainTextEdit_red.moveCursor(QTextCursor.Start)
 
 
@@ -1611,7 +1689,20 @@ class UI_dialog_red(QDialog):
 # ***********************************************************
 
 
-# Posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99)
+'''
+Posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99)
+ ____________________ ____________________ ____________________
+|                    |                    |                    |
+|    12              |              17    |          1516      |
+|    22              |              27    |        24    27    |
+|    32              |              37    |        34          |
+|    4243444546      |      4344454647    |    4243444546      |
+|    52        57    |    52        57    |        54          |
+|    62        67    |    62        67    |        64          |
+|    72        77    |    72        77    |        74          |
+|    8283848586      |      8384858687    |        84          |
+|                    |                    |                    |
+ ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ '''
 posb = [12,22,32,42,43,44,45,46,52,57,62,67,72,77,82,83,84,85,86]
 posd = [17,27,37,43,44,45,46,47,52,57,62,67,72,77,83,84,85,86,87]
 posf = [15,16,24,27,34,42,43,44,45,46,54,64,74,84]
