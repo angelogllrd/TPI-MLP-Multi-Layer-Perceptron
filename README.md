@@ -201,9 +201,9 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
   - Sección a modo de "consola", que muestra diferentes informaciones a medida que se realiza el proceso.
 - **Sección 6**:
   - Estos botones permiten visualizar el contenido de la red (botón "Red"), o de los diferentes conjuntos (Botones "Entrenamiento", "Test", "Validación 10%", "Validación 20%", y "Validación 30%") en forma tabular y gráfica:
-  
+
 <p align="center">
-<img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/200420425-1e48df7b-3e03-40a3-bc80-38c48dce71c5.png">
+<img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/200910432-b482715f-f92d-496f-a329-06f7fcf55380.png">
 </p>
 
 <p align="center">
@@ -330,18 +330,18 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 - `resource_path()`: Función para no tener problemas con las rutas en la conversion a .exe. Todos los paths que referencian a archivos externos se pasan a esta función. 
 - **FUNCIONES PARA LA CREACIÓN E IMPRESIÓN DE PATRONES Y DATASETS**:
   - `inicializarPatrones()`: Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0, usando las posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99).
-  - `imprimirMatriz()`: Recibe un patrón e imprime la matriz de pixeles (en formato de string)
+  - `imprimirMatriz()`: Recibe un patrón e imprime la matriz de pixeles con * en cada pixel pintado. Se la usa solamente para pruebas en `generarDataset()`.
   - `generarDistorsion()`: Distorsiona el patron pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0).
   - `generarDataset()`: Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación generados como se explica [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-los-datasets).
   - `cargarDataset()`: Se usa en la 1ra pestaña, con el boton "Cargar". Toma un dataset completo (con los 100, 500 o 1000 ejemplos) y extrae los demás datasets usando la misma lógica que `generarDataset()`.
   - `convertirStringADataset()`: Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt.
-  - `imprimirDataset1()`: Imprime el dataset en forma gráfica (matrices de los patrones en formato de string), usando `imprimirMatriz()`.
-  - `imprimirDataset2()`: Imprime el dataset en forma tabular.
+  - `imprimirDatasetGraficoConAsteriscos()`: Imprime el dataset en forma gráfica (matrices de los patrones) con * en cada pixel pintado, dispuesto en "cant_filas" filas de "patrones_por_fila" patrones.
+  - `imprimirDatasetGraficoConPosiciones()`: Imprime el dataset en forma gráfica (matrices de los patrones) con la posición en cada pixel pintado, dispuesto en "cant_filas" filas de "patrones_por_fila" patrones.
+  - `imprimirDatasetTabular()`: Imprime el dataset en forma tabular.
   - `restarDatasets()`: Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación.
 - **CREACIÓN DE LA RED Y DE FUNCIONES PARA EL ALGORITMO**:
   - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-la-red-neuronal).
-  - `imprimirRed1()`: Muestra el contenido de la red en su estado actual, por cada capa (no se la usa).
-  - `imprimirRed2()`: Igual que la anterior, pero muestra la red de forma más ordenada.
+  - `imprimirRed()`: Muestra el contenido de la red en su estado actual, por cada capa.
   - `inicializarPesos()`: Corresponde al **Paso 1**. Inicializa los pesos de la red con valores pequeños aleatorios (entre -0.5 y 0.5)
   - `aplicarPatronDeEntrada()`: Corresponde al **Paso 2**. Presenta un patrón de entrada del dataset, copiándolo a la salida de las neuronas de la capa de entrada. También inserta las salidas deseadas (3 últimos elementos del patrón) en las salidas deseadas de las neuronas de salida.
   - `calcularSalidasRed()`: Corresponde al **Paso 3**. Propaga las entradas y calcula las salidas de la red.
