@@ -171,7 +171,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 ## Partes de la aplicación
 <details><summary>Ver Partes de la aplicación</summary>
   
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1WtA38S4O7MvZgWZLr3xD9tKdn52uQ3Ge/view?usp=sharing) / [Linux](https://drive.google.com/file/d/1CCp0kANpVLxpkK-MhyXm5l_y_MWBBv3B/view?usp=sharing)
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/15oaN7XDcYwfxJIkI0-9EhXViB6kAIpef/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
 
 La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** y **"Probar patrón"**.
 
@@ -229,7 +229,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ## Instrucciones de uso de la aplicación
 <details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1WtA38S4O7MvZgWZLr3xD9tKdn52uQ3Ge/view?usp=sharing) / [Linux](https://drive.google.com/file/d/1CCp0kANpVLxpkK-MhyXm5l_y_MWBBv3B/view?usp=sharing)
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/15oaN7XDcYwfxJIkI0-9EhXViB6kAIpef/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
 
 1. **Generar/Cargar dataset:** 
      - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la ruta del ejecutable.
