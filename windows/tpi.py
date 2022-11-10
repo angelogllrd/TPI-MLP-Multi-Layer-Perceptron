@@ -345,7 +345,7 @@ def imprimirDatasetGraficoConAsteriscos(dataset):
     # filas de "patrones_por_fila" patrones
     
     dataset_copia = dataset[:]
-    str_total = '' # String que contiene todas las matrices ordenadas de acuerdo al número de patrones_por_fila
+    str_total = '' # String que contendrá todo lo que se muestra
     patrones_por_fila = 10
     cant_filas = ceil(len(dataset_copia)/patrones_por_fila)
     nro_patron = 1 # Contador para poner números a las matrices
