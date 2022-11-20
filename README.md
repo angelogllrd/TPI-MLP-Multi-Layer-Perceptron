@@ -1,7 +1,7 @@
 # Análisis MLP (Multi-Layer Perceptron) 
 TPI del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
 
-![2022-11-08 00_12_32-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/200443223-3d869881-bd41-43cf-9246-96f443e610d9.png)
+![2022-11-20 17_52_45-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/202927114-9422238e-8f62-4630-856a-1963be0e3f06.png)
 
 ## Consigna
 <details><summary>Ver Consigna</summary>
@@ -153,7 +153,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 ## Estructura de la red neuronal
 <details><summary>Ver Estructura de la red neuronal</summary>
   
-![Sin título](https://user-images.githubusercontent.com/51035369/200857729-afc1c9ad-a962-4396-a839-d6a528fbf9fc.png)
+![200857729-afc1c9ad-a962-4396-a839-d6a528fbf9fc](https://user-images.githubusercontent.com/51035369/202927141-dcfe2b93-417a-4bf3-9c08-080e58c20098.png)
 
 - La red se representa también usando lista de listas, donde cada sublista es una capa. 
 - Cada neurona dentro cada capa se representa mediante un diccionario, cuyos items varían dependiendo de qué capa se trate.
@@ -229,7 +229,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ## Instrucciones de uso de la aplicación
 <details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/15oaN7XDcYwfxJIkI0-9EhXViB6kAIpef/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1fElKQyQl-hqpxbABTjoEjJuDNBDY3KaG/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
 
 1. **Generar/Cargar dataset:** 
      - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la ruta del ejecutable.
@@ -264,12 +264,15 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
      
        ![2022-11-07 22_41_23-Window](https://user-images.githubusercontent.com/51035369/200433365-47550610-7b0d-4d1f-b8d1-f53df033d2b6.png)
        
-       - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código en las líneas 977 a 981 y comentando las líneas 993 a 997, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
+       - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código de la primera imágen (dentro de `entrenarRed()`) y comentando el código de la segunda, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
          
-         ![2022-11-07 22_19_34-Window](https://user-images.githubusercontent.com/51035369/200433406-97d428b6-5f5f-4192-8afe-b0cfc01294ac.png)
-         
-         ![2022-11-07 22_19_53-Window](https://user-images.githubusercontent.com/51035369/200433426-a16033a7-4719-41dd-8505-78dcd0ccec75.png)
+         ![1](https://user-images.githubusercontent.com/51035369/202927296-e7c4e0de-e10b-462a-af41-47a2f9c57eea.png)
 
+         ![2](https://user-images.githubusercontent.com/51035369/202927300-687d89b8-9fcb-4aad-b75b-be6d9046597b.png)
+         Con esta opción de fin, y para evitar que el entrenamiento se prolongue indefinidamente cuando la red no converge (o lo hace muy lento), la aplicación genera una alerta cuando detecta que el error de las últimas 20 épocas es el mismo (comparando los los 8 primeros dígitos decimales). Esta ofrece la opción de **Parar** el entrenamiento o **Seguir** con el mismo (hasta detectar la misma situación).
+         
+         ![2022-11-20 18_39_12-Acción requerida](https://user-images.githubusercontent.com/51035369/202927529-536344ef-50c9-49e5-8bc4-9460ecc7fbf3.png)
+         
        - **Seleccionar un número de épocas/iteraciones fijo**: El entrenamiento se hace por un número de épocas fijado, independientemente del Error de entrenamiento como en el caso anterior.
      - Una vez seleccionada una opción, presionar el botón **"Entrenar"** para comenzar el entrenamiento. En realidad, esto lleva a cabo 3 entrenamientos (considerando en cada uno un conjunto de validación distinto). En cada uno de esos 3 entrenamientos:
        - Se restan o quitan los ejemplos de uno conjunto de validación al dataset de entrenamiento original, y se entrena con el conjunto resultante. 
@@ -342,6 +345,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 - **CREACIÓN DE LA RED Y DE FUNCIONES PARA EL ALGORITMO**:
   - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-la-red-neuronal).
   - `imprimirRed()`: Muestra el contenido de la red en su estado actual, por cada capa.
+  - `dibujarTituloCapa()`: Usado en `imprimirRed()`. Dibuja el título recuadrado de una capa.
   - `inicializarPesos()`: Corresponde al **Paso 1**. Inicializa los pesos de la red con valores pequeños aleatorios (entre -0.5 y 0.5)
   - `aplicarPatronDeEntrada()`: Corresponde al **Paso 2**. Presenta un patrón de entrada del dataset, copiándolo a la salida de las neuronas de la capa de entrada. También inserta las salidas deseadas (3 últimos elementos del patrón) en las salidas deseadas de las neuronas de salida.
   - `calcularSalidasRed()`: Corresponde al **Paso 3**. Propaga las entradas y calcula las salidas de la red.
@@ -379,6 +383,8 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
       - **MÉTODOS PARA LA PRIMERA PESTAÑA:**
         - `desactivarEsto()`: Recibe una tupla de cosas de la interfaz para desactivar.
         - `activarEsto()`: Recibe una tupla de cosas de la interfaz para activar.
+        - `generarAlerta()`: Genera una alerta cuando se detecta que el entrenamiento produjo el mismo error (considerando una precisión de hasta 8 dígitos) durante 20 décadas, brindando la opción de "Parar" o "Seguir" el entrenamiento. Su función es brindar al usuario la opción de parar el entrenamiento cuando el error no baja, o baja muy lentamente.
+        - `animarEsto()`: Muestra una animación resaltando una sección cuando la misma se activa.
         - `generarDataset()`: Verifica si alguno de los radio buttons (100, 500 o 1000) se seleccionó y genera los datasets correspondientes. Llamado por el botón "Generar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
         - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt en la misma ruta del ejecutable. Llamado por el botón "Guardar".
         - `cargarDataset()`: Carga un .txt de un dataset guardado previamente con la aplicación, y genera los datasets correspondientes. Llamado por el botón "Cargar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
@@ -388,6 +394,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
         - `tratarSpinBoxCapaOculta2()`: Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del número de capas ocultas.
         - `crearRed()`: Toma los parámetros seleccionados para la red, y crea la estructura. Activa parte de la Sección 3 (Entrenamiento) y el botón de la esquina inferior derecha "Red actual" para ver el contenido de la red.
         - `entrenarRed()`: Realiza 3 entrenamientos, en cada uno considerando un conjunto de validación diferente. De acuerdo a la condición de fin seleccionada, realiza cada entrenamiento hasta que el Error de entrenamiento (MSE promedio de una época) sea menor que el error aceptable ingresado, o durante un número fijo de épocas o iteraciones. Dentro de cada entrenamiento y por cada época también se calcula el Error de validación. Una vez finalizados los 3 entrenamientos, arroja los resultados por cada uno (épocas que consumió, Error de entrenamiento y Error de validación de la última época). Llamada por el botón "Entrenar". Activa parte de la Sección 4 (Hacer test) y la Sección 7.
+        - `mostrarErrorEpoca()`: Usado dentro de `entrenarRed()`. Muestra por la consola de la aplicación el error de entrenamiento al terminar una época.
         - `guardarRedEntrenada()`: Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista en los comboboex de las Secciones 4 y 7. Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura en el combobox de la Sección 2 y obtiene el texto que la describe. Si no, forma la descripción. Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier momento. Llamada dentro de `entrenarRed()`.
         - `esArquitecturaPredefinida()`: Comprueba si la red actual tiene una arquitectura predefinida. Si la tiene, retorna el string que la describe, tal como está en el combobox de la Sección 2. Si no, retorna string vacío. En ambos casos, retorna en segundo lugar la estructura de la arquitectura (necesaria par actualizar atributos al cargar una red). Llamada dentro de `guardarRedEntrenada()`.
         - `finalizarEntrenamiento()`: Agrupa operaciones comunes a los entrenamientos con las dos condiciones de fin, para evitar repetición de código. Llamada dentro de `entrenarRed()`.
@@ -421,4 +428,22 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   - Se inicializan los patrones de cada letra.
   - Se inicializa la app
   
+</details>
+
+## Últimos cambios
+<details><summary>Ver Últimos cambios</summary>
+
+### Cambios posteriores a la entrega del 9/11
+- Agregados tooltips a todos los botones y comboboxes.
+- Cambiada la presentación de resultados:
+  - Ahora los resultados no se muestran con notación científica.
+  - Los errores en los resultados del entrenamiento se muestran con una precisión de hasta 8 dígitos decimales.
+  - Los valores de precisión se muestran en forma de porcentaje con 2 dígitos decimales.
+  - Las salidas de las neuronas de salida al clasificar un patrón se muestran en forma de porcentaje.
+- Agregada venatan de alerta cuando el entrenamiento produjo el mismo error (considerando las primeras 8 cifras decimales) durante 20 ápocas, a fin de ofrecer la opción de cortar el entrenamiento cuando la red no converge (o converge muy lento). Se dejó de usar el corte automático a las 200 épocas, que prolongaba demasiado el entrenamiento para datasets muy grandes (500 y 100 ejemplos).
+- Mejorada la representación de las informaciones mostradas por la consola de la aplicación. Se agregó espaciado entre renglones y ahora se listan los errores producidos por cada época durante el entrenamiento.
+- Se mejoró la representación del contenido de la red (botón "Red actual"). Se organizaron matricialmente las neuronas de entrada (para evitar una lista larga de 100 neuronas) y se agregó un recuadro a cada capa para distinguir mejor cuando comienza cada una.
+- Se agregó una animación de resaltado para distinguir cuando se activa una sección nueva en la aplicación.
+- Se quitaron los "ticks" fijos del eje x en el gráfico de Errores vs Épocas, lo que provocaba que cuando las épocas eran muchas (>100), los números quedaran muy juntos. Ahora, matplotlib los genera automáticamente. Lo que antes era la época 1, ahora se indica con 0, y lo que era la época *n* ahora es la época *n-1*. Lo mismo para el gráfico de error de test.
+
 </details>
