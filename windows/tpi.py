@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Lista de widgets disponible en Formulario -> View Python Code, del Designer
-from PyQt5.QtWidgets import QMainWindow, QAbstractSpinBox, QApplication, QDoubleSpinBox, QFormLayout, QGraphicsView, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLayout, QLineEdit, QMainWindow, QPlainTextEdit, QPushButton, QRadioButton, QSizePolicy, QSlider, QSpinBox, QStatusBar, QTabWidget, QVBoxLayout, QWidget, QFileDialog, QDesktopWidget, QDialog
+from PyQt5.QtWidgets import QMainWindow, QAbstractSpinBox, QApplication, QDoubleSpinBox, QFormLayout, QGraphicsView, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLayout, QLineEdit, QMainWindow, QPlainTextEdit, QPushButton, QRadioButton, QSizePolicy, QSlider, QSpinBox, QStatusBar, QTabWidget, QVBoxLayout, QWidget, QFileDialog, QDesktopWidget, QDialog, QMessageBox
 from PyQt5.QtGui import QTextCursor, QIcon # Para moverme hasta arriba en los QPlainTextEdit donde se muestran la red y datasets
 from PyQt5 import uic
 from PyQt5 import QtCore # Para usar expresiones regulares con QRegularExpression
@@ -498,29 +498,50 @@ def crearRed(neuronasDeEntrada, nroCapasOcultas, neuronasPorCapaOculta, neuronas
 def imprimirRed(red):
     # Muestra el contenido de la red en su estado actual, por cada capa
     str_total = ''
+    tam_titulo = 113
     for capa in range(len(red)):
         if capa == 0:
-            str_total += '\n _______________\n'
-            str_total += '|CAPA DE ENTRADA|\n'
-            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
+            str_total += dibujarTituloCapa('CAPA DE ENTRADA', tam_titulo)
         elif capa == len(red)-1:
-            str_total += '\n\n ______________\n'
-            str_total += '|CAPA DE SALIDA|\n'
-            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
+            str_total += dibujarTituloCapa('CAPA DE SALIDA', tam_titulo)
         else:
-            str_total += '\n\n _____________\n'
-            str_total += '|CAPA OCULTA ' + str(capa) + '|' + '\n'
-            str_total += ' ¯¯¯¯¯¯¯¯¯¯¯¯¯\n'
-        for neurona in range(len(red[capa])):
-            if neurona+1 > 9:
-                subray = '     ¯¯¯¯¯¯¯¯¯¯'
-            else:
-                subray = '     ¯¯¯¯¯¯¯¯¯'                
-            str_total += '\n     Neurona ' + str(neurona+1) + '\n'
-            str_total += subray + '\n'
-            for contenido in range(len(red[capa][neurona])):
-                str_total += '        ' + '* ' + list(red[capa][neurona].keys())[contenido] + ': ' + str(list(red[capa][neurona].values())[contenido]) + '\n'
+            str_total += dibujarTituloCapa('CAPA OCULTA ' + str(capa), tam_titulo)
+        if capa == 0: # Dibujo capa de entrada, con neuronas una al lado de la otra, y 6 neuronas por fila
+            sub_str1 = sub_str2 = sub_str3 = '     '
+            for neurona in range(len(red[capa])):
+                if neurona+1 > 9:
+                    subray = '¯¯¯¯¯¯¯¯¯¯       '
+                    espacio = ''
+                else:
+                    subray = '¯¯¯¯¯¯¯¯¯       '
+                    espacio = ' '
+                sub_str1 += 'Neurona ' + str(neurona+1) + espacio + '       '
+                sub_str2 += subray + espacio 
+                sub_str3 += '* salida: ' + str(red[capa][neurona]['salida']) + '      '
+                if (neurona+1) % 6 == 0 or (neurona+1) == 100: # Si terminé de imprimir las 6 neuronas de la fila o es la última fila, imprimo 
+                    str_total += '\n' + sub_str1 + '\n' + sub_str2 + '\n' + sub_str3 + '\n'
+                    sub_str1 = sub_str2 = sub_str3 = '     '
+        else: # Dibujo capa oculta o de salida
+            for neurona in range(len(red[capa])):
+                if neurona+1 > 9:
+                    subray = '     ¯¯¯¯¯¯¯¯¯¯'
+                else:
+                    subray = '     ¯¯¯¯¯¯¯¯¯'                
+                str_total += '\n     Neurona ' + str(neurona+1) + '\n'
+                str_total += subray + '\n'
+                for contenido in range(len(red[capa][neurona])):
+                    str_total += '     ' + '* ' + list(red[capa][neurona].keys())[contenido] + ': ' + str(list(red[capa][neurona].values())[contenido]) + '\n'
     UIWindow.window_red.plainTextEdit_red.appendPlainText(str_total)
+
+
+def dibujarTituloCapa(nombre_capa, tam_titulo):
+    # Devuelve un string con el titulo de la capa recuadrado
+    str_total = '\n ' + '_'*tam_titulo + '\n'
+    esp_inicio = floor((tam_titulo-len(nombre_capa))/2)
+    esp_fin = tam_titulo - esp_inicio - len(nombre_capa)
+    str_total += '|' + ' '*esp_inicio + nombre_capa + ' '*esp_fin + '|\n '
+    str_total += '¯'*tam_titulo + '\n'
+    return str_total
 
 
 def inicializarPesos(red):
@@ -723,10 +744,15 @@ class UI(QMainWindow):
 
         # Acciones disparadas por radiobuttons
         self.radioButton_100.toggled.connect(lambda: self.activarEsto((self.pushButton_generar,)))
+        self.radioButton_100.toggled.connect(lambda: self.animarEsto((self.frame_generar,)))
         self.radioButton_500.toggled.connect(lambda: self.activarEsto((self.pushButton_generar,)))
+        self.radioButton_500.toggled.connect(lambda: self.animarEsto((self.frame_generar,)))
         self.radioButton_1000.toggled.connect(lambda: self.activarEsto((self.pushButton_generar,)))
+        self.radioButton_1000.toggled.connect(lambda: self.animarEsto((self.frame_generar,)))
         self.radioButton_erroracep.toggled.connect(lambda: self.activarEsto((self.pushButton_entrenar, self.progressBar_entrenamiento, self.label_entrresult, self.label_entrepocas, self.label_entrmseentr, self.label_entrmseval, self.label_entr10, self.label_entr20, self.label_entr30, self.lineEdit_nroepocas10, self.lineEdit_nroepocas20, self.lineEdit_nroepocas30, self.lineEdit_mseentr10, self.lineEdit_mseentr20, self.lineEdit_mseentr30, self.lineEdit_msevalid10, self.lineEdit_msevalid20, self.lineEdit_msevalid30)))
+        self.radioButton_erroracep.toggled.connect(lambda: self.animarEsto((self.frame_entrenamiento2,)))
         self.radioButton_iteraciones.toggled.connect(lambda: self.activarEsto((self.pushButton_entrenar, self.progressBar_entrenamiento, self.label_entrresult, self.label_entrepocas, self.label_entrmseentr, self.label_entrmseval, self.label_entr10, self.label_entr20, self.label_entr30, self.lineEdit_nroepocas10, self.lineEdit_nroepocas20, self.lineEdit_nroepocas30, self.lineEdit_mseentr10, self.lineEdit_mseentr20, self.lineEdit_mseentr30, self.lineEdit_msevalid10, self.lineEdit_msevalid20, self.lineEdit_msevalid30)))
+        self.radioButton_iteraciones.toggled.connect(lambda: self.animarEsto((self.frame_entrenamiento2,)))
 
         # Acciones disparadas por sliders
         self.horizontalSlider_probar1patron.valueChanged.connect(self.tratarLineEditSlider)
@@ -797,7 +823,7 @@ class UI(QMainWindow):
 
     def mostrarPorConsola(self, texto):
         # Muestra en la parte derecha de la UI un texto
-        self.consola.appendPlainText(texto)
+        self.consola.appendPlainText('\n'+texto)
         self.consola.moveCursor(QTextCursor.End)
 
 
@@ -811,6 +837,36 @@ class UI(QMainWindow):
         # Recibe una tupla de cosas de la interfaz para activar
         for cosa in cosas:
             if not cosa.isEnabled():
+                cosa.setEnabled(True)
+
+
+    def generarAlerta(self, error, repetidas):
+        # Muestra una alerta preguntando si seguir o no con un entrenamiento cuando el mismo no converge, o lo hace muy lento        
+        alerta = QMessageBox(self)
+        alerta.setWindowTitle("Acción requerida")
+        alerta.setIcon(QMessageBox.Warning)
+        alerta.setText('El error no baja, o baja muy lentamente')
+        alerta.setInformativeText('Las últimas ' + str(repetidas) + ' épocas arrojaron un error (hasta 8 decimales) de ' + str(error) + '.\n\n¿Desea PARAR o SEGUIR con este entrenamiento?')
+        botonParar = alerta.addButton('Parar', QMessageBox.AcceptRole)
+        botonSeguir = alerta.addButton('Seguir', QMessageBox.RejectRole)
+        alerta.setDefaultButton(botonParar)
+        alerta.exec()
+        if alerta.clickedButton() == botonParar:
+            return 'parar'
+        elif alerta.clickedButton() == botonSeguir:
+            return 'seguir'
+
+
+    def animarEsto(self, cosas):
+        # Muestra una animación cuando se activa una nueva función
+        for cosa in cosas:
+            if not cosa.isEnabled():
+                alfa = 255
+                for tiempo in (70,60,50,40,30,20,10):
+                    # cosa.setStyleSheet('background-color: rgba(140, 140, 140, 255);')
+                    cosa.setStyleSheet('background-color: rgba(255, 26, 26, ' + str(alfa) + ');')
+                    alfa -= 42.5
+                    QtTest.QTest.qWait(tiempo)
                 cosa.setEnabled(True)
 
 
@@ -835,7 +891,7 @@ class UI(QMainWindow):
 
         # Activo nuevas funciones
         self.activarEsto((self.groupBox_arquitectura, self.pushButton_verentr, self.pushButton_vertest, self.pushButton_verval10, self.pushButton_verval20, self.pushButton_verval30, self.label_verreddataset, self.pushButton_guardar))
-
+        self.animarEsto((self.frame_arquitectura, self.frame_guardar, self.frame_validacion10, self.frame_botonesvarios))
 
     def guardarDataset(self):
         # Guarda en la ruta del ejecutable el dataset completo generado
@@ -864,6 +920,7 @@ class UI(QMainWindow):
             
             # Activo nuevas funciones
             self.activarEsto((self.groupBox_arquitectura, self.pushButton_verentr, self.pushButton_vertest, self.pushButton_verval10, self.pushButton_verval20, self.pushButton_verval30, self.label_verreddataset, self.pushButton_guardar))
+            self.animarEsto((self.frame_arquitectura, self.frame_guardar, self.frame_validacion10, self.frame_botonesvarios))
 
             # # Para probar
             # print('Tamaño dataset full:', len(self.dataset_full))
@@ -995,6 +1052,7 @@ class UI(QMainWindow):
 
         # Habilito el entrenamiento y botón para ver red
         self.activarEsto((self.groupBox_entrenamiento, self.pushButton_verred))
+        self.animarEsto((self.frame_entrenamiento1, self.frame_verred))
 
         # Muestro mensaje por consola con información de la red creada
         if hay_2:
@@ -1020,6 +1078,7 @@ class UI(QMainWindow):
                 if errorAcep < 0:
                     self.mostrarPorConsola('>>El error aceptable debe ser un número positivo o cero')
                 else: # El error tiene un formato correcto
+                    conjuntoActual = 0
                     # Hago un entrenamiento por cada conjunto de validación
                     for conjunto_val in (self.conjunto_val_10, self.conjunto_val_20, self.conjunto_val_30):
                         errorNoAceptable = True # Bandera que me informa si algún patrón dio un error mayor al aceptable
@@ -1028,16 +1087,22 @@ class UI(QMainWindow):
                         nroEpocas = 0 # Contador de épocas
                         listaErroresEntrEpoca = [] # Para el gráfico de MSE vs épocas
                         listaErroresValEpoca = [] # Para el gráfico de MSE vs épocas
+                        contErrorRepetido = 0
+                        maxErrorRepetido = 20
+                        conjuntoActual += 10
+
+                        self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de ' + str(conjuntoActual) + ' comenzado')
+                        self.mostrarPorConsola('  Errores de entrenamiento:\n' + '  ' + '¯'*25)
                         
                         inicializarPesos(self.red)
                         # Si algún patrón tuvo error por encima del aceptable, comienzo una nueva época
-                        while errorNoAceptable:  
+                        while errorNoAceptable:
                             nroEpocas += 1
-                            if nroEpocas > 200: # Cuido que el entrenamiento termine en algún momento si no está convergiendo
-                                self.mostrarPorConsola('>>Mas de 200 épocas...')
-                                self.mostrarPorConsola('>>La red no se establizó')
-                                nroEpocas -= 1
-                                break
+                            # if nroEpocas > 200: # Cuido que el entrenamiento termine en algún momento si no está convergiendo
+                            #     self.mostrarPorConsola('>>Mas de 200 épocas...')
+                            #     self.mostrarPorConsola('>>La red no se establizó')
+                            #     nroEpocas -= 1
+                            #     break
                             errorNoAceptable = False                      
                             sumErrorEntr = 0 # Acumula los errores de entrenamiento de 1 época
                             contFilas = 0 # Para graficar el progreso
@@ -1073,54 +1138,73 @@ class UI(QMainWindow):
                                 errorNoAceptable = True
                                 # print('Epoca ' + str(nroEpocas))
                                 # print('Error que superó:', errorEntrEpoca)
+                            
+                            # Muestro por consola el error de entrenamiento de esta epoca
+                            self.mostrarErrorEpoca(nroEpocas, errorEntrEpoca)
+                            
+                            # Controlo errores parecidos para generar alerta de parada de entrenamiento
+                            if nroEpocas > 1:
+                                errorAnterior = float(f'{listaErroresEntrEpoca[-2]:.8f}')
+                                errorActual = float(f'{listaErroresEntrEpoca[-1]:.8f}')
+                                if errorAnterior == errorActual:
+                                    contErrorRepetido += 1
+                                    if contErrorRepetido == maxErrorRepetido:
+                                        contErrorRepetido = 0
+                                        resp = self.generarAlerta(errorActual, maxErrorRepetido)
+                                        if resp == 'parar':
+                                            break
+                                else:
+                                    contErrorRepetido = 0
 
                         # Terminé entrenamiento para el conjunto de validación actual. Guardo listas de errores y muestro resultados
-                        if conjunto_val is self.conjunto_val_10:
-                            cv = '10' # Lo uso en la llamada a guardarRedEntrenada() abajo
+                        if conjuntoActual == 10:
                             # Guardo lista de errores para graficar
                             listaErroresEntrEpoca10 = listaErroresEntrEpoca
                             listaErroresValEpoca10 = listaErroresValEpoca
                             # Muestro resultados
                             self.lineEdit_nroepocas10.setText(str(nroEpocas)) # Número de épocas que llevó el entrenamiento
-                            self.lineEdit_mseentr10.setText(str(round(listaErroresEntrEpoca[-1],8))) # Muestro error de entrenamiento de última época
-                            self.lineEdit_msevalid10.setText(str(round(listaErroresValEpoca[-1],8))) # Muestro error de validación de última época
-                            self.mostrarPorConsola('>>Entr. con conj. de val. de 10 terminado')
-                        elif conjunto_val is self.conjunto_val_20:
-                            cv = '20'
+                            self.lineEdit_mseentr10.setText(f'{listaErroresEntrEpoca[-1]:.8f}') # Muestro error de entrenamiento de última época
+                            self.lineEdit_msevalid10.setText(f'{listaErroresValEpoca[-1]:.8f}') # Muestro error de validación de última época
+                            self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 10 terminado')
+                        elif conjuntoActual == 20:
                             listaErroresEntrEpoca20 = listaErroresEntrEpoca
                             listaErroresValEpoca20 = listaErroresValEpoca
                             self.lineEdit_nroepocas20.setText(str(nroEpocas))
-                            self.lineEdit_mseentr20.setText(str(round(listaErroresEntrEpoca[-1],8))) 
-                            self.lineEdit_msevalid20.setText(str(round(listaErroresValEpoca[-1],8))) 
-                            self.mostrarPorConsola('>>Entr. con conj. de val. de 20 terminado')
+                            self.lineEdit_mseentr20.setText(f'{listaErroresEntrEpoca[-1]:.8f}') 
+                            self.lineEdit_msevalid20.setText(f'{listaErroresValEpoca[-1]:.8f}') 
+                            self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 20 terminado')
                         else:
-                            cv = '30'
                             listaErroresEntrEpoca30 = listaErroresEntrEpoca
                             listaErroresValEpoca30 = listaErroresValEpoca
                             self.lineEdit_nroepocas30.setText(str(nroEpocas))
-                            self.lineEdit_mseentr30.setText(str(round(listaErroresEntrEpoca[-1],8))) 
-                            self.lineEdit_msevalid30.setText(str(round(listaErroresValEpoca[-1],8))) 
-                            self.mostrarPorConsola('>>Entr. con conj. de val. de 30 terminado')
+                            self.lineEdit_mseentr30.setText(f'{listaErroresEntrEpoca[-1]:.8f}') 
+                            self.lineEdit_msevalid30.setText(f'{listaErroresValEpoca[-1]:.8f}') 
+                            self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 30 terminado')
 
                         # Guardo la red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados
-                        self.guardarRedEntrenada(cv)
-
-                    # Grafico errores de entrenamiento y validación vs épocas        
-                    self.graficarErrores(listaErroresEntrEpoca10, listaErroresEntrEpoca20, listaErroresEntrEpoca30, listaErroresValEpoca10, listaErroresValEpoca20, listaErroresValEpoca30)
+                        self.guardarRedEntrenada(str(conjuntoActual))
 
                     # Activo nuevas funciones disponibles por haber entrenado
                     self.finalizarEntrenamiento()
+
+                    # Grafico errores de entrenamiento y validación vs épocas        
+                    self.graficarErrores(listaErroresEntrEpoca10, listaErroresEntrEpoca20, listaErroresEntrEpoca30, listaErroresValEpoca10, listaErroresValEpoca20, listaErroresValEpoca30)                    
         
         else: # Se seleccionó el combo box de número fijo de iteraciones
             # Tomo el número de iteraciones ingresado
-            nroEpocas = self.spinBox_iteraciones.value() 
-            
+            nroEpocas = self.spinBox_iteraciones.value()
+
+            conjuntoActual = 0
             # Hago un entrenamiento por cada conjunto de validación
             for conjunto_val in (self.conjunto_val_10, self.conjunto_val_20, self.conjunto_val_30):
                 dataset_entr_actual = restarDatasets(self.dataset_entr, conjunto_val) # Resto al de entrenamiento el conjunto de validacion
                 self.vaciarRed() # Dejo la red vacia para iniciar un nuevo entrenamiento
                 listaErroresEntrEpoca = [] # Para el gráfico de MSE vs épocas
                 listaErroresValEpoca = [] # Para el gráfico de MSE vs épocas
+                conjuntoActual += 10
+                
+                self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de ' + str(conjuntoActual) + ' comenzado')
+                self.mostrarPorConsola('  Errores de entrenamiento:\n' + '  ' + '¯'*25)
                 
                 inicializarPesos(self.red)
                 # Itero "nroEpocas" veces el dataset_entr_actual
@@ -1149,43 +1233,55 @@ class UI(QMainWindow):
                     listaErroresEntrEpoca.append(errorEntrEpoca)
                     errorValEpoca = self.probarDataset(conjunto_val)[3]
                     listaErroresValEpoca.append(errorValEpoca)
+
+                    # Muestro por consola el error de entrenamiento de esta epoca
+                    self.mostrarErrorEpoca(epoca+1, errorEntrEpoca)
                                     
                 # Terminé entrenamiento para el conjunto de validación actual
-                if conjunto_val is self.conjunto_val_10:
-                    cv = '10' # Lo uso en la llamada a guardarRedEntrenada() abajo
+                if conjuntoActual == 10:
                     # Guardo lista de errores para graficar
                     listaErroresEntrEpoca10 = listaErroresEntrEpoca
                     listaErroresValEpoca10 = listaErroresValEpoca
                     # Muestro resultados
                     self.lineEdit_nroepocas10.setText(str(nroEpocas)) # Número de épocas que llevó el entrenamiento
-                    self.lineEdit_mseentr10.setText(str(round(listaErroresEntrEpoca[-1],8))) # Muestro error de entrenamiento de última época
-                    self.lineEdit_msevalid10.setText(str(round(listaErroresValEpoca[-1],8))) # Muestro error de validación de última época
-                    self.mostrarPorConsola('>>Entr. con conj. de val. de 10 terminado')
-                elif conjunto_val is self.conjunto_val_20:
-                    cv = '20'
+                    self.lineEdit_mseentr10.setText(f'{listaErroresEntrEpoca[-1]:.8f}') # Muestro error de entrenamiento de última época
+                    self.lineEdit_msevalid10.setText(f'{listaErroresValEpoca[-1]:.8f}') # Muestro error de validación de última época
+                    self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 10 terminado')
+                elif conjuntoActual == 20:
                     listaErroresEntrEpoca20 = listaErroresEntrEpoca
                     listaErroresValEpoca20 = listaErroresValEpoca
                     self.lineEdit_nroepocas20.setText(str(nroEpocas))
-                    self.lineEdit_mseentr20.setText(str(round(listaErroresEntrEpoca[-1],8))) 
-                    self.lineEdit_msevalid20.setText(str(round(listaErroresValEpoca[-1],8))) 
-                    self.mostrarPorConsola('>>Entr. con conj. de val. de 20 terminado')
+                    self.lineEdit_mseentr20.setText(f'{listaErroresEntrEpoca[-1]:.8f}') 
+                    self.lineEdit_msevalid20.setText(f'{listaErroresValEpoca[-1]:.8f}') 
+                    self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 20 terminado')
                 else:
-                    cv = '30'
                     listaErroresEntrEpoca30 = listaErroresEntrEpoca
                     listaErroresValEpoca30 = listaErroresValEpoca
                     self.lineEdit_nroepocas30.setText(str(nroEpocas))
-                    self.lineEdit_mseentr30.setText(str(round(listaErroresEntrEpoca[-1],8))) 
-                    self.lineEdit_msevalid30.setText(str(round(listaErroresValEpoca[-1],8))) 
-                    self.mostrarPorConsola('>>Entr. con conj. de val. de 30 terminado')
+                    self.lineEdit_mseentr30.setText(f'{listaErroresEntrEpoca[-1]:.8f}') 
+                    self.lineEdit_msevalid30.setText(f'{listaErroresValEpoca[-1]:.8f}') 
+                    self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 30 terminado')
 
                 # Guardo la red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados
-                self.guardarRedEntrenada(cv)
+                self.guardarRedEntrenada(str(conjuntoActual))
+
+            # Activo nuevas funciones disponibles por haber entrenado
+            self.finalizarEntrenamiento()
 
             # Grafico errores de entrenamiento y validación vs épocas
             self.graficarErrores(listaErroresEntrEpoca10, listaErroresEntrEpoca20, listaErroresEntrEpoca30, listaErroresValEpoca10, listaErroresValEpoca20, listaErroresValEpoca30)
 
-            # Activo nuevas funciones disponibles por haber entrenado
-            self.finalizarEntrenamiento()
+
+    def mostrarErrorEpoca(self, nroEpocas, errorEntrEpoca):
+        # Muestra por consola el error de entrenamiento de una época
+        if nroEpocas < 10:
+            espacio = 2
+        elif nroEpocas < 100:
+            espacio = 1
+        else:
+            espacio = 0
+        self.consola.appendPlainText('  Época ' + str(nroEpocas) + ': ' + ' '*espacio + str(errorEntrEpoca))
+        self.consola.moveCursor(QTextCursor.End)
 
 
     def guardarRedEntrenada(self, conj_val):
@@ -1262,6 +1358,7 @@ class UI(QMainWindow):
         # Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
         self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron))
+        self.animarEsto((self.frame_test1,))
 
 
     def vaciarRed(self):
@@ -1331,12 +1428,7 @@ class UI(QMainWindow):
         plt.plot(yVal, label="Error de validación 10")
         plt.ylabel("MSE promedio", fontsize=9)
         plt.tick_params(axis='both', labelsize=8)
-        plt.xticks(ticks=range(len(lErroresEntr10)), labels=range(1,len(lErroresEntr10)+1)) # Para que la numeración del eje x comience en 1
         plt.legend(fontsize=8)
-        tam = len(lErroresEntr10)
-        if tam > 70: # Si el número de épocas es muy grande, muestro los valores del eje x en forma vertical para que no se solapen
-            plt.xticks(rotation='vertical')
-            plt.tick_params(axis='x', labelsize=5)
 
         # Gráfico 2
         yEntr = np.array(lErroresEntr20)
@@ -1346,12 +1438,7 @@ class UI(QMainWindow):
         plt.plot(yVal, label="Error de validación 20")
         plt.ylabel("MSE promedio", fontsize=9)
         plt.tick_params(axis='both', labelsize=8)
-        plt.xticks(ticks=range(len(lErroresEntr20)), labels=range(1,len(lErroresEntr20)+1))
         plt.legend(fontsize=8)
-        tam = len(lErroresEntr20)
-        if tam > 70:
-            plt.xticks(rotation='vertical')
-            plt.tick_params(axis='x', labelsize=5)
 
         # Gráfico 3
         yEntr = np.array(lErroresEntr30)
@@ -1362,12 +1449,7 @@ class UI(QMainWindow):
         plt.xlabel("Épocas", fontsize=9)
         plt.ylabel("MSE promedio", fontsize=9)
         plt.tick_params(axis='both', labelsize=8)
-        plt.xticks(ticks=range(len(lErroresEntr30)), labels=range(1,len(lErroresEntr30)+1))
         plt.legend(fontsize=8)
-        tam = len(lErroresEntr30)
-        if tam > 70:
-            plt.xticks(rotation='vertical')
-            plt.tick_params(axis='x', labelsize=5)
 
         plt.show()
 
@@ -1381,10 +1463,9 @@ class UI(QMainWindow):
 
         # Pruebo y calculo resultados
         precision, correctas, listaErrores = self.probarDataset(dataset_test)[0:3]
-        precision = round(precision, 2)
         self.lineEdit_testcorrectas.setText(str(correctas))
         self.lineEdit_testtotal.setText(str(len(dataset_test)))
-        self.lineEdit_testprec.setText(str(precision))
+        self.lineEdit_testprec.setText(f'{precision:.2%}')
         self.mostrarPorConsola('>>Etapa de test finalizada')
 
         # Grafico el error de test
@@ -1393,7 +1474,6 @@ class UI(QMainWindow):
         plt.xlabel("Patrones", fontsize=9)
         plt.ylabel("MSE", fontsize=9)
         plt.tick_params(axis='both', labelsize=8)
-        plt.xticks(ticks=range(len(dataset_test)), labels=range(1,len(dataset_test)+1))
         plt.legend(fontsize=8)
         plt.show()
 
@@ -1404,6 +1484,7 @@ class UI(QMainWindow):
         
         # Activo el resto de la sección "Test"
         self.activarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec))
+        self.animarEsto((self.frame_test2,))
         
         # Cargo como red actual la red seleccionada, y resguardo el dataset de test
         self.dataset_test_resg = self.cargarRedSeleccionada(self.comboBox_test)[0]
@@ -1437,6 +1518,7 @@ class UI(QMainWindow):
 
         # Activo nuevas funciones
         self.activarEsto((self.groupBox_probar1patron, self.groupBox_probarmasde1))
+        self.animarEsto((self.frame_probarpatron1, self.frame_probarpatrones))
         self.graphicsView.setStyleSheet('border: 1px solid black;')
         self.graphicsView_2.setStyleSheet('border: 1px solid black;')
         self.label_clasificacion2.setStyleSheet('background-color: rgb(255, 255, 255);border-width: 1px;border-style: solid;border-color: black;')
@@ -1505,6 +1587,7 @@ class UI(QMainWindow):
 
             # Activo la parte de clasificación (a la derecha de la 1ra matriz de pixeles)
             self.activarEsto((self.label_salida_clasif, self.pushButton_clasificar, self.label_yb, self.lineEdit_yb, self.label_yd, self.lineEdit_yd, self.label_yf, self.lineEdit_yf))
+            self.animarEsto((self.frame_probarpatron2,))
             self.label_clasificacion1.setStyleSheet('background-color: rgb(255, 255, 255);border-width: 1px;border-style: solid;border-color: black;')
 
 
@@ -1558,9 +1641,10 @@ class UI(QMainWindow):
         else:
             label.setText('f')
         if not probarPatrones: # Solamente cuando no estoy probando patrones (matrices de pixeles de abajo), muestro las salidas obtenidas
-            self.lineEdit_yb.setText(str(round(so1_float,8)))
-            self.lineEdit_yd.setText(str(round(so2_float,8)))
-            self.lineEdit_yf.setText(str(round(so3_float,8)))
+            # print('yb:', so1_float, 'yd:', so2_float, 'yf:', so3_float)
+            self.lineEdit_yb.setText(f'{so1_float:.2%}')
+            self.lineEdit_yd.setText(f'{so2_float:.2%}')
+            self.lineEdit_yf.setText(f'{so3_float:.2%}')
             self.mostrarPorConsola('>>Patrón clasificado')
 
 
@@ -1606,7 +1690,7 @@ class UI(QMainWindow):
         # Muestro resultados
         self.lineEdit_probar_correctas.setText(str(clasifCorrectas))
         self.lineEdit_probar_total.setText(str(nroPatrones))
-        self.lineEdit_probar_precision.setText(str(round(precision,2)))
+        self.lineEdit_probar_precision.setText(f'{precision:.2%}')
         self.mostrarPorConsola('>>Prueba de patrones finalizada')
 
 
