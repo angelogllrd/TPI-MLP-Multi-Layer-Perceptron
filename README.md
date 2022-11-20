@@ -444,6 +444,9 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 - Mejorada la representación de las informaciones mostradas por la consola de la aplicación. Se agregó espaciado entre renglones y ahora se listan los errores producidos por cada época durante el entrenamiento.
 - Se mejoró la representación del contenido de la red (botón "Red actual"). Se organizaron matricialmente las neuronas de entrada (para evitar una lista larga de 100 neuronas) y se agregó un recuadro a cada capa para distinguir mejor cuando comienza cada una.
 - Se agregó una animación de resaltado para distinguir cuando se activa una sección nueva en la aplicación.
+  
+  <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202929260-9ae04f62-61d5-42e4-8e7d-06c9b793e4e1.gif"></p>
+  
 - Se quitaron los "ticks" fijos del eje x en el gráfico de Errores vs Épocas, lo que provocaba que cuando las épocas eran muchas (>100), los números quedaran muy juntos. Ahora, matplotlib los genera automáticamente. Lo que antes era la época 1, ahora se indica con 0, y lo que era la época *n* ahora es la época *n-1*. Lo mismo para el gráfico de error de test.
 
 </details>
