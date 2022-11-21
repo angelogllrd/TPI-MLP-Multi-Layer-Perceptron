@@ -266,12 +266,12 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
        
        - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código de la primera imágen (dentro de `entrenarRed()`) y comentando el código de la segunda, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
          
-         ![1](https://user-images.githubusercontent.com/51035369/202927296-e7c4e0de-e10b-462a-af41-47a2f9c57eea.png)
+         ![1](https://user-images.githubusercontent.com/51035369/202963545-f234d764-2e4e-4682-8ed7-86340b8e6fb7.png)
 
-         ![2](https://user-images.githubusercontent.com/51035369/202927300-687d89b8-9fcb-4aad-b75b-be6d9046597b.png)
-         Con esta opción de fin, y para evitar que el entrenamiento se prolongue indefinidamente cuando la red no converge (o lo hace muy lento), la aplicación genera una alerta cuando detecta que el error de las últimas 20 épocas es el mismo (comparando los los 8 primeros dígitos decimales). Esta ofrece la opción de **Parar** el entrenamiento o **Seguir** con el mismo (hasta detectar la misma situación).
+         ![2](https://user-images.githubusercontent.com/51035369/202963582-d5e2e3cd-e685-487d-aefb-a2cf6d769ffb.png)
+         Con esta opción de fin, y para evitar que el entrenamiento se prolongue indefinidamente cuando la red no converge (o lo hace muy lento), la aplicación genera una alerta cuando detecta que el error de cierta cantidad de las últimas épocas es el mismo (comparando cierta cantidad de decimales de los errores). La alerta ofrece la opción de **Parar** el entrenamiento o **Seguir** con el mismo (hasta detectar la misma situación):
          
-         ![2022-11-20 18_39_12-Acción requerida](https://user-images.githubusercontent.com/51035369/202927529-536344ef-50c9-49e5-8bc4-9460ecc7fbf3.png)
+         ![2022-11-20 21_36_03-Acción requerida](https://user-images.githubusercontent.com/51035369/202963265-abf05e27-7aa7-4249-aef5-fddf37c3ace2.png)
          
        - **Seleccionar un número de épocas/iteraciones fijo**: El entrenamiento se hace por un número de épocas fijado, independientemente del Error de entrenamiento como en el caso anterior.
      - Una vez seleccionada una opción, presionar el botón **"Entrenar"** para comenzar el entrenamiento. En realidad, esto lleva a cabo 3 entrenamientos (considerando en cada uno un conjunto de validación distinto). En cada uno de esos 3 entrenamientos:
@@ -358,6 +358,8 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   - `derivadaFuncionSigmoidal()`: Calcula la derivada de la función sigmoidal. Usada en `calcularTerminoError()`.
   - `actualizarPesosRed()`: Corresponde al **Paso 5**. Actualiza los pesos de la red.
   - `calcularMSE()`: Corresponde al **Paso 6**. Calcula el error cuadrático medio entre la salida obtenida y la deseada.
+- **OTRAS FUNCIONES**:
+  - `convertirErrorAString()`: Convierte un error (flotante) a un string del mismo, considerando que puede estar en notación científica. Se usa porque el formateo de strings para tomar cierta cantidad de cifras decimales redondeala última cifra de acuerdo a los valores siguientes. Por ejemplo, `f'{0.123456789:.8f}'` quedaría `'0.12345679'`, cuando debería ser `'0.12345678'`. El redondeo ocasiona que la comparación de las cifras decimales para verificar errores repetidos no se haga correctamente.
 - **UI, DEFINICIÓN DE CLASES, ATRIBUTOS Y MÉTODOS**:
   - `class UI()`: Clase correspondiente a la ventana principal.
     - `uic.loadUi()`: Carga el archivo .ui de la ventana principal.
@@ -383,7 +385,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
       - **MÉTODOS PARA LA PRIMERA PESTAÑA:**
         - `desactivarEsto()`: Recibe una tupla de cosas de la interfaz para desactivar.
         - `activarEsto()`: Recibe una tupla de cosas de la interfaz para activar.
-        - `generarAlerta()`: Genera una alerta cuando se detecta que el entrenamiento produjo el mismo error (considerando una precisión de hasta 8 dígitos) durante 20 décadas, brindando la opción de "Parar" o "Seguir" el entrenamiento. Su función es brindar al usuario la opción de parar el entrenamiento cuando el error no baja, o baja muy lentamente.
+        - `generarAlerta()`: Genera una alerta cuando se detecta que el entrenamiento produjo el mismo error (considerando cierta cantidad de dígitos decimales) durante cierta cantidad de décadas, brindando la opción de "Parar" o "Seguir" el entrenamiento. Su función es brindar al usuario la opción de parar el entrenamiento cuando el error no baja, o baja muy lentamente.
         - `animarEsto()`: Muestra una animación resaltando una sección cuando la misma se activa.
         - `generarDataset()`: Verifica si alguno de los radio buttons (100, 500 o 1000) se seleccionó y genera los datasets correspondientes. Llamado por el botón "Generar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
         - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt en la misma ruta del ejecutable. Llamado por el botón "Guardar".
@@ -435,14 +437,23 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 
 ### Cambios posteriores a la entrega del 9/11
 - Agregados tooltips a todos los botones y comboboxes.
+<p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202962752-49a0f731-8acb-4a6e-b0c0-e86847383e3f.gif"></p>
+
 - Cambiada la presentación de resultados:
-  - Ahora los resultados no se muestran con notación científica.
+  - Los resultados ya no se muestran con notación científica.
   - Los errores en los resultados del entrenamiento se muestran con una precisión de hasta 8 dígitos decimales.
   - Los valores de precisión se muestran en forma de porcentaje con 2 dígitos decimales.
-  - Las salidas de las neuronas de salida al clasificar un patrón se muestran en forma de porcentaje.
-- Agregada venatan de alerta cuando el entrenamiento produjo el mismo error (considerando las primeras 8 cifras decimales) durante 20 ápocas, a fin de ofrecer la opción de cortar el entrenamiento cuando la red no converge (o converge muy lento). Se dejó de usar el corte automático a las 200 épocas, que prolongaba demasiado el entrenamiento para datasets muy grandes (500 y 100 ejemplos).
+  - Al clasificar un patrón, las salidas de las neuronas de salida se muestran en forma de porcentaje con 2 dígitos decimales.
+- Se dejó de usar el corte automático a las 200 épocas, que prolongaba demasiado el entrenamiento para datasets muy grandes (500 y 100 ejemplos), y, en cambio, se agregó una ventana de alerta cuando el entrenamiento produce el mismo error (considerando cierta cantidad de cifras decimales en el error) durante cierta cantidad de épocas, a fin de ofrecer la opción de cortar el entrenamiento cuando la red no converge (o converge muy lento). 
+<p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202961615-cc5e8e9f-c4b7-4b7f-abd7-43a5c8b421bc.png"></p>
+
+- Los errores repetidos y la cantidad de cifras consideradas para comparar los errores se puede modificar en las siguientes líneas:
+<p align="center"><img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/202961391-63233b5c-1dcb-474e-8394-c556d5890dbc.png"></p>
+
 - Mejorada la representación de las informaciones mostradas por la consola de la aplicación. Se agregó espaciado entre renglones y ahora se listan los errores producidos por cada época durante el entrenamiento.
 - Se mejoró la representación del contenido de la red (botón "Red actual"). Se organizaron matricialmente las neuronas de entrada (para evitar una lista larga de 100 neuronas) y se agregó un recuadro a cada capa para distinguir mejor cuando comienza cada una.
+<p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202963076-1cb53936-241f-4165-be1b-5efd4a797393.png"></p>
+
 - Se agregó una animación de resaltado para distinguir cuando se activa una sección nueva en la aplicación.
   
   <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202929260-9ae04f62-61d5-42e4-8e7d-06c9b793e4e1.gif"></p>
