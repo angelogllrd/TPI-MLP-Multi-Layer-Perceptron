@@ -933,6 +933,7 @@ class UI(QMainWindow):
         self.activarEsto((self.groupBox_arquitectura, self.pushButton_verentr, self.pushButton_vertest, self.pushButton_verval10, self.pushButton_verval20, self.pushButton_verval30, self.label_verreddataset, self.pushButton_guardar))
         self.animarEsto((self.frame_arquitectura, self.frame_guardar, self.frame_validacion10, self.frame_botonesvarios))
 
+
     def guardarDataset(self):
         """Guarda en la ruta del ejecutable el dataset completo generado."""
         tam = len(self.dataset_full) # Determino el tamaño del dataset actual
@@ -1133,8 +1134,9 @@ class UI(QMainWindow):
                         nroEpocas = 0 # Contador de épocas
                         listaErroresEntrEpoca = [] # Para el gráfico de MSE vs épocas
                         listaErroresValEpoca = [] # Para el gráfico de MSE vs épocas
-                        contErrorRepetido = 0
-                        maxErrorRepetido = 20
+                        contErrorRepetido = 0 # Contador de errores repetidos
+                        maxErrorRepetido = 20 # Número de errores repetidos seguidos a detectar
+                        cifrasDecimales = 8 # Número de cifras decimales consideradas para verificar repetición en errores
                         conjuntoActual += 10
 
                         self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de ' + str(conjuntoActual) + ' comenzado')
@@ -1190,9 +1192,9 @@ class UI(QMainWindow):
                             
                             # Controlo errores parecidos para generar alerta de parada de entrenamiento
                             if nroEpocas > 1:
-                                # Formo los strings de los últimos 2 errores, hasta la 8va cifra decimal
-                                errorAnterior = convertirErrorAString(listaErroresEntrEpoca[-2])[:10] # (f'{listaErroresEntrEpoca[-2]:.9f}')[:10]
-                                errorActual = convertirErrorAString(listaErroresEntrEpoca[-1])[:10] # (f'{listaErroresEntrEpoca[-1]:.9f}')[:10]
+                                # Formo los strings de los últimos 2 errores, hasta la "cifrasDecimales"-esima cifra decimal
+                                errorAnterior = convertirErrorAString(listaErroresEntrEpoca[-2])[:cifrasDecimales+2] # +2 por la cifra entera y el punto
+                                errorActual = convertirErrorAString(listaErroresEntrEpoca[-1])[:cifrasDecimales+2] # +2 por la cifra entera y el punto
                                 # Comparo ambos trings e incremento el contador si hay coincidencia
                                 if errorAnterior == errorActual:
                                     contErrorRepetido += 1
@@ -1201,7 +1203,7 @@ class UI(QMainWindow):
                                         contErrorRepetido = 0
                                         resp = self.generarAlerta(errorActual, maxErrorRepetido)
                                         if resp == 'parar':
-                                            break # Salgo del entrenamiento si hubo 20 repeticiones del error (hasta la 8va cifra decimal)
+                                            break # Salgo del entrenamiento si hubo "maxErrorRepetido" repeticiones del error
                                 else:
                                     contErrorRepetido = 0
 
