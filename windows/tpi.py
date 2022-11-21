@@ -694,9 +694,9 @@ def calcularMSE(red):
 def convertirErrorAString(error):
     """
     * Convierte un float a string, considerando que puede estar en notación científica.
-    * Se usa para tener el string de un error hasta 8 cifras decimales.
-    * No se usa f'{num:.8f}' (u otra forma de formatear strings) porque dependiendo de las cifras 
-      decimales siguientes (a la 8va en este caso), la última cifra puede quedar redondeada.
+    * Se usa para tener el string de un error hasta N cifras decimales.
+    * No se usa f'{num:.Nf}' (u otra forma de formatear strings) porque dependiendo de las cifras 
+      decimales siguientes (a la N-esima en este caso), la última cifra puede quedar redondeada.
     * Ej: f'{0.123456789:.8f}' quedaría '0.12345679', cuando debería ser '0.12345678'. 
     """
     str_error = str(error)
