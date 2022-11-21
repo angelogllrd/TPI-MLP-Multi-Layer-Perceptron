@@ -39,7 +39,7 @@ def resource_path(relative_path):
 
 
 def inicializarPatrones():
-    # Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0
+    """Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0."""
     b, d, f = [], [], []
     for pos in range(100):
         if pos in posb:
@@ -54,11 +54,11 @@ def inicializarPatrones():
             f.append(1)
         else: 
             f.append(0)
-    return b,d,f
+    return b, d, f
 
 
 def imprimirMatriz(patron):
-    # Recibe un patrón e imprime la matriz de pixeles con * en cada pixel pintado. Se la usa solamente para pruebas
+    """Recibe un patrón e imprime la matriz de pixeles con * en cada pixel pintado. Se la usa solamente para pruebas."""
     print(' __________ ')
     for f in range(10):
         fila = '|'
@@ -72,7 +72,7 @@ def imprimirMatriz(patron):
 
 
 def generarDistorsion(patron, porc):
-    # Distorsiona el patrón pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0)
+    """Distorsiona el patrón pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0)."""
     pos_anterior = []
     for pixel in range(porc):
         while True:
@@ -87,7 +87,7 @@ def generarDistorsion(patron, porc):
 
 
 def generarDataset(ejemplos):
-    '''
+    """
     * Genera un dataset con el nro de ejemplos pasado, cumpliendo 10% sin distorsión, y el resto distorsionado 1%-30%. 
       El dataset es una lista de listas, donde cada sublista es un patrón de entrada o fila del dataset. 
       Para asegurar que los conjuntos de test y validación sean representativos, se genera de la siguiente manera,
@@ -107,7 +107,7 @@ def generarDataset(ejemplos):
       
     * Los datasets de test y validación se crean incluyendo ejemplos de cada porción, lo mas similares posibles en cantidad.    
     * Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación.
-    '''
+    """
     
     dataset = []
 
@@ -203,71 +203,71 @@ def generarDataset(ejemplos):
 
     return dataset, dataset_entr, dataset_test, conj_val10, conj_val20, conj_val30
 
-'''
-def generarDataset(ejemplos):   
-    # Lo mismo que la anterior, pero hace la selección de los ejemplos de los conjuntos de test y validación
-    # de manera ALEATORIA, es decir, no asegura que tengan la misma cantidad de cada una de las 4 porciones.
+
+# def generarDataset(ejemplos):   
+#     """Lo mismo que la anterior, pero hace la selección de los ejemplos de los conjuntos de test y validación
+#        de manera ALEATORIA, es decir, no asegura que tengan la misma cantidad de cada una de las 4 porciones."""
     
-    dataset = []
-    sin_distorsionar = ejemplos * 0.10
-    porc_test = 0.2 # A diferencia del anterior generarDataset(), podemos poner diferentes porcentajes
+#     dataset = []
+#     sin_distorsionar = ejemplos * 0.10
+#     porc_test = 0.2 # A diferencia del anterior generarDataset(), podemos poner diferentes porcentajes
 
-    # GENERO EL DATASET PRINCIPAL
-    for ejemplo in range(ejemplos):
-        letra = random.choice(['b','d','f'])
-        if letra == 'b':
-            patron = patronb.copy()
-            clases = [1,0,0]
-        elif letra == 'd':
-            patron = patrond.copy()
-            clases = [0,1,0]
-        else:
-            patron = patronf.copy()
-            clases = [0,0,1]
+#     # GENERO EL DATASET PRINCIPAL
+#     for ejemplo in range(ejemplos):
+#         letra = random.choice(['b','d','f'])
+#         if letra == 'b':
+#             patron = patronb.copy()
+#             clases = [1,0,0]
+#         elif letra == 'd':
+#             patron = patrond.copy()
+#             clases = [0,1,0]
+#         else:
+#             patron = patronf.copy()
+#             clases = [0,0,1]
         
-        if ejemplo >= sin_distorsionar: # Si ya generé más del 10% de ejemplos, distorsiono entre 1% y 30%
-            distorsión_aleatoria = random.randint(1, 30)
-            generarDistorsion(patron, distorsión_aleatoria)
-        dataset.append(patron+clases)
+#         if ejemplo >= sin_distorsionar: # Si ya generé más del 10% de ejemplos, distorsiono entre 1% y 30%
+#             distorsión_aleatoria = random.randint(1, 30)
+#             generarDistorsion(patron, distorsión_aleatoria)
+#         dataset.append(patron+clases)
         
-        # # Esto imprime las matrices, junto con la letra y la distorsión a medida que las genera (solamente para probar)
-        # imprimirMatriz(patron)
-        # print('Ejemplo:',ejemplo+1)
-        # print('Letra:', letra)
-        # print('Distorsion: ', end='')
-        # if ejemplo < sin_distorsionar:
-        #   print('Sin distorsionar')
-        # else:
-        #   print(distorsión_aleatoria,'%')
+#         # # Esto imprime las matrices, junto con la letra y la distorsión a medida que las genera (solamente para probar)
+#         # imprimirMatriz(patron)
+#         # print('Ejemplo:',ejemplo+1)
+#         # print('Letra:', letra)
+#         # print('Distorsion: ', end='')
+#         # if ejemplo < sin_distorsionar:
+#         #   print('Sin distorsionar')
+#         # else:
+#         #   print(distorsión_aleatoria,'%')
 
-    dataset_entr = dataset.copy()
-    random.shuffle(dataset_entr) # Mezclo aleatoriamente los patrones
+#     dataset_entr = dataset.copy()
+#     random.shuffle(dataset_entr) # Mezclo aleatoriamente los patrones
 
-    # GENERO EL DATASET DE TEST
-    et = int(ejemplos * porc_test) # et = ejemplos_test
-    dataset_test = dataset_entr[:et]
+#     # GENERO EL DATASET DE TEST
+#     et = int(ejemplos * porc_test) # et = ejemplos_test
+#     dataset_test = dataset_entr[:et]
 
-    # QUITO LOS EJEMPLOS CARGADOS EN EL DATASET DE TEST (EL DATASET RESULTANTE ES EL DE ENTRENAMIENTO)
-    dataset_entr = dataset_entr[et:]
+#     # QUITO LOS EJEMPLOS CARGADOS EN EL DATASET DE TEST (EL DATASET RESULTANTE ES EL DE ENTRENAMIENTO)
+#     dataset_entr = dataset_entr[et:]
 
-    # GENERO LOS CONJUNTOS DE VALIDACIÓN
-    for porc_valid in [0.1, 0.2, 0.3]:
-        ev = int(ejemplos * porc_valid) # ev = ejemplos_validacion
-        conj = dataset_entr[:ev]
+#     # GENERO LOS CONJUNTOS DE VALIDACIÓN
+#     for porc_valid in [0.1, 0.2, 0.3]:
+#         ev = int(ejemplos * porc_valid) # ev = ejemplos_validacion
+#         conj = dataset_entr[:ev]
 
-        if porc_valid == 0.1:
-            conj_val10 = conj
-        elif porc_valid == 0.2:
-            conj_val20 = conj
-        else:
-            conj_val30 = conj
+#         if porc_valid == 0.1:
+#             conj_val10 = conj
+#         elif porc_valid == 0.2:
+#             conj_val20 = conj
+#         else:
+#             conj_val30 = conj
 
-    return dataset, dataset_entr, dataset_test, conj_val10, conj_val20, conj_val30
-'''
+#     return dataset, dataset_entr, dataset_test, conj_val10, conj_val20, conj_val30
+
 
 def cargarDataset(dataset):
-    # Se usa en la 1ra pestaña, con el botón "Cargar". Toma un dataset "full" (con los 100, 500 o 1000 ejemplos, sin mezclar, 
-    # sin repartir en test, validación, etc) y extrae los demás datasets usando la misma lógica que el primer generarDataset(). 
+    """Se usa en la 1ra pestaña, con el botón "Cargar". Toma un dataset "full" (con los 100, 500 o 1000 ejemplos, sin mezclar, 
+       sin repartir en test, validación, etc) y extrae los demás datasets usando la misma lógica que el primer generarDataset()."""
 
     ejemplos = len(dataset)
     porc_test = 0.08
@@ -323,7 +323,7 @@ def cargarDataset(dataset):
 
 
 def convertirStringADataset(string):
-    # Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt
+    """Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt"""
     pos = -1
     dataset = []
     while True:
@@ -341,8 +341,8 @@ def convertirStringADataset(string):
 
 
 def imprimirDatasetGraficoConAsteriscos(dataset):
-    # Imprime el dataset en forma gráfica (matrices de los patrones) con * en cada pixel pintado, dispuesto en "cant_filas" 
-    # filas de "patrones_por_fila" patrones
+    """Imprime el dataset en forma gráfica (matrices de los patrones) con * en cada pixel pintado, dispuesto en "cant_filas" 
+       filas de "patrones_por_fila" patrones."""
     
     dataset_copia = dataset[:]
     str_total = '' # String que contendrá todo lo que se muestra
@@ -380,8 +380,8 @@ def imprimirDatasetGraficoConAsteriscos(dataset):
 
 
 def imprimirDatasetGraficoConPosiciones(dataset):
-    # Imprime el dataset en forma gráfica (matrices de los patrones) con la posición en cada pixel pintado, dispuesto en 
-    # "cant_filas" filas de "patrones_por_fila" patrones
+    """Imprime el dataset en forma gráfica (matrices de los patrones) con la posición en cada pixel pintado, dispuesto en 
+       "cant_filas" filas de "patrones_por_fila" patrones."""
     
     dataset_copia = dataset[:]
     str_total = '' # String que contendrá todo lo que se muestra
@@ -422,7 +422,7 @@ def imprimirDatasetGraficoConPosiciones(dataset):
 
 
 def imprimirDatasetTabular(dataset):
-    # Imprime el dataset en forma tabular
+    """Imprime el dataset en forma tabular."""
     str_total = '' # String que contendrá todo lo que se muestra
     nombres_col1 = '     '
     for i in range(10):
@@ -450,7 +450,7 @@ def imprimirDatasetTabular(dataset):
 
 
 def restarDatasets(aEste, restaleEste):
-    # Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación
+    """Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación."""
     aEste2 = aEste[:] # Para no modificar la lista "aEste" original, la copio en una nueva y elimino lo que quiero de la copia
     for fila in restaleEste:
         aEste2.remove(fila) # No hace falta comprobar que "fila" este en "aEste" porque son filas extraidas originalmente de "aEste"
@@ -464,7 +464,7 @@ def restarDatasets(aEste, restaleEste):
 
 
 def crearRed(neuronasDeEntrada, nroCapasOcultas, neuronasPorCapaOculta, neuronasDeSalida):
-    # Crea la estructura de la red, con las neuronas de cada capa
+    """Crea la estructura de la red, con las neuronas de cada capa."""
     red = []
     for capa in range(nroCapasOcultas+2):
         c = []
@@ -496,7 +496,7 @@ def crearRed(neuronasDeEntrada, nroCapasOcultas, neuronasPorCapaOculta, neuronas
 
 
 def imprimirRed(red):
-    # Muestra el contenido de la red en su estado actual, por cada capa
+    """Muestra el contenido de la red en su estado actual, por cada capa."""
     str_total = ''
     tam_titulo = 113
     for capa in range(len(red)):
@@ -535,7 +535,7 @@ def imprimirRed(red):
 
 
 def dibujarTituloCapa(nombre_capa, tam_titulo):
-    # Devuelve un string con el titulo de la capa recuadrado
+    """Devuelve un string con el titulo de la capa recuadrado."""
     str_total = '\n ' + '_'*tam_titulo + '\n'
     esp_inicio = floor((tam_titulo-len(nombre_capa))/2)
     esp_fin = tam_titulo - esp_inicio - len(nombre_capa)
@@ -545,7 +545,7 @@ def dibujarTituloCapa(nombre_capa, tam_titulo):
 
 
 def inicializarPesos(red):
-    # Paso 1: Inicializar los pesos de la red con valores pequeños aleatorios
+    """Paso 1: Inicializar los pesos de la red con valores pequeños aleatorios."""
     for capa in range(1,len(red)):
         for neuronaActual in red[capa]:
             for neuronaAnterior in range(len(red[capa-1])):
@@ -554,7 +554,7 @@ def inicializarPesos(red):
 
 
 def aplicarPatronDeEntrada(patron, red):
-    # Paso 2: Presentar un patrón de entrada del dataset
+    """Paso 2: Presentar un patrón de entrada del dataset."""
     
     # Verifico que el nro de neuronas de entrada coindida con el nro de entradas del patrón (comprobación por motivos de test)
     if len(red[0]) != len(patron[:-3]):
@@ -567,7 +567,7 @@ def aplicarPatronDeEntrada(patron, red):
 
 
 def calcularSalidasRed(fActSalida, fActOculta, red):
-    # Paso 3: Propagar las entradas y calcular las salidas de la red
+    """Paso 3: Propagar las entradas y calcular las salidas de la red."""
     for capa in range(1,len(red)):
         for neuronaActual in red[capa]:
             # Paso 3.1: Calculo los net (de neuronas ocultas y de salida)
@@ -577,7 +577,7 @@ def calcularSalidasRed(fActSalida, fActOculta, red):
 
     
 def calcularNetNeurona(pesosNeurona, capaAnterior, red):
-    # Paso 3.1
+    """Paso 3.1"""
     net = 0
     for i in range(len(red[capaAnterior])): # o bien for i in range(len(pesosNeurona))
         net += pesosNeurona[i] * red[capaAnterior][i]['salida']
@@ -585,7 +585,7 @@ def calcularNetNeurona(pesosNeurona, capaAnterior, red):
 
 
 def calcularSalidaNeurona(net, capa, fActSalida, fActOculta, red):
-    # Paso 3.2
+    """Paso 3.2"""
     if capa == len(red)-1: # Capa de salida
         if fActSalida == 'lineal':
             return funcionLineal(net)
@@ -603,15 +603,18 @@ def funcionLineal(x):
 
 
 def funcionSigmoidal(x):
-    # La constante "e" elevada a un número mayor a 709.78271 resulta en un número extremadamente grande
-    # que supera la representación en coma flotante: 1.7976931348623157e+308, y devuelve un error de 
-    # OverflowError. 
-    # Por la forma de la función sigmoidal, esto pasa cuando le pasamos un x menor a -709.78271 (que 
-    # eleva "e" a un número mayor a 709.78271). Si se pudiera representar, el resultado de la función 
-    # sigmoidal sería un número con más de 309 ceros adelante (prácticamente 0). Por eso, para evitar
-    # el OverflowError cuando se presenta este caso, se reemplaza la potencia de "e" con la constante
-    # inf (infinito positivo de punto flotante), que se representa con float('inf') o math.inf, y que 
-    # hace que la función devuelva directamente 0.
+    """
+    * La constante "e" elevada a un número mayor a 709.78271 resulta en un número extremadamente grande que supera la 
+      representación en coma flotante: 1.7976931348623157e+308, y devuelve un error de OverflowError. 
+    * Por la forma de la función sigmoidal, esto pasa cuando le pasamos un x menor a -709.78271 (que eleva "e" a un 
+      número mayor a 709.78271). 
+    * Si se pudiera representar, el resultado de la función sigmoidal en este caso, sería un número con más de 309 
+      ceros adelante (prácticamente 0). 
+    * Por eso, para evitar el OverflowError cuando se presenta este caso, se reemplaza la potencia de "e" con la 
+      constante inf (infinito positivo de punto flotante), que se representa con float('inf') o math.inf, y que hace 
+      que la función devuelva directamente 0.
+    """
+    
     try:
         potencia = exp(-x) # math.exp(x) retorna "e" elevado a la x potencia
     except OverflowError:
@@ -627,7 +630,8 @@ def funcionSigmoidal(x):
 
 
 def calcularTerminosErrorRed(fActSalida, fActOculta, red):
-    # Paso 4: Se calculan los términos de error para neuronas de salida y ocultas, comenzando por las de salida (propagación de errores hacia atrás)
+    """Paso 4: Se calculan los términos de error para neuronas de salida y ocultas, comenzando por las de salida 
+       (propagación de errores hacia atrás)."""
     for capa in reversed(range(1,len(red))): # Recorro las capas hacia atrás
         for nroNeurona in range(len(red[capa])):
             neuronaActual = red[capa][nroNeurona]
@@ -639,8 +643,8 @@ def derivadaFuncionSigmoidal(salida):
 
 
 def calcularTerminoError(capa, neuronaActual, nroNeurona, fActSalida, fActOculta, red):
-    # Determina un término de error en base a la capa actual, la neurona actual, y el número de esa neurona
-    # El número de la neurona es usado para el cálculo del delta en neuronas ocultas
+    """Determina un término de error en base a la capa actual, la neurona actual, y el número de esa neurona.
+       El número de la neurona es usado para el cálculo del delta en neuronas ocultas."""
     delta = 0
     if capa == len(red)-1: # Estoy en capa de salida, calculo delta para neuronas de salida
         if fActSalida == 'lineal':
@@ -659,7 +663,7 @@ def calcularTerminoError(capa, neuronaActual, nroNeurona, fActSalida, fActOculta
 
 
 def actualizarPesosRed(alfa, beta, red):
-    # Paso 5: Actualización de los pesos de la red
+    """Paso 5: Actualización de los pesos de la red."""
     for capa in reversed(range(1,len(red))): # Recorro las capas hacia atrás (podría hacerlo hacia adelante)
         for neuronaActual in red[capa]: 
             for peso in range(len(red[capa-1])):
@@ -671,7 +675,7 @@ def actualizarPesosRed(alfa, beta, red):
 
 
 def calcularMSE(red):
-    # Paso 6: Calcula el error cuadrático medio entre la salida obtenida y la deseada.
+    """Paso 6: Calcula el error cuadrático medio entre la salida obtenida y la deseada."""
     sumatoria = 0
     for neuronaSalida in red[-1]:
         delta = neuronaSalida['salidaDeseada'] - neuronaSalida['salida']
@@ -679,6 +683,42 @@ def calcularMSE(red):
         sumatoria += delta_cuad
     mse = 0.5 * sumatoria
     return mse
+
+
+
+# ***********************************************************
+# OTRAS FUNCIONES
+# ***********************************************************
+
+
+def convertirErrorAString(error):
+    """
+    * Convierte un float a string, considerando que puede estar en notación científica.
+    * Se usa para tener el string de un error hasta 8 cifras decimales.
+    * No se usa f'{num:.8f}' (u otra forma de formatear strings) porque dependiendo de las cifras 
+      decimales siguientes (a la 8va en este caso), la última cifra puede quedar redondeada.
+    * Ej: f'{0.123456789:.8f}' quedaría '0.12345679', cuando debería ser '0.12345678'. 
+    """
+    str_error = str(error)
+    pos = str_error.find('e')
+    if pos != -1: # Error con notación científica
+        if str_error[pos+1] == '-':
+            str_error = '0.' + '0'*(int(str_error[pos+2:])-1) + str_error[0] + str_error[2:pos]
+        else:
+            exp = int(str_error[pos+2:])
+            sin_punto = str_error[0] + str_error[2:pos]
+            nros_desp_coma = len(sin_punto)-1
+            if exp == nros_desp_coma:
+                str_error = sin_punto # Ej: 1.234e+3 = 1234
+            elif exp > nros_desp_coma:
+                str_error = sin_punto + '0'*(nros_desp_coma-exp) # Ej: 1.234e+5 = 123400
+            else:
+                str_error = str_error[:exp+1] + '.' + str_error[exp+1:] # Ej: 1.234e+2 = 123.4
+    else: # Error sin notación científica
+        str_error = str(error)
+
+    # print(error == float(str_error))
+    return str_error
 
 
 
@@ -814,7 +854,7 @@ class UI(QMainWindow):
 
 
     def center(self):
-        # Hace que la ventana aparezca centrada
+        """Hace que la ventana aparezca centrada."""
         qtRectangle = self.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qtRectangle.moveCenter(centerPoint)
@@ -822,31 +862,31 @@ class UI(QMainWindow):
 
 
     def mostrarPorConsola(self, texto):
-        # Muestra en la parte derecha de la UI un texto
+        """Muestra un texto en la parte derecha de la aplicación."""
         self.consola.appendPlainText('\n'+texto)
         self.consola.moveCursor(QTextCursor.End)
 
 
     def desactivarEsto(self, cosas):
-        # Recibe una tupla de cosas de la interfaz para desactivar
+        """Recibe una tupla de cosas de la interfaz para desactivar."""
         for cosa in cosas:
             cosa.setEnabled(False)
 
 
     def activarEsto(self, cosas):
-        # Recibe una tupla de cosas de la interfaz para activar
+        """Recibe una tupla de cosas de la interfaz para activar."""
         for cosa in cosas:
             if not cosa.isEnabled():
                 cosa.setEnabled(True)
 
 
     def generarAlerta(self, error, repetidas):
-        # Muestra una alerta preguntando si seguir o no con un entrenamiento cuando el mismo no converge, o lo hace muy lento        
+        """Muestra una alerta preguntando si seguir o no con un entrenamiento cuando el mismo no converge, o lo hace muy lento."""
         alerta = QMessageBox(self)
         alerta.setWindowTitle("Acción requerida")
         alerta.setIcon(QMessageBox.Warning)
         alerta.setText('El error no baja, o baja muy lentamente')
-        alerta.setInformativeText('Las últimas ' + str(repetidas) + ' épocas arrojaron un error (hasta 8 decimales) de ' + str(error) + '.\n\n¿Desea PARAR o SEGUIR con este entrenamiento?')
+        alerta.setInformativeText('Las últimas ' + str(repetidas) + ' épocas arrojaron un error (considerando los primeros 8 decimales) de ' + error + '.\n\n¿Desea PARAR o SEGUIR con este entrenamiento?')
         botonParar = alerta.addButton('Parar', QMessageBox.AcceptRole)
         botonSeguir = alerta.addButton('Seguir', QMessageBox.RejectRole)
         alerta.setDefaultButton(botonParar)
@@ -858,7 +898,7 @@ class UI(QMainWindow):
 
 
     def animarEsto(self, cosas):
-        # Muestra una animación cuando se activa una nueva función
+        """Muestra una animación cuando se activa una nueva función."""
         for cosa in cosas:
             if not cosa.isEnabled():
                 alfa = 255
@@ -875,7 +915,7 @@ class UI(QMainWindow):
 
  
     def generarDataset(self):
-        # Genera los datasets de entrenamiento, test y validación en función del radiobutton seleccionado
+        """Genera los datasets de entrenamiento, test y validación en función del radiobutton seleccionado."""
         
         # Compruebo qué radiobutton está seleccionado y genero los dataset en base a ese tamaño
         rb100 = self.radioButton_100.isChecked() 
@@ -894,7 +934,7 @@ class UI(QMainWindow):
         self.animarEsto((self.frame_arquitectura, self.frame_guardar, self.frame_validacion10, self.frame_botonesvarios))
 
     def guardarDataset(self):
-        # Guarda en la ruta del ejecutable el dataset completo generado
+        """Guarda en la ruta del ejecutable el dataset completo generado."""
         tam = len(self.dataset_full) # Determino el tamaño del dataset actual
         path = os.path.dirname(__file__) # Obtengo el path del ejecutable
         f = open('dataset_de_%s.txt' %(tam), 'w') # Creo el archivo .txt
@@ -904,8 +944,8 @@ class UI(QMainWindow):
 
 
     def cargarDataset(self):
-        # Carga un dataset desde un .txt (debería ser un "dataset_full" guardado previamente, con los 100, 500 o 1000 ejemplos)
-        # y extrae los demás conjuntos
+        """Carga un dataset desde un .txt (debería ser un "dataset_full" guardado previamente, con los 100, 500 o 1000 ejemplos)
+           y extrae los demás conjuntos."""
         fname = QFileDialog.getOpenFileName(self, 'Open File', '', "*.txt") # Abrimos un cuadro de diálogo
         if not fname[0] == '': # fname[0] devuelve '' cuando cancelamos en el cuadro de diálogo
             path = fname[0] # Obtengo el path del arhivo seleccionado
@@ -932,7 +972,8 @@ class UI(QMainWindow):
 
 
     def desactivarSeñales(self, valor):
-        # Bloquea las señales producidas por cambios de valores en parámetros (https://stackoverflow.com/questions/26358945/qt-find-out-if-qspinbox-was-changed-by-user)
+        """Bloquea las señales producidas por cambios de valores en parámetros.
+           (https://stackoverflow.com/questions/26358945/qt-find-out-if-qspinbox-was-changed-by-user)"""
         self.spinBox_capasOcultas.blockSignals(valor)
         self.spinBox_tamCapaOc1.blockSignals(valor)
         self.spinBox_tamCapaOc2.blockSignals(valor)
@@ -942,7 +983,7 @@ class UI(QMainWindow):
 
 
     def tratarArquitecturaPredefinida(self):
-        # Carga automáticamente los parámetros de la arquitectura predefinida seleccionada en el combobox
+        """Carga automáticamente los parámetros de la arquitectura predefinida seleccionada en el combobox."""
         
         # Desactivo señales disparadas con el cambio de valores para evitar que estos cambios disparen tratarCambioParametrosArg()
         # Esto hace que las señales se disparen solo por cambios manuales de valores (de otra forma, hay resultados no deseados)
@@ -965,8 +1006,8 @@ class UI(QMainWindow):
 
 
     def tratarCambioParametrosArq(self):
-        # Por un lado comprueba, ante un cambio de parámetro, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona.
-        # Por el otro, activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del valor del número de capas ocultas.
+        """Por un lado comprueba, ante un cambio de parámetro, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona.
+           Por el otro, activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del valor del número de capas ocultas."""
 
         # Si selecciono 1 capa oculta, no debe tener en cuenta las neuronas de la 2da. capa. Si seleccione 2, si.
         if self.spinBox_capasOcultas.value() == 1:
@@ -993,7 +1034,7 @@ class UI(QMainWindow):
 
 
     def tratarSpinBoxCapaOculta2(self):
-        # Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del valor del número de capas ocultas.
+        """Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del valor del número de capas ocultas."""
         if self.spinBox_capasOcultas.value() == 2:
             self.activarEsto((self.spinBox_tamCapaOc2, self.label_arquired5))
         else:
@@ -1059,12 +1100,17 @@ class UI(QMainWindow):
             cap_oc_2 = '\n*Tamaño capa oculta 2: ' + str(self.tamCapaOc2)
         else:
             cap_oc_2 = ''
-        self.mostrarPorConsola('>>Red creada correctamente\n*Nro. total de capas: '+str(self.nroCapas)+'\n*Tamaño capa de entrada: '+str(self.tamCapaEnt)+'\n*Tamaño capa oculta 1: '+str(self.tamCapaOc1)+'%s' %(cap_oc_2)+'\n*Tamaño capa de salida: '+str(self.tamCapaSal)+'\n*Función de transf. de capa oculta: '+self.funcionDeActivacionOc+'\n*Función de transf. de capa de salida: '+self.funcionDeActivacionSal+'\n*Coeficiente de aprendizaje (α): '+str(round(self.alfa,1))+'\n*Término momento (β): '+str(round(self.beta,1)))
+        self.mostrarPorConsola('>>Red creada correctamente\n*Nro. total de capas: '+str(self.nroCapas)+'\n*Tamaño capa de entrada: '
+                                +str(self.tamCapaEnt)+'\n*Tamaño capa oculta 1: '+str(self.tamCapaOc1)+'%s' %(cap_oc_2)
+                                +'\n*Tamaño capa de salida: '+str(self.tamCapaSal)+'\n*Función de transf. de capa oculta: '
+                                +self.funcionDeActivacionOc+'\n*Función de transf. de capa de salida: '+self.funcionDeActivacionSal
+                                +'\n*Coeficiente de aprendizaje (α): '+str(round(self.alfa,1))+'\n*Término momento (β): '
+                                +str(round(self.beta,1)))
         self.mostrarPorConsola('>>Red actual actualizada')
 
 
     def entrenarRed(self):
-        # Hace el entrenamiento hasta obtener MSE por debajo de un error aceptable, o bien repitiendo por una cantidad de épocas ingresadas
+        """Hace el entrenamiento hasta obtener MSE por debajo de un error aceptable, o bien repitiendo por una cantidad de épocas ingresadas."""
         
         error = self.radioButton_erroracep.isChecked()
         epocas = self.radioButton_iteraciones.isChecked()
@@ -1144,15 +1190,18 @@ class UI(QMainWindow):
                             
                             # Controlo errores parecidos para generar alerta de parada de entrenamiento
                             if nroEpocas > 1:
-                                errorAnterior = float(f'{listaErroresEntrEpoca[-2]:.8f}')
-                                errorActual = float(f'{listaErroresEntrEpoca[-1]:.8f}')
+                                # Formo los strings de los últimos 2 errores, hasta la 8va cifra decimal
+                                errorAnterior = convertirErrorAString(listaErroresEntrEpoca[-2])[:10] # (f'{listaErroresEntrEpoca[-2]:.9f}')[:10]
+                                errorActual = convertirErrorAString(listaErroresEntrEpoca[-1])[:10] # (f'{listaErroresEntrEpoca[-1]:.9f}')[:10]
+                                # Comparo ambos trings e incremento el contador si hay coincidencia
                                 if errorAnterior == errorActual:
                                     contErrorRepetido += 1
-                                    if contErrorRepetido == maxErrorRepetido:
+                                    # print(errorAnterior, errorActual, contErrorRepetido)
+                                    if contErrorRepetido == maxErrorRepetido-1: # -1 porque el primer repetido no suma al contador
                                         contErrorRepetido = 0
                                         resp = self.generarAlerta(errorActual, maxErrorRepetido)
                                         if resp == 'parar':
-                                            break
+                                            break # Salgo del entrenamiento si hubo 20 repeticiones del error (hasta la 8va cifra decimal)
                                 else:
                                     contErrorRepetido = 0
 
@@ -1273,7 +1322,7 @@ class UI(QMainWindow):
 
 
     def mostrarErrorEpoca(self, nroEpocas, errorEntrEpoca):
-        # Muestra por consola el error de entrenamiento de una época
+        """Muestra por consola el error de entrenamiento de una época."""
         if nroEpocas < 10:
             espacio = 2
         elif nroEpocas < 100:
@@ -1285,11 +1334,14 @@ class UI(QMainWindow):
 
 
     def guardarRedEntrenada(self, conj_val):
-        # Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista.
-        # Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura 
-        # en el combobox de "Arquitectura de la red" y obtiene el texto que la describe. Si no, forma la descripción. 
-        # Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de 
-        # entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier momento.
+        """
+        * Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista.
+        * Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura 
+          en el combobox de "Arquitectura de la red" y obtiene el texto que la describe. Si no, forma la descripción. 
+        * Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de 
+          entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier 
+          momento.
+        """
 
         descrip, arq_actual = self.esArquitecturaPredefinida()
         if descrip == '': # La red actual no tiene una arquitectura predefinida, formo su descripción
@@ -1329,9 +1381,9 @@ class UI(QMainWindow):
 
 
     def esArquitecturaPredefinida(self):
-        # Comprueba si la red actual tiene una arquitectura predefinida. Si la tiene, retorna el string que la describe, tal como está
-        # en el combobox de la sección "Arquitectura de la red". Si no, retorna string vacío. En ambos casos, retorna en segundo lugar
-        # la estructura de la arquitectura (necesaria par actualizar atributos al cargar una red)
+        """Comprueba si la red actual tiene una arquitectura predefinida. Si la tiene, retorna el string que la describe, tal como está
+           en el combobox de la sección "Arquitectura de la red". Si no, retorna string vacío. En ambos casos, retorna en segundo lugar
+           la estructura de la arquitectura (necesaria par actualizar atributos al cargar una red)."""
 
         if self.capasOcultas == 1:
             neurOcultas = (self.neuronasPorCapa[0],)
@@ -1355,19 +1407,20 @@ class UI(QMainWindow):
 
 
     def finalizarEntrenamiento(self):
-        # Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin
+        """Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin."""
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
         self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron))
         self.animarEsto((self.frame_test1,))
 
 
     def vaciarRed(self):
-        # Asigna al atributo "red" una estructura de red vacía. Se usa para resetear la red en cada entrenamiento
+        """Asigna al atributo "red" una estructura de red vacía. Se usa para resetear la red en cada entrenamiento."""
         self.red = crearRed(self.tamCapaEnt, self.capasOcultas, self.neuronasPorCapa, self.tamCapaSal)
     
 
     def probarDataset(self, dataset):
-        # Calcula la precisión de la clasificación con un dataset, y el MSE promedio al probarlo
+        """Calcula la precisión de la clasificación con un dataset, y el MSE promedio al probarlo."""
+        
         clasifCorrectas = 0
         sumError = 0
         listaErrores = []
@@ -1386,8 +1439,9 @@ class UI(QMainWindow):
 
 
     def probarPatron(self, patron):
-        # Presenta un patrón a la red, calcula la salida y el error, comprueba si la salida obtenida es igual a la deseada, y devuelve 1
-        # o 0 dependiendo de la coincidencia, el error, la salida obtenida convertida a binaria y sin convertir.
+        """Presenta un patrón a la red, calcula la salida y el error, comprueba si la salida obtenida es igual a la deseada, y devuelve 1
+           o 0 dependiendo de la coincidencia, el error, la salida obtenida convertida a binaria y sin convertir."""
+
         aplicarPatronDeEntrada(patron, self.red)
         calcularSalidasRed(self.funcionDeActivacionSal, self.funcionDeActivacionOc, self.red)
         error = calcularMSE(self.red)
@@ -1418,7 +1472,7 @@ class UI(QMainWindow):
 
 
     def graficarErrores(self, lErroresEntr10, lErroresEntr20, lErroresEntr30, lErroresVal10, lErroresVal20, lErroresVal30):
-        # Genera 3 gráficos, comparando en cada uno los MSE promedio (de entrenamiento y validación) contra las épocas
+        """Genera 3 gráficos, comparando en cada uno los MSE promedio (de entrenamiento y validación) contra las épocas."""
 
         # Gráfico 1
         yEntr = np.array(lErroresEntr10)
@@ -1455,8 +1509,8 @@ class UI(QMainWindow):
 
 
     def hacerTest(self):
-        # Toma del combobox la red guardada seleccionada, prueba el dataset de test en ella, muestra resultados de precisión 
-        # y el gráfico de error de test.
+        """Toma del combobox la red guardada seleccionada, prueba el dataset de test en ella, muestra resultados de precisión 
+           y el gráfico de error de test."""
 
         # Actualizo red actual y sus atributos en base a la red seleccionada, y guardo el dataset de test correspondiente a su entrenamiento
         dataset_test = self.dataset_test_resg
@@ -1479,8 +1533,8 @@ class UI(QMainWindow):
 
 
     def tratarComboboxTest(self):
-        # Activa el resto de la sección "Test", carga como red actual la red seleccionada en el combobox, y resguarda el dataset de test
-        # correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test.
+        """Activa el resto de la sección "Test", carga como red actual la red seleccionada en el combobox, y resguarda el dataset de test
+           correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test."""
         
         # Activo el resto de la sección "Test"
         self.activarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec))
@@ -1491,8 +1545,8 @@ class UI(QMainWindow):
 
 
     def cargarRedSeleccionada(self, combobox):
-        # Carga en la red actual la red seleccionada en el combobox pasado, y retorna los datasets de entrenamiento, test
-        # y validación usados en el entrenamiento de la red cargada
+        """Carga en la red actual la red seleccionada en el combobox pasado, y retorna los datasets de entrenamiento, test
+           y validación usados en el entrenamiento de la red cargada."""
 
         # Tomo la red seleccionada en el combobox, su arquitectura, y el dataset de test correspondiente a su entrenamiento
         red, arquitectura, dataset_test, dataset_entr, conj_val = combobox.currentData()
@@ -1514,7 +1568,7 @@ class UI(QMainWindow):
 
 
     def tratarComboboxProbarpatron(self):
-        # Activa nuevas funciones de la pestaña "Probar patrón", y carga como red actual la red seleccionada en el combobox.
+        """Activa nuevas funciones de la pestaña "Probar patrón", y carga como red actual la red seleccionada en el combobox."""
 
         # Activo nuevas funciones
         self.activarEsto((self.groupBox_probar1patron, self.groupBox_probarmasde1))
@@ -1528,12 +1582,12 @@ class UI(QMainWindow):
 
 
     def tratarLineEditSlider(self, value):
-        # Traslada valor del slider al lineedit
+        """Traslada valor del slider al lineedit."""
         self.lineEdit_sliderprobar1.setText(str(value))
 
 
     def tratarLetra(self, patron, letra):
-        # Se llama cuando se presiona el botón de una letra
+        """Se llama cuando se presiona el botón de una letra."""
         self.mostrarPorConsola('>>Letra "' + letra + '" seleccionada')
         self.setLetraIngresada(letra)
         self.mostrarLetra(patron, self.labels_matriz1)
@@ -1548,7 +1602,7 @@ class UI(QMainWindow):
 
 
     def mostrarLetra(self, patron, matriz):
-        # Pinta la matriz de pixeles de acuerdo al patrón pasado
+        """Pinta la matriz de pixeles de acuerdo al patrón pasado."""
         self.borrarLetra(matriz)        
         labels = matriz
         for i in range(len(patron)):
@@ -1558,14 +1612,14 @@ class UI(QMainWindow):
 
 
     def borrarLetra(self, matriz):
-        # Pone en blanco la matriz de pixeles
+        """Pone en blanco la matriz de pixeles."""
         labels = matriz
         for label in labels:
             label.setStyleSheet("background-color:white")
 
 
     def generarDistorsion(self):
-        # Se llama cuando presiono el botón "Distorsionar". Muestra la letra distorsionada en la 1ra matriz de la 2da pestaña
+        """Se llama cuando presiono el botón "Distorsionar". Muestra la letra distorsionada en la 1ra matriz de la 2da pestaña."""
         if self.letraIngresada == '':
             self.mostrarPorConsola('>>Debe seleccionar una letra!')
         else:
@@ -1592,7 +1646,7 @@ class UI(QMainWindow):
 
 
     def copiarPatron(self, letra):
-        # Devuelve una copia del patrón sin distorsionar de la letra pasada
+        """Devuelve una copia del patrón sin distorsionar de la letra pasada."""
         if letra == 'b':
             patron = patronb.copy() 
         elif letra == 'd':
@@ -1607,7 +1661,7 @@ class UI(QMainWindow):
 
 
     def comprobarPatron(self, patron, letra):
-        # Comprueba si un patrón fue usado para el entrenamiento
+        """Comprueba si un patrón fue usado para el entrenamiento."""
         
         # Obtengo los ejemplos usados en el entrenamiento de la red actual
         resta = restarDatasets(self.dataset_entr_resg, self.conj_val_resg)
@@ -1626,7 +1680,7 @@ class UI(QMainWindow):
 
 
     def clasificarPatron(self, patron, label, probarPatrones):
-        # Presenta un patrón a la red y muestra la letra que representa la salida de la misma.
+        """Presenta un patrón a la red y muestra la letra que representa la salida de la misma."""
 
         # Agrego 3 valores de clase cualquiera para que funcione correctamente aplicarPatronDeEntrada()
         patron_de_prueba = patron.copy()
@@ -1649,7 +1703,7 @@ class UI(QMainWindow):
 
 
     def probarPatrones(self):
-        # Clasifica un número dado de patrones aleatorios y muestra la precisión.
+        """Clasifica un número dado de patrones aleatorios y muestra la precisión."""
 
         nroPatrones = self.spinBox_pataprobar.value()
         dataset = []
@@ -1699,7 +1753,7 @@ class UI(QMainWindow):
 
 
     def verDataset(self, dataset):
-        # Abre una ventana con el dataset pasado mostrado en forma tabular y gráfica
+        """Abre una ventana con el dataset pasado mostrado en forma tabular y gráfica."""
         self.window_dataset = UIDialog_dataset
         self.window_dataset.show()
         self.window_dataset.plainTextEdit_tabular.clear()
@@ -1710,7 +1764,7 @@ class UI(QMainWindow):
         self.window_dataset.plainTextEdit_grafico.moveCursor(QTextCursor.Start)
         
     def verRed(self):
-        # Abre una ventana que muestra la estructura y contenido actual de la red
+        """Abre una ventana que muestra la estructura y contenido actual de la red."""
         self.window_red = UIDialog_red
         self.window_red.show()
         self.window_red.plainTextEdit_red.clear()
@@ -1735,7 +1789,7 @@ class UI_dialog_dataset(QDialog):
         self.setWindowIcon(QIcon(resource_path('icons\\icon3.ico'))) # Ícono de la ventana
 
     def center(self):
-        # Hace que la ventana aparezca centrada
+        """Hace que la ventana aparezca centrada."""
         qtRectangle = self.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qtRectangle.moveCenter(centerPoint)
@@ -1759,7 +1813,7 @@ class UI_dialog_red(QDialog):
         self.setWindowIcon(QIcon(resource_path('icons\\icon2.ico'))) # Ícono de la ventana
 
     def center(self):
-        # Hace que la ventana aparezca centrada
+        """Hace que la ventana aparezca centrada."""
         qtRectangle = self.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qtRectangle.moveCenter(centerPoint)
