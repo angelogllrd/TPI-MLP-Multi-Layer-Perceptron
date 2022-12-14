@@ -87,6 +87,8 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 
 ## Generación del ejecutable (Windows y Linux)
 <details><summary>Ver Generación del ejecutable</summary>
+
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
   
 Para evitar la instalación de las librerias podemos obtener un ejecutable, tanto en Windows como en Linux, usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
@@ -171,7 +173,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 ## Partes de la aplicación
 <details><summary>Ver Partes de la aplicación</summary>
   
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/15oaN7XDcYwfxJIkI0-9EhXViB6kAIpef/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
 
 La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** y **"Probar patrón"**.
 
@@ -229,7 +231,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ## Instrucciones de uso de la aplicación
 <details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1fElKQyQl-hqpxbABTjoEjJuDNBDY3KaG/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1kvmw3jR4zz6c0hvTpTLKl5Nmj726qVvb/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
 
 1. **Generar/Cargar dataset:** 
      - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la ruta del ejecutable.

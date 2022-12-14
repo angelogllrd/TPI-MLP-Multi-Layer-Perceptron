@@ -887,8 +887,8 @@ class UI(QMainWindow):
         alerta.setIcon(QMessageBox.Warning)
         alerta.setText('El error no baja, o baja muy lentamente')
         alerta.setInformativeText('Las últimas ' + str(repetidas) + ' épocas arrojaron un error (considerando los primeros 8 decimales) de ' + error + '.\n\n¿Desea PARAR o SEGUIR con este entrenamiento?')
-        botonParar = alerta.addButton('Parar', QMessageBox.AcceptRole)
-        botonSeguir = alerta.addButton('Seguir', QMessageBox.RejectRole)
+        botonParar = alerta.addButton('Parar', QMessageBox.RejectRole)
+        botonSeguir = alerta.addButton('Seguir', QMessageBox.AcceptRole)
         alerta.setDefaultButton(botonParar)
         alerta.exec()
         if alerta.clickedButton() == botonParar:
