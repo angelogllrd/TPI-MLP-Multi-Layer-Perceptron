@@ -13,6 +13,8 @@ from math import exp, floor, ceil
 
 from time import sleep
 
+import json
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -186,7 +188,7 @@ def generarDataset(ejemplos):
         else: # Cantidad de ejemplos del conjunto de validación NO divisible por 4, porciones distintas
             evpp1 = floor(ev/4) 
             evpp2 = evpp1 + 1
-            l_evpp = [evpp1, evpp1, evpp2, evpp2] # Ejemplos de validación = evpp1*2 + evpp2*2
+            l_evpp = [evpp1, evpp1, evpp2, evpp2] # Decido aleatoriamente cuánto tomo de cada porción (Ejemplos de validación = evpp1*2 + evpp2*2)
             random.shuffle(l_evpp) # Para que los ejemplos que tomo de cada porción no sean siempre los mismos
             conj = parte_sin_dist[:l_evpp[0]] + parte_dist_1_10[:l_evpp[1]] + parte_dist_11_20[:l_evpp[2]] + parte_dist_21_30[:l_evpp[3]]
         
@@ -322,22 +324,23 @@ def cargarDataset(dataset):
     return dataset_entr, dataset_test, conj_val10, conj_val20, conj_val30
 
 
-def convertirStringADataset(string):
-    """Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt"""
-    pos = -1
-    dataset = []
-    while True:
-        fila= []
-        for i in range(103):
-            pos += 3
-            #print(pos, string[pos], i)
-            fila.append(int(string[pos]))
-        dataset.append(fila)
-        if string[pos+2] == ']':
-            break
-        else:
-            pos += 2
-    return dataset
+# def convertirStringADataset(string):
+#     """NO SE USA MÁS, REEMPLAZADO POR json.loads(). Convierte una string de lista de listas a una estructura de lista de 
+#        listas. Se usa cuando se carga un dataset desde un .txt"""
+#     pos = -1
+#     dataset = []
+#     while True:
+#         fila= []
+#         for i in range(103):
+#             pos += 3
+#             #print(pos, string[pos], i)
+#             fila.append(int(string[pos]))
+#         dataset.append(fila)
+#         if string[pos+2] == ']':
+#             break
+#         else:
+#             pos += 2
+#     return dataset
 
 
 def imprimirDatasetGraficoConAsteriscos(dataset):
@@ -761,6 +764,7 @@ class UI(QMainWindow):
         self.pushButton_cargar.clicked.connect(self.cargarDataset)
         self.pushButton_crearred.clicked.connect(self.crearRed)
         self.pushButton_entrenar.clicked.connect(self.entrenarRed)
+        self.pushButton_guardarredesentrenadas.clicked.connect(self.guardarRedesEntrenadas)
         self.pushButton_hacertest.clicked.connect(self.hacerTest)
         self.pushButton_letraB.clicked.connect(lambda: self.tratarLetra(patronb,'b'))
         self.pushButton_letraD.clicked.connect(lambda: self.tratarLetra(patrond,'d'))
@@ -802,15 +806,17 @@ class UI(QMainWindow):
         self.comboBox_funcion.activated.connect(self.tratarCambioParametrosArq)
         self.comboBox_test.activated.connect(self.tratarComboboxTest)
         self.comboBox_probarpatron.activated.connect(self.tratarComboboxProbarpatron)
+        self.comboBox_tipomodelotest.activated.connect(lambda: self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test))
+        self.comboBox_tipomodeloprobar.activated.connect(lambda: self.tratarComboboxTipoModelo(self.comboBox_tipomodeloprobar, self.comboBox_probarpatron))
 
         # Desactivaciones iniciales de sección "Arquitectura de la red"
         self.desactivarEsto((self.spinBox_tamCapaOc2, self.label_arquired5))
 
         # Desactivaciones iniciales de sección "Entrenamiento"
-        self.desactivarEsto((self.pushButton_entrenar, self.progressBar_entrenamiento, self.label_entrresult, self.label_entrepocas, self.label_entrmseentr, self.label_entrmseval, self.label_entr10, self.label_entr20, self.label_entr30, self.lineEdit_nroepocas10, self.lineEdit_nroepocas20, self.lineEdit_nroepocas30, self.lineEdit_mseentr10, self.lineEdit_mseentr20, self.lineEdit_mseentr30, self.lineEdit_msevalid10, self.lineEdit_msevalid20, self.lineEdit_msevalid30))
+        self.desactivarEsto((self.pushButton_entrenar, self.progressBar_entrenamiento, self.label_entrresult, self.label_entrepocas, self.label_entrmseentr, self.label_entrmseval, self.label_entr10, self.label_entr20, self.label_entr30, self.lineEdit_nroepocas10, self.lineEdit_nroepocas20, self.lineEdit_nroepocas30, self.lineEdit_mseentr10, self.lineEdit_mseentr20, self.lineEdit_mseentr30, self.lineEdit_msevalid10, self.lineEdit_msevalid20, self.lineEdit_msevalid30, self.pushButton_guardarredesentrenadas))
 
         # Desactivaciones iniciales de sección "Test"
-        self.desactivarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec))        
+        self.desactivarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec))
 
         # Desactivación inicial del label y botones para mostrar red y datasets
         self.desactivarEsto((self.pushButton_verred, self.pushButton_verentr, self.pushButton_vertest, self.pushButton_verval10, self.pushButton_verval20, self.pushButton_verval30, self.label_verreddataset))
@@ -822,8 +828,11 @@ class UI(QMainWindow):
         self.graphicsView.setStyleSheet('border: 1px solid rgb(208, 208, 208);')
         self.graphicsView_2.setStyleSheet('border: 1px solid rgb(208, 208, 208);')
 
-        # Inicialización de letra ingresada
+        # Inicializaciónes varias
+        self.funcionDeActivacionSal = 'sigmoidal'
         self.letraIngresada = ''
+        self.listaRedesEntrenadas = []
+        self.listaRedesPrecargadas = []
 
         # Definición de arquitecturas predefinidas
         self.arquitecturasPredefinidas = ({'capasOcultas': 1, 'neurOcultas': (5,), 'funcTransf': 'Lineal', 'alfa': 0.5, 'beta': 0.5},
@@ -839,7 +848,23 @@ class UI(QMainWindow):
         for arq in range(len(self.arquitecturasPredefinidas)):
             self.comboBox_arquitectura.setItemData(arq, self.arquitecturasPredefinidas[arq])
 
+        # Inicialización de lista de redes precargadas
+        directorio = 'redes_precargadas'
+        for nombrearchivo in os.listdir(directorio):
+            if nombrearchivo.endswith('.json'):
+                path = os.path.join(directorio, nombrearchivo)
+                f = open(path, "r")
+                cosas_red = f.read()
+                f.close()
+                cosas_red = json.loads(cosas_red) # cosas_red contiene  
+                item = (nombrearchivo[:-5], cosas_red)
+                self.listaRedesPrecargadas.append(item)
 
+        # Carga de redes precargadas
+        self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test)
+        self.tratarComboboxTipoModelo(self.comboBox_tipomodeloprobar, self.comboBox_probarpatron) 
+
+       
 
     # MÉTODOS DE CLASE
     # ----------------
@@ -848,7 +873,7 @@ class UI(QMainWindow):
     def initUI(self):
         self.setWindowTitle('TPI MLP 2022 - Inteligencia Artificial - UTN FRRe') # Título de la ventana
         self.center() # Centramos ventana
-        self.mostrarPorConsola('>>Hola! Comience creando o cargando un dataset') # Instrucción inicial
+        self.mostrarPorConsola('>>Hola! Para comenzar puede:\n  * Crear o cargar un dataset\n  * Seleccionar un modelo precargado') # Instrucción inicial
         self.setWindowIcon(QIcon(resource_path('icons\\icon.ico'))) # Ícono de la ventana
         self.show() # Mostramos la app
 
@@ -936,12 +961,16 @@ class UI(QMainWindow):
 
     def guardarDataset(self):
         """Guarda en la ruta del ejecutable el dataset completo generado."""
+        try:
+            os.mkdir('datasets')
+        except:
+            pass
         tam = len(self.dataset_full) # Determino el tamaño del dataset actual
-        path = os.path.dirname(__file__) # Obtengo el path del ejecutable
-        f = open('dataset_de_%s.txt' %(tam), 'w') # Creo el archivo .txt
+        f = open(f'datasets\\dataset_de_{tam}.txt', 'w') # Creo el archivo .txt
         f.write(str(self.dataset_full)) # Escribo el archivo
         f.close()
-        self.mostrarPorConsola('>>Dataset guardado correctamente en ' + path)
+        path = os.path.dirname(__file__) # Obtengo el path del ejecutable
+        self.mostrarPorConsola(f'>>Dataset guardado correctamente en {path}\\datasets')
 
 
     def cargarDataset(self):
@@ -953,7 +982,7 @@ class UI(QMainWindow):
             f = open(path, "r")
             dataset_string = f.read()
             f.close()
-            dataset = convertirStringADataset(dataset_string)
+            dataset = json.loads(dataset_string) # Convierto el string del dataset a una estructura de lista de patrones
             self.dataset_full = dataset
             self.dataset_entr, self.dataset_test, self.conjunto_val_10, self.conjunto_val_20, self.conjunto_val_30 = cargarDataset(dataset)
             self.mostrarPorConsola('>>Dataset cargado correctamente desde ' + path)
@@ -1054,7 +1083,6 @@ class UI(QMainWindow):
             self.funcionDeActivacionOc = 'lineal'
         else:
             self.funcionDeActivacionOc = 'sigmoidal'
-        self.funcionDeActivacionSal = 'sigmoidal'
         self.alfa = round(self.doubleSpinBox_alfa.value(), 1)
         self.beta = round(self.doubleSpinBox_beta.value(), 1)
 
@@ -1126,6 +1154,7 @@ class UI(QMainWindow):
                     self.mostrarPorConsola('>>El error aceptable debe ser un número positivo o cero')
                 else: # El error tiene un formato correcto
                     conjuntoActual = 0
+                    self.redesParaExportar = []
                     # Hago un entrenamiento por cada conjunto de validación
                     for conjunto_val in (self.conjunto_val_10, self.conjunto_val_20, self.conjunto_val_30):
                         errorNoAceptable = True # Bandera que me informa si algún patrón dio un error mayor al aceptable
@@ -1233,7 +1262,7 @@ class UI(QMainWindow):
                             self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 30 terminado')
 
                         # Guardo la red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados
-                        self.guardarRedEntrenada(str(conjuntoActual))
+                        self.guardarRedEntrenada(conjuntoActual)
 
                     # Activo nuevas funciones disponibles por haber entrenado
                     self.finalizarEntrenamiento()
@@ -1246,6 +1275,7 @@ class UI(QMainWindow):
             nroEpocas = self.spinBox_iteraciones.value()
 
             conjuntoActual = 0
+            self.redesParaExportar = []
             # Hago un entrenamiento por cada conjunto de validación
             for conjunto_val in (self.conjunto_val_10, self.conjunto_val_20, self.conjunto_val_30):
                 dataset_entr_actual = restarDatasets(self.dataset_entr, conjunto_val) # Resto al de entrenamiento el conjunto de validacion
@@ -1314,7 +1344,7 @@ class UI(QMainWindow):
                     self.mostrarPorConsola('>>Entrenamiento con conjunto de validación de 30 terminado')
 
                 # Guardo la red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados
-                self.guardarRedEntrenada(str(conjuntoActual))
+                self.guardarRedEntrenada(conjuntoActual)
 
             # Activo nuevas funciones disponibles por haber entrenado
             self.finalizarEntrenamiento()
@@ -1358,28 +1388,49 @@ class UI(QMainWindow):
         descrip += ' (Dat ' + tamañoDatasetActual
 
         # Agrego el conjunto de validación que se usó
-        if conj_val == '10':
+        if conj_val == 10:
             descrip += '; Val 10)'
             conjunto_usado = self.conjunto_val_10
-        elif conj_val == '20':
+        elif conj_val == 20:
             descrip += '; Val 20)'
             conjunto_usado = self.conjunto_val_20
         else:
             descrip += '; Val 30)'
             conjunto_usado = self.conjunto_val_30
 
+        # Creo el ítem a listar
+        item = (descrip, (self.red, arq_actual, self.dataset_test, self.dataset_entr, conjunto_usado))
+
         # Compruebo si una arquitectura idéntica ya está listada. Si ya existe una, la sobreescribo
-        ind = self.comboBox_test.findText(descrip) # Busco un texto idéntico a la descripción
+        ind = -1
+        for i in range(len(self.listaRedesEntrenadas)):
+            if descrip in self.listaRedesEntrenadas[i]:
+                ind = i
         if ind == -1: # No hay listada una arquitectura similar
-            self.comboBox_test.addItem(descrip, (self.red, arq_actual, self.dataset_test, self.dataset_entr, conjunto_usado))
-            self.comboBox_probarpatron.addItem(descrip, (self.red, arq_actual, self.dataset_test, self.dataset_entr, conjunto_usado))
+            self.listaRedesEntrenadas.append(item)
             self.mostrarPorConsola('>>Se guardó una red nueva')
         else: # Ya hay listada una arquitectura similar
-            self.comboBox_test.removeItem(ind) # Remuevo la que ya existe
-            self.comboBox_probarpatron.removeItem(ind) # Remuevo la que ya existe
-            self.comboBox_test.insertItem(ind, descrip, (self.red, arq_actual, self.dataset_test, self.dataset_entr, conjunto_usado)) # Inserto la nueva en la misma posición
-            self.comboBox_probarpatron.insertItem(ind, descrip, (self.red, arq_actual, self.dataset_test, self.dataset_entr, conjunto_usado)) # Inserto la nueva en la misma posición
+            self.listaRedesEntrenadas.pop(ind) # Remuevo la que ya existe
+            self.listaRedesEntrenadas.insert(ind, item) # Inserto la nueva en la misma posición
             self.mostrarPorConsola('>>Se sobreescribió una red guardada previamente')
+
+        # Guardo la red, su texto descriptivo y datasets asociados para poder exportarlos como archivo
+        self.redesParaExportar.append(item)
+
+        
+    def tratarComboboxTipoModelo(self, combobox1, combobox2):
+        """Carga la lista de redes precargadas o recién entrenadas en 'combobox2' de acuerdo a lo seleccionado en 
+           'combobox1'. Ambos comboboxes pueden ser el par de la sección 'Test' o de la pestaña 'Probar patrón'."""
+
+        # Limpio el combobox que lista las redes entrenadas/precargadas
+        combobox2.clear()
+        # Muestro la lista de redes precargadas o recién entrenadas, según lo seleccionado en el otro combobox
+        if combobox1.currentIndex() == 1: # Se seleccionó la lista de redes recién entrenadas
+            for item in self.listaRedesEntrenadas:
+                combobox2.addItem(item[0], item[1])
+        else: # Se seleccionó la lista de redes precargadas
+            for item in self.listaRedesPrecargadas:
+                combobox2.addItem(item[0], item[1])
 
 
     def esArquitecturaPredefinida(self):
@@ -1410,9 +1461,29 @@ class UI(QMainWindow):
 
     def finalizarEntrenamiento(self):
         """Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin."""
+        self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test) # Para que actualice la lista de redes entrenadas
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
-        self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron))
-        self.animarEsto((self.frame_test1,))
+        self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron, self.pushButton_guardarredesentrenadas))
+        self.animarEsto((self.frame_entrenamiento3,))
+
+
+    def guardarRedesEntrenadas(self):
+        """Guarda las últimas redes entrenadas y datasets de entrenamiento, test y validación asociados en archivos .json"""
+
+        # Creo la carpeta para guardar las redes
+        try:
+            os.mkdir('redes_entrenadas')
+        except:
+            pass
+        # Creo los .json para las 3 redes entrenadas (1 por cada conjunto de validación)
+        for red_entrenada in self.redesParaExportar:
+            descrip = red_entrenada[0]
+            f = open(f'redes_entrenadas\\{descrip}.json', 'w') # Creo el archivo .txt
+            f.write(json.dumps(red_entrenada[1])) # Escribo el archivo
+            f.close()
+        # Muestro por consola confirmación de redes guardadas
+        path = os.path.dirname(__file__) # Obtengo el path del ejecutable
+        self.mostrarPorConsola(f'>>Redes entrenadas guardadas correctamente en {path}\\redes_entrenadas')
 
 
     def vaciarRed(self):
@@ -1539,8 +1610,8 @@ class UI(QMainWindow):
            correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test."""
         
         # Activo el resto de la sección "Test"
-        self.activarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec))
-        self.animarEsto((self.frame_test2,))
+        self.activarEsto((self.pushButton_hacertest, self.label_testresult, self.label_testcorrectas, self.label_testtotal, self.label_testprec, self.lineEdit_testcorrectas, self.lineEdit_testtotal, self.lineEdit_testprec, self.pushButton_verred))
+        self.animarEsto((self.frame_test, self.frame_verred))
         
         # Cargo como red actual la red seleccionada, y resguardo el dataset de test
         self.dataset_test_resg = self.cargarRedSeleccionada(self.comboBox_test)[0]
@@ -1573,7 +1644,7 @@ class UI(QMainWindow):
         """Activa nuevas funciones de la pestaña "Probar patrón", y carga como red actual la red seleccionada en el combobox."""
 
         # Activo nuevas funciones
-        self.activarEsto((self.groupBox_probar1patron, self.groupBox_probarmasde1))
+        self.activarEsto((self.groupBox_probar1patron, self.groupBox_probarmasde1, self.pushButton_verred))
         self.animarEsto((self.frame_probarpatron1, self.frame_probarpatrones))
         self.graphicsView.setStyleSheet('border: 1px solid black;')
         self.graphicsView_2.setStyleSheet('border: 1px solid black;')

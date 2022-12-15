@@ -745,12 +745,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </item>
             </layout>
            </widget>
+           <widget class="QPushButton" name="pushButton_guardarredesentrenadas">
+            <property name="geometry">
+             <rect>
+              <x>9</x>
+              <y>273</y>
+              <width>90</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Guarda cada una de las 3 redes entrenadas, junto con sus datasets de entrenamiento, test y validación asociados, en un archivo .json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Guardar redes</string>
+            </property>
+           </widget>
           </widget>
          </item>
          <item>
           <widget class="QGroupBox" name="groupBox_test">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="title">
             <string>Test</string>
@@ -761,15 +777,38 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <x>10</x>
               <y>20</y>
               <width>331</width>
-              <height>182</height>
+              <height>210</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <widget class="QLabel" name="label_206">
                <property name="text">
-                <string>Redes disponibles (entrenadas):</string>
+                <string>Seleccione una red entrenada o una precargada:</string>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_tipomodelotest">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite seleccionar si listar las redes precargadas, o las que se entrenaron desde que se inició la aplicación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <property name="placeholderText">
+                <string>Seleccione un tipo de modelo</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Redes precargadas</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Redes entrenadas</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item>
@@ -780,10 +819,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
                 </font>
                </property>
                <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes entrenadas que se guardaron. Una red con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes precargadas o las entrenadas desde el inicio de la aplicación, según lo seleccionado en el combobox de arriba. Una red recién entrenada, con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="placeholderText">
-                <string>Seleccione una opción</string>
+                <string>Seleccione un modelo</string>
                </property>
               </widget>
              </item>
@@ -939,35 +978,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <enum>QFrame::Raised</enum>
       </property>
      </widget>
-     <widget class="QFrame" name="frame_test1">
+     <widget class="QFrame" name="frame_test">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>377</x>
-        <y>350</y>
+        <y>431</y>
         <width>339</width>
-        <height>54</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_test2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>377</x>
-        <y>403</y>
-        <width>339</width>
-        <height>127</height>
+        <height>129</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -996,8 +1016,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <enum>QFrame::Raised</enum>
       </property>
      </widget>
-     <zorder>frame_test2</zorder>
-     <zorder>frame_test1</zorder>
+     <widget class="QFrame" name="frame_entrenamiento3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>376</x>
+        <y>278</y>
+        <width>99</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <zorder>frame_entrenamiento3</zorder>
+     <zorder>frame_test</zorder>
      <zorder>frame_arquitectura</zorder>
      <zorder>frame_entrenamiento2</zorder>
      <zorder>frame_entrenamiento1</zorder>
@@ -2403,7 +2442,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
             <rect>
              <x>203</x>
              <y>61</y>
-             <width>121</width>
+             <width>131</width>
              <height>32</height>
             </rect>
            </property>
@@ -4202,15 +4241,15 @@ border-color: black;</string>
         <rect>
          <x>10</x>
          <y>8</y>
-         <width>331</width>
-         <height>51</height>
+         <width>591</width>
+         <height>52</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QLabel" name="label_comboprobarpatron">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Redes disponibles (entrenadas):</string>
@@ -4218,22 +4257,46 @@ border-color: black;</string>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_probarpatron">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>7</pointsize>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes entrenadas que se guardaron. Una red con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="placeholderText">
-           <string>Seleccione una opción</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QComboBox" name="comboBox_tipomodeloprobar">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite seleccionar si listar las redes precargadas, o las que se entrenaron desde que se inició la aplicación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Redes precargadas</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Redes entrenadas</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_probarpatron">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>7</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes precargadas o las entrenadas desde el inicio de la aplicación, según lo seleccionado en el combobox de la izquierda. Una red recién entrenada, con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="placeholderText">
+             <string>Seleccione una opción</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -4339,6 +4402,9 @@ color: white</string>
     <layout class="QVBoxLayout" name="verticalLayout_14">
      <item>
       <widget class="QLabel" name="label_verreddataset">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Ver red o dataset:</string>
        </property>
@@ -4353,6 +4419,9 @@ color: white</string>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
           <widget class="QPushButton" name="pushButton_verred">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido de la red actual&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4363,6 +4432,9 @@ color: white</string>
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_verentr">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de entrenamiento de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4373,6 +4445,9 @@ color: white</string>
          </item>
          <item row="1" column="0">
           <widget class="QPushButton" name="pushButton_verval10">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 10%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4383,6 +4458,9 @@ color: white</string>
          </item>
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_vertest">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de test de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4393,6 +4471,9 @@ color: white</string>
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="pushButton_verval20">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 20%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4403,6 +4484,9 @@ color: white</string>
          </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="pushButton_verval30">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 30%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
