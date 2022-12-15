@@ -1,7 +1,7 @@
 # Análisis MLP (Multi-Layer Perceptron) 
 TPI del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
 
-![2022-11-20 17_52_45-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/202927114-9422238e-8f62-4630-856a-1963be0e3f06.png)
+![Portada](https://user-images.githubusercontent.com/51035369/207970240-5a0e859f-dcec-4c65-b7be-68f1d4c2f88f.png)
 
 ## Consigna
 <details><summary>Ver Consigna</summary>
@@ -180,7 +180,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ### Pestaña **"Entrenamiento y test"**:
 
 <p align="center">
-<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200418814-98371479-d96a-4e68-90cf-05c333a66951.png">
+<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/207969597-2aa35650-3756-49aa-ad70-ece770e9da72.png">
 </p>
 
 - **Sección 1**: 
@@ -209,13 +209,13 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 </p>
 
 <p align="center">
-<img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/200858256-2f4b6a55-4e2b-47a3-9a02-1033579133fa.png">
+<img width="60%" height="60%" src="https://user-images.githubusercontent.com/51035369/207969515-69b46ae0-d986-4b06-bc0e-f4d80d46bd6e.png">
 </p>    
     
 ### Pestaña **"Probar patrón"**:
 
 <p align="center">
-<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/200421015-fc7198c9-91b7-43ce-a1b2-78863d0b8406.png">
+<img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/207969674-5784fa0c-b202-486a-a26d-466c5f977337.png">
 </p>
 
 - **Sección 7**:
@@ -331,7 +331,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 ## Estructuración del código
 <details><summary>Ver Estructuración del código</summary>
   
-- Importación de librerias necesarias (PyQt5, sys, os, random, time, math, matplotlib, numpy).
+- Importación de librerias necesarias (PyQt5, sys, os, random, time, math, json, matplotlib, numpy).
 - `resource_path()`: Función para no tener problemas con las rutas en la conversion a .exe. Todos los paths que referencian a archivos externos se pasan a esta función. 
 - **FUNCIONES PARA LA CREACIÓN E IMPRESIÓN DE PATRONES Y DATASETS**:
   - `inicializarPatrones()`: Devuelve los patrones de las 3 letras, en forma de listas de 100 elementos con 1 y 0, usando las posiciones ocupadas por cada letra, considerando la matriz como una lista de 100 elementos (del 0 al 99).
@@ -339,11 +339,10 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   - `generarDistorsion()`: Distorsiona el patron pasado un porc% (cambia "porc" veces 0 por 1, y 1 por 0).
   - `generarDataset()`: Retorna el dataset completo, y los conjuntos de entrenamiento, test, y validación generados como se explica [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-los-datasets).
   - `cargarDataset()`: Se usa en la 1ra pestaña, con el boton "Cargar". Toma un dataset completo (con los 100, 500 o 1000 ejemplos) y extrae los demás datasets usando la misma lógica que `generarDataset()`.
-  - `convertirStringADataset()`: Convierte una string de lista de listas a una estructura de lista de listas. Se usa cuando se carga un dataset desde un .txt.
   - `imprimirDatasetGraficoConAsteriscos()`: Imprime el dataset en forma gráfica (matrices de los patrones) con * en cada pixel pintado, dispuesto en "cant_filas" filas de "patrones_por_fila" patrones.
   - `imprimirDatasetGraficoConPosiciones()`: Imprime el dataset en forma gráfica (matrices de los patrones) con la posición en cada pixel pintado, dispuesto en "cant_filas" filas de "patrones_por_fila" patrones.
   - `imprimirDatasetTabular()`: Imprime el dataset en forma tabular.
-  - `restarDatasets()`: Quita de un dataset filas de otro. Se lo usa para restar al conjunto de entrenamiento los de validación.
+  - `restarDatasets()`: Quita de un dataset filas de otro. Se lo usa en `entrenarRed()` para restar al conjunto de entrenamiento los de validación, y en `comprobarPatron()` para obtener los ejemplos usados en el entrenamiento de una red y comprobar si un patrón fue usado para el entrenamiento.
 - **CREACIÓN DE LA RED Y DE FUNCIONES PARA EL ALGORITMO**:
   - `crearRed()`: Crea la estructura de la red, con sus capas y neuronas en cada capa, tal como se describe [más arriba](https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/blob/main/README.md#estructura-de-la-red-neuronal).
   - `imprimirRed()`: Muestra el contenido de la red en su estado actual, por cada capa.
@@ -361,7 +360,7 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   - `actualizarPesosRed()`: Corresponde al **Paso 5**. Actualiza los pesos de la red.
   - `calcularMSE()`: Corresponde al **Paso 6**. Calcula el error cuadrático medio entre la salida obtenida y la deseada.
 - **OTRAS FUNCIONES**:
-  - `convertirErrorAString()`: Convierte un error (flotante) a un string del mismo, considerando que puede estar en notación científica. Se usa porque el formateo de strings para tomar cierta cantidad de cifras decimales redondeala última cifra de acuerdo a los valores siguientes. Por ejemplo, `f'{0.123456789:.8f}'` quedaría `'0.12345679'`, cuando debería ser `'0.12345678'`. El redondeo ocasiona que la comparación de las cifras decimales para verificar errores repetidos no se haga correctamente.
+  - `convertirErrorAString()`: Convierte un error (flotante) a un string del mismo, considerando que puede estar en notación científica. Se usa porque el formateo de strings para tomar cierta cantidad de cifras decimales redondea la última cifra de acuerdo a los valores siguientes. Por ejemplo, `f'{0.123456789:.8f}'` quedaría `'0.12345679'`, cuando debería ser `'0.12345678'`. El redondeo ocasiona que la comparación de las cifras decimales para verificar errores repetidos no se haga correctamente.
 - **UI, DEFINICIÓN DE CLASES, ATRIBUTOS Y MÉTODOS**:
   - `class UI()`: Clase correspondiente a la ventana principal.
     - `uic.loadUi()`: Carga el archivo .ui de la ventana principal.
@@ -378,9 +377,10 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
       - "Desactivaciones iniciales de sección Test": Desactivaciones necesarias de elementos de la Sección 4.
       - "Desactivación inicial del label y botones para mostrar red y datasets": Desactivaciones necesarias de elementos de la Sección 6.
       - "Desactivaciones iniciales de la segunda pestaña": Desactiva necesarias de elementos de la Sección 8 y Sección 9.
-      - "Inicialización de letra ingresada": Más adelante sirve para saber si ya se presionó o no alguno de los botones de las letras de la segunda pestaña.
+      - "Inicializaciones varias": de los atributos `letraIngresada` (más adelante sirve para saber si ya se presionó o no alguno de los botones de las letras de la segunda pestaña), `funcionDeActivacionSal` (define queé función de transferencia se usa en las neuronas de la capa de salida), `listaRedesEntrenadas` (guarda las redes que entrenamos desde el inicio de la aplicación), y `listaRedesPrecargadas` (guarda las redes/modelos ya entrenados que se cargan al inicio de la aplicación).
       - "Definición de arquitecturas predefinidas": Se define una tupla de diccionarios con las características de las arquitecturas dadas en el TPI.
-      - "Inicialización de combobox de arquitecturas predefinidas": Se cargan (listan) las arquitecturas predefinidas del item anterir en el combobox de la Sección 2.
+      - "Inicialización de combobox de arquitecturas predefinidas": Para cada arquitectura listada en el combobox de la Sección 2 se carga por detrás los datos de su estructura, definidos en el ítem anterior.
+      - "Carga de redes precargadas": Se encarga de cargar, al inicio de la aplicación, las redes precargadas en el 2do combobox de la sección 4.
     - **MÉTODOS DE CLASE:**
         - `center()`: Sirve para centrar la ventana en la pantalla. Llamado en `initUI()`.
         - `mostrarPorConsola()`: Concatena un string al contenido ya existente en el panel negro de la derecha.
