@@ -233,19 +233,30 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 
 > Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
 
-1. **Generar/Cargar dataset:** 
-     - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la ruta del ejecutable.
-       
-       ![2022-11-07 22_44_46-Window](https://user-images.githubusercontent.com/51035369/200431389-a95e57ff-46a4-4903-b72c-c0e95898df82.png)
-       
-     - La generación o la carga de un dataset produce la división del mismo en dos partes: entrenamiento y test. A su vez, con ejemplos del dataset de entrenamiento se forman los 3 conjuntos de validación. Por lo tanto, **los conjuntos o datasets resultantes son 5**.
-       
-       ![2022-11-07 22_29_20-Window](https://user-images.githubusercontent.com/51035369/200432193-eecdced6-9646-4d58-b746-2d9679c12888.png)
-       
-     - Luego, se habilita la **Sección 2** para crear una estructura de red, y los botones de la **Sección 6** para ver los diferentes conjuntos formados.
-       
-       ![2022-11-07 22_49_43-Window](https://user-images.githubusercontent.com/51035369/200432402-0466b0b8-1958-47a1-81f4-a8971f5fa602.png)
+1. **Generar/Cargar dataset o Seleccionar modelo precargado:**
+     
+     ![image](https://user-images.githubusercontent.com/51035369/208118316-89d9b5ee-1540-4d16-a0cf-36e23c91335b.png)
 
+     - **Generar/Cargar dataset**
+         - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la carpeta "datasets" en la ruta del ejecutable.
+       
+           ![2022-11-07 22_44_46-Window](https://user-images.githubusercontent.com/51035369/200431389-a95e57ff-46a4-4903-b72c-c0e95898df82.png)
+       
+         - La generación o la carga de un dataset produce la división del mismo en dos partes: entrenamiento y test. A su vez, con ejemplos del dataset de entrenamiento se forman los 3 conjuntos de validación. Por lo tanto, **los conjuntos o datasets resultantes son 5**.
+       
+           ![2022-11-07 22_29_20-Window](https://user-images.githubusercontent.com/51035369/200432193-eecdced6-9646-4d58-b746-2d9679c12888.png)
+       
+         - Luego, se habilita la **Sección 2** para crear una estructura de red, y los botones de la **Sección 6** para ver los diferentes conjuntos formados.
+       
+           ![2022-11-07 22_49_43-Window](https://user-images.githubusercontent.com/51035369/200432402-0466b0b8-1958-47a1-81f4-a8971f5fa602.png)
+     
+     - **Seleccionar modelo precargado**:
+         - Alternativamente, podemos ahorrarnos entrenar una red y cargar una red/modelo ya entrenado seleccionando uno de los 72 modelos precargados en la **Sección 4** (para hacer test) o en la **Sección 7** (para probar patrones). En el primer caso, se habilita el resto de la **Sección 4**, y en el segundo la **Sección 8** y la **Sección 9**:
+         
+           ![7](https://user-images.githubusercontent.com/51035369/208119635-bb938749-aa3b-4bda-b5d7-6f2908acab2a.png)
+         
+         - Seguir por el **Paso 4** o el **Paso 5**.
+  
 2. **Crear estructura de red**:
      - En la **Sección 2** tenemos 2 opciones:
        - **Seleccionar arquitectura predefinida de la lista**: En cuyo caso los campos de los de parámetros de abajo se rellenan automáticamente con los parámetros de la arquitectura seleccionada.
@@ -268,9 +279,10 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
        
        - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código de la primera imágen (dentro de `entrenarRed()`) y comentando el código de la segunda, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
          
-         ![1](https://user-images.githubusercontent.com/51035369/202963545-f234d764-2e4e-4682-8ed7-86340b8e6fb7.png)
+         ![2022-12-16 11_30_26-Window](https://user-images.githubusercontent.com/51035369/208120635-8c00443f-1c81-4492-90b5-f29cd6bd5b69.png)
 
-         ![2](https://user-images.githubusercontent.com/51035369/202963582-d5e2e3cd-e685-487d-aefb-a2cf6d769ffb.png)
+         ![2022-12-16 11_30_52-Window](https://user-images.githubusercontent.com/51035369/208120655-d23afab6-13e5-48f3-af8f-277ae96c0c98.png)
+         
          Con esta opción de fin, y para evitar que el entrenamiento se prolongue indefinidamente cuando la red no converge (o lo hace muy lento), la aplicación genera una alerta cuando detecta que el error de cierta cantidad de las últimas épocas es el mismo (comparando cierta cantidad de decimales de los errores). La alerta ofrece la opción de **Parar** el entrenamiento o **Seguir** con el mismo (hasta detectar la misma situación):
          
          ![2022-11-20 21_36_03-Acción requerida](https://user-images.githubusercontent.com/51035369/202963265-abf05e27-7aa7-4249-aef5-fddf37c3ace2.png)
@@ -283,48 +295,63 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
      - Al finalizar el entrenamiento, se muestran:
        - **Resultados:** Épocas que llevó el entrenamiento, Error de entrenamiento de la última época, y Error de validación de la última época.
        
-           ![2022-11-07 22_42_09-Window](https://user-images.githubusercontent.com/51035369/200434007-12138a54-c41c-4a38-ae2e-0d3ca24ad65e.png)
+           ![2022-12-16 11_33_00-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/208121122-b7d0e3e0-ab07-4130-9111-9b7d69a8d0cb.png)
 
        - **Gráficos de MSE promedio vs. Épocas:** Cada gráfico representa el Error de entrenamiento y Error de validación por cada época.
 
-           ![Figure_1](https://user-images.githubusercontent.com/51035369/200580615-7399fd81-2541-4265-be1a-7b22d5c7bc80.png)
+           ![Figure_1](https://user-images.githubusercontent.com/51035369/208121238-6d0fc70c-5169-4a6b-926d-537ccef63b1d.png)
 
-     - Se habilita una parte de la **Sección 4** y la **Sección 7**.
+     - Se habilita el botón "Guardar redes", que guarda las 3 redes que se acaban de entrenar como archivos .json en la carpeta "redes_entrenadas" en la ruta del ejecutable.
+       
+       ![image](https://user-images.githubusercontent.com/51035369/208121507-fa854a29-72dc-4c02-bccd-2bf0d9350e11.png)
+
      
 En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña para probar patrones distorsionados
 
 4. **Realizar el test**:
-     - En la **Sección 4** seleccionar la red entrenada previamente con la que queremos realizar el test, y presionar el botón "Hacer test". Esto inserta los patrones del dataset de test guardado en la red seleccionada, en dicha red. Luego calcula las salidas, detecta la letra representada por las salidas y la compara con la salida deseada, obteniendo el número de clasificaciones correctas.
+     - En la **Sección 4** seleccionar, en primer lugar, el tipo de modelo a cargar:
+       - Uno de los 72 modelos precargados,
+       - Una de las redes que se entrenaron desde el inicio de la aplicación:
        
-       ![2022-11-07 23_19_17-Window](https://user-images.githubusercontent.com/51035369/200436074-77db6ca6-f7e6-4ef1-a793-6f40a487ff8f.png)
+       ![image](https://user-images.githubusercontent.com/51035369/208122011-3ddf988f-081e-4792-ae5e-3851e8841f01.png)
+  
+     - Luego seleccionar el modelo en la segunda lista (esto habilita el resto de la sección):
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123252-9fc07330-982b-4a03-aaef-33d419fd6a75.png)
 
+     - Presionar el botón "Hacer test". Esto inserta los patrones del dataset de test guardado en la red seleccionada, en dicha red. Luego calcula las salidas, detecta la letra representada por las salidas y la compara con la salida deseada, obteniendo el número de clasificaciones correctas.
      - Se muestran los resultados (Clasificaciones correctas, números de casos de prueba, y la precisión, calculada a partir de los dos primeros), junto con el gráfico de los Errores por cada patrón.
-
-       ![Figure_1](https://user-images.githubusercontent.com/51035369/200580836-fecba0e6-7d30-4c2f-9131-4eb72c2f4219.png)
-
-       ![2022-11-07 23_19_41-Window](https://user-images.githubusercontent.com/51035369/200436701-53e568e9-a6e4-42d2-914e-9bf8730f51e3.png)
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208122516-be282f34-1af3-4b37-9e96-7b583195c3bd.png)
+     
+       ![image](https://user-images.githubusercontent.com/51035369/208122354-e533d316-c010-4dff-a7b4-ee8ba32b5488.png)
 
 5. **Probar patrones** (segunda pestaña):
-     - En la **Sección 7** seleccionar la red entrenada previamente con la que queremos probar patrones distorsionados.
-     
-       ![2022-11-07 23_27_21-Window](https://user-images.githubusercontent.com/51035369/200437109-599be7fd-a506-4c4a-a6f0-30bca024d8ee.png)
+     - En la **Sección 7** seleccionar, en primer lugar, el tipo de modelo a cargar:
+       - Uno de los 72 modelos precargados,
+       - Una de las redes que se entrenaron desde el inicio de la aplicación:
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123056-d2205db5-0c5d-478b-b9c6-a71d324940c6.png)
 
-     - Esto carga la red seleccionada como red actual, junto con los datasets guardados con la misma (los datasets de entrenamiento y validación guardados en la red seleccionada se usan para comprobar si un patrón aleatorio fué usado en el entrenamiento de esa red), y habilita la **Sección 7** y la **Sección 8**.
+     - Luego seleccionar el modelo en la segunda lista. Esto carga la red seleccionada como red actual, junto con los datasets guardados con la misma (los datasets de entrenamiento y validación guardados en la red seleccionada se usan para comprobar si un patrón aleatorio fué usado en el entrenamiento de esa red), y habilita la **Sección 8** y la **Sección 9**:
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123597-42ec688c-2ad4-4620-a958-d269d6268f30.png)
+
      - Luego, tenemos 2 opciones:
-       - **Sección 7: Generar y clasificar un patrón con distorsión aleatoria**
+       - **Sección 8: Generar y clasificar un patrón con distorsión aleatoria**
 
-           ![image](https://user-images.githubusercontent.com/51035369/200440431-32251ae2-33b1-4f0b-8f45-317418c28496.png)
+           ![image](https://user-images.githubusercontent.com/51035369/208124414-a4b6a7e9-bce7-4b63-b956-492bf3906e94.png)
 
            - Seleccionar una letra con uno de los 3 botones (se muestra la letra en la matriz de pixeles).
            - Seleccionar la distorsión a generar. **ACLARACIÓN**: El programa comprueba si el patrón distorsionado resultante es uno de los patrones usados para entrenar la red. Si lo fué, se muestra "Si" en el label "¿Patrón usado para entrenar?", mientras que si no, se muestra "No".
-           - Presionar el botón "Distorsionar" (se muestra la letra distorsionada en la matriz de pixeles). Esto habilida la parte derecha de la Sección 7, donde clasificamos la letra distorsionada.
+           - Presionar el botón "Distorsionar" (se muestra la letra distorsionada en la matriz de pixeles). Esto habilita la parte derecha de la Sección 8, donde clasificamos la letra distorsionada.
            - Presionar el botón "Clasificar". Se muestra la letra que representa la salida de la red al insertar el patrón distorsionado, junto con los valores de salida que se usaron para clasificar la letra.
-       - **Sección 8: Generar y clasificar un número dado de patrones con distoriones aleatorias**:
+       - **Sección 9: Generar y clasificar un número dado de patrones con distoriones aleatorias**:
 
-           ![image](https://user-images.githubusercontent.com/51035369/200439675-bf7048ab-9a92-4c36-abb8-96a88aaf7650.png)
+           ![image](https://user-images.githubusercontent.com/51035369/208124626-dfce57a8-a0ca-405b-aedb-e9621ed5ccc8.png)
 
            - Ingresar el número de patrones distorsionados a generar.
-           - Presionar el botón "Probar patrones". Se muestra a la izquierda la matriz de pixeles con cada patrón generado, junto con la letra clasificada a la derecha. **ACLARACIÓN**: Al igual que en la Sección 7, se comprueba si cada patrón generado fué usado en el entrenamiento de la red, y solamente se usan aquellos que no lo fueron.
+           - Presionar el botón "Probar patrones". Se muestra a la izquierda la matriz de pixeles con cada patrón generado, junto con la letra clasificada a la derecha. **ACLARACIÓN**: Al igual que en la Sección 8, se comprueba si cada patrón generado fué usado en el entrenamiento de la red, y solamente se usan aquellos que no lo fueron.
            - Se muestran los resultados de precisión.
 </details>
 
