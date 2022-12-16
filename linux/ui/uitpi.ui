@@ -234,8 +234,8 @@
             <property name="geometry">
              <rect>
               <x>10</x>
-              <y>22</y>
-              <width>330</width>
+              <y>20</y>
+              <width>331</width>
               <height>281</height>
              </rect>
             </property>
@@ -422,13 +422,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
                </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="label_arquired6">
-                 <property name="font">
-                  <font>
-                   <pointsize>9</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
-                  <string>  - Función de transf. de capas ocultas:              </string>
+                  <string>  - Función de transf. de capas ocultas               </string>
                  </property>
                 </widget>
                </item>
@@ -570,7 +565,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <x>10</x>
               <y>20</y>
               <width>331</width>
-              <height>270</height>
+              <height>241</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -595,11 +590,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                </item>
                <item row="0" column="1">
                 <widget class="QLineEdit" name="lineEdit_erroracep">
-                 <property name="font">
-                  <font>
-                   <pointsize>9</pointsize>
-                  </font>
-                 </property>
                  <property name="text">
                   <string>0.5</string>
                  </property>
@@ -669,42 +659,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
              </item>
              <item>
               <layout class="QGridLayout" name="gridLayout_5">
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="lineEdit_msevalid10">
-                 <property name="font">
-                  <font>
-                   <pointsize>8</pointsize>
-                  </font>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_entrmseentr">
-                 <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Error de entrenamiento de la última época&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>MSE entrenamiento</string>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="2">
                 <widget class="QLineEdit" name="lineEdit_mseentr20">
-                 <property name="font">
-                  <font>
-                   <pointsize>8</pointsize>
-                  </font>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3">
-                <widget class="QLineEdit" name="lineEdit_mseentr30">
                  <property name="font">
                   <font>
                    <pointsize>8</pointsize>
@@ -727,62 +683,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_entrmseval">
-                 <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Error de validación de la última época&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>MSE validación</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLineEdit" name="lineEdit_nroepocas10">
-                 <property name="font">
-                  <font>
-                   <pointsize>8</pointsize>
-                  </font>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_entrepocas">
-                 <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Épocas que llevó el entrenamiento&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Épocas</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLineEdit" name="lineEdit_nroepocas20">
-                 <property name="font">
-                  <font>
-                   <pointsize>8</pointsize>
-                  </font>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3">
-                <widget class="QLineEdit" name="lineEdit_msevalid30">
-                 <property name="font">
-                  <font>
-                   <pointsize>8</pointsize>
-                  </font>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="3">
                 <widget class="QLineEdit" name="lineEdit_nroepocas30">
                  <property name="font">
@@ -792,6 +692,26 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </property>
                  <property name="readOnly">
                   <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_entrmseentr">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Error de entrenamiento de la última época&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>MSE entrenamiento</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_entr10">
+                 <property name="text">
+                  <string>10%</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -807,13 +727,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="label_entr10">
-                 <property name="text">
-                  <string>10%</string>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="lineEdit_nroepocas10">
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
                  </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QLineEdit" name="lineEdit_nroepocas20">
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -837,16 +771,88 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </property>
                 </widget>
                </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="lineEdit_msevalid10">
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_entrepocas">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Épocas que llevó el entrenamiento&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Épocas</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_entrmseval">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Error de validación de la última época&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>MSE validación</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3">
+                <widget class="QLineEdit" name="lineEdit_mseentr30">
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3">
+                <widget class="QLineEdit" name="lineEdit_msevalid30">
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                  </font>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
             </layout>
+           </widget>
+           <widget class="QPushButton" name="pushButton_guardarredesentrenadas">
+            <property name="geometry">
+             <rect>
+              <x>9</x>
+              <y>270</y>
+              <width>101</width>
+              <height>25</height>
+             </rect>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Guarda cada una de las 3 redes entrenadas, junto con sus datasets de entrenamiento, test y validación asociados, en un archivo .json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Guardar redes</string>
+            </property>
            </widget>
           </widget>
          </item>
          <item>
           <widget class="QGroupBox" name="groupBox_test">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="title">
             <string>Test</string>
@@ -857,29 +863,52 @@ li.checked::marker { content: &quot;\2612&quot;; }
               <x>10</x>
               <y>20</y>
               <width>331</width>
-              <height>207</height>
+              <height>236</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <widget class="QLabel" name="label_206">
                <property name="text">
-                <string>Redes disponibles (entrenadas):</string>
+                <string>Seleccione una red entrenada o una precargada:</string>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_tipomodelotest">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite seleccionar si listar las redes precargadas, o las que se entrenaron desde que se inició la aplicación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <property name="placeholderText">
+                <string>Seleccione un tipo de modelo</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Redes precargadas</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Redes entrenadas</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item>
               <widget class="QComboBox" name="comboBox_test">
                <property name="font">
                 <font>
-                 <pointsize>8</pointsize>
+                 <pointsize>7</pointsize>
                 </font>
                </property>
                <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes entrenadas que se guardaron. Una red con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes precargadas o las entrenadas desde el inicio de la aplicación, según lo seleccionado en el combobox de arriba. Una red recién entrenada, con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="placeholderText">
-                <string>Seleccione una opción</string>
+                <string>Seleccione un modelo</string>
                </property>
               </widget>
              </item>
@@ -966,14 +995,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </property>
       <property name="geometry">
        <rect>
-        <x>25</x>
+        <x>27</x>
         <y>111</y>
-        <width>91</width>
+        <width>87</width>
         <height>34</height>
        </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-color: rgba(255, 255, 255, 0);</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -988,9 +1014,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </property>
       <property name="geometry">
        <rect>
-        <x>112</x>
+        <x>114</x>
         <y>111</y>
-        <width>91</width>
+        <width>87</width>
         <height>34</height>
        </rect>
       </property>
@@ -1008,9 +1034,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="geometry">
        <rect>
         <x>376</x>
-        <y>35</y>
-        <width>343</width>
-        <height>94</height>
+        <y>31</y>
+        <width>342</width>
+        <height>83</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -1027,9 +1053,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="geometry">
        <rect>
         <x>376</x>
-        <y>124</y>
-        <width>343</width>
-        <height>182</height>
+        <y>112</y>
+        <width>342</width>
+        <height>163</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -1039,35 +1065,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <enum>QFrame::Raised</enum>
       </property>
      </widget>
-     <widget class="QFrame" name="frame_test1">
+     <widget class="QFrame" name="frame_test">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>376</x>
-        <y>349</y>
-        <width>343</width>
-        <height>65</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-     <widget class="QFrame" name="frame_test2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>376</x>
-        <y>410</y>
-        <width>343</width>
-        <height>146</height>
+        <y>440</y>
+        <width>342</width>
+        <height>145</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -1084,9 +1091,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="geometry">
        <rect>
         <x>17</x>
-        <y>345</y>
-        <width>344</width>
-        <height>285</height>
+        <y>344</y>
+        <width>343</width>
+        <height>286</height>
        </rect>
       </property>
       <property name="frameShape">
@@ -1096,8 +1103,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <enum>QFrame::Raised</enum>
       </property>
      </widget>
-     <zorder>frame_test2</zorder>
-     <zorder>frame_test1</zorder>
+     <widget class="QFrame" name="frame_entrenamiento3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>376</x>
+        <y>275</y>
+        <width>109</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <zorder>frame_entrenamiento3</zorder>
+     <zorder>frame_test</zorder>
      <zorder>frame_arquitectura</zorder>
      <zorder>frame_entrenamiento2</zorder>
      <zorder>frame_entrenamiento1</zorder>
@@ -2501,7 +2527,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QWidget" name="horizontalLayoutWidget_3">
            <property name="geometry">
             <rect>
-             <x>199</x>
+             <x>197</x>
              <y>61</y>
              <width>131</width>
              <height>32</height>
@@ -2543,7 +2569,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QLabel" name="label_selec_letra">
            <property name="geometry">
             <rect>
-             <x>199</x>
+             <x>198</x>
              <y>44</y>
              <width>101</width>
              <height>16</height>
@@ -2556,7 +2582,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QWidget" name="formLayoutWidget_4">
            <property name="geometry">
             <rect>
-             <x>199</x>
+             <x>197</x>
              <y>99</y>
              <width>211</width>
              <height>120</height>
@@ -2572,11 +2598,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
             </item>
             <item row="1" column="1">
              <widget class="QLineEdit" name="lineEdit_sliderprobar1">
-              <property name="font">
-               <font>
-                <pointsize>9</pointsize>
-               </font>
-              </property>
               <property name="text">
                <string>0</string>
               </property>
@@ -2587,11 +2608,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_6">
-              <property name="font">
-               <font>
-                <family>Ubuntu</family>
-               </font>
-              </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indica si el patrón representado por la matriz de pixeles fué usado para entrenar la red seleccionada&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -2602,11 +2618,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
             </item>
             <item row="2" column="1">
              <widget class="QLineEdit" name="lineEdit_usado">
-              <property name="font">
-               <font>
-                <pointsize>9</pointsize>
-               </font>
-              </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indica si el patrón representado por la matriz de pixeles fué usado para entrenar la red seleccionada&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -2643,7 +2654,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <widget class="QLabel" name="label_clasificacion1">
            <property name="geometry">
             <rect>
-             <x>417</x>
+             <x>422</x>
              <y>49</y>
              <width>183</width>
              <height>183</height>
@@ -2672,7 +2683,7 @@ border-color: black;</string>
           <widget class="QLabel" name="label_salida_clasif">
            <property name="geometry">
             <rect>
-             <x>417</x>
+             <x>422</x>
              <y>26</y>
              <width>121</width>
              <height>16</height>
@@ -2685,7 +2696,7 @@ border-color: black;</string>
           <widget class="QPushButton" name="pushButton_clasificar">
            <property name="geometry">
             <rect>
-             <x>606</x>
+             <x>608</x>
              <y>50</y>
              <width>75</width>
              <height>24</height>
@@ -2701,7 +2712,7 @@ border-color: black;</string>
           <widget class="QWidget" name="verticalLayoutWidget_2">
            <property name="geometry">
             <rect>
-             <x>607</x>
+             <x>609</x>
              <y>80</y>
              <width>71</width>
              <height>134</height>
@@ -4191,7 +4202,7 @@ border-color: black;</string>
           <widget class="QWidget" name="verticalLayoutWidget_5">
            <property name="geometry">
             <rect>
-             <x>391</x>
+             <x>389</x>
              <y>47</y>
              <width>291</width>
              <height>202</height>
@@ -4325,15 +4336,15 @@ border-color: black;</string>
         <rect>
          <x>10</x>
          <y>8</y>
-         <width>331</width>
-         <height>51</height>
+         <width>591</width>
+         <height>52</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QLabel" name="label_comboprobarpatron">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Redes disponibles (entrenadas):</string>
@@ -4341,22 +4352,46 @@ border-color: black;</string>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_probarpatron">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>8</pointsize>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes entrenadas que se guardaron. Una red con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="placeholderText">
-           <string>Seleccione una opción</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QComboBox" name="comboBox_tipomodeloprobar">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite seleccionar si listar las redes precargadas, o las que se entrenaron desde que se inició la aplicación&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Redes precargadas</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Redes entrenadas</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_probarpatron">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>7</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Lista las redes precargadas o las entrenadas desde el inicio de la aplicación, según lo seleccionado en el combobox de la izquierda. Una red recién entrenada, con la misma configuración que una ya existente en la lista, sobreescribe la misma cuando se la entrena&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="placeholderText">
+             <string>Seleccione una opción</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -4386,9 +4421,9 @@ border-color: black;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>435</x>
+        <x>439</x>
         <y>111</y>
-        <width>274</width>
+        <width>270</width>
         <height>212</height>
        </rect>
       </property>
@@ -4427,7 +4462,7 @@ border-color: black;</string>
    <widget class="QPlainTextEdit" name="consola">
     <property name="geometry">
      <rect>
-      <x>744</x>
+      <x>743</x>
       <y>26</y>
       <width>301</width>
       <height>536</height>
@@ -4453,15 +4488,18 @@ color: white</string>
    <widget class="QWidget" name="verticalLayoutWidget_6">
     <property name="geometry">
      <rect>
-      <x>744</x>
+      <x>743</x>
       <y>560</y>
-      <width>301</width>
+      <width>291</width>
       <height>91</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_14">
      <item>
       <widget class="QLabel" name="label_verreddataset">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Ver red o dataset:</string>
        </property>
@@ -4476,6 +4514,9 @@ color: white</string>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
           <widget class="QPushButton" name="pushButton_verred">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido de la red actual&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4486,6 +4527,9 @@ color: white</string>
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_verentr">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de entrenamiento de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4496,6 +4540,9 @@ color: white</string>
          </item>
          <item row="1" column="0">
           <widget class="QPushButton" name="pushButton_verval10">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 10%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4506,6 +4553,9 @@ color: white</string>
          </item>
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_vertest">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de test de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4516,6 +4566,9 @@ color: white</string>
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="pushButton_verval20">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 20%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4526,6 +4579,9 @@ color: white</string>
          </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="pushButton_verval30">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Permite ver el contenido del conjunto de validación del 30%, de forma tabular y gráfica&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -4548,8 +4604,8 @@ color: white</string>
      <rect>
       <x>740</x>
       <y>592</y>
-      <width>105</width>
-      <height>34</height>
+      <width>100</width>
+      <height>32</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -4565,9 +4621,9 @@ color: white</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>843</x>
+      <x>839</x>
       <y>592</y>
-      <width>206</width>
+      <width>199</width>
       <height>64</height>
      </rect>
     </property>
@@ -4585,9 +4641,9 @@ color: white</string>
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>622</y>
-      <width>105</width>
-      <height>34</height>
+      <y>623</y>
+      <width>100</width>
+      <height>33</height>
      </rect>
     </property>
     <property name="frameShape">
