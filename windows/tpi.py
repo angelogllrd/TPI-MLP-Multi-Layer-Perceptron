@@ -849,7 +849,7 @@ class UI(QMainWindow):
             self.comboBox_arquitectura.setItemData(arq, self.arquitecturasPredefinidas[arq])
 
         # Inicialización de lista de redes precargadas
-        directorio = 'redes_precargadas'
+        directorio = resource_path('redes_precargadas')
         for nombrearchivo in os.listdir(directorio):
             if nombrearchivo.endswith('.json'):
                 path = os.path.join(directorio, nombrearchivo)
@@ -1461,7 +1461,8 @@ class UI(QMainWindow):
 
     def finalizarEntrenamiento(self):
         """Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin."""
-        self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test) # Para que actualice la lista de redes entrenadas
+        if self.comboBox_tipomodelotest.currentIndex() == 1:
+            self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test) # Para que actualice la lista de redes entrenadas
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
         self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron, self.pushButton_guardarredesentrenadas))
         self.animarEsto((self.frame_entrenamiento3,))
