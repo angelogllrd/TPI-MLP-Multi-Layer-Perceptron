@@ -1463,6 +1463,8 @@ class UI(QMainWindow):
         """Lo que se hace al terminar el entrenamiento por cualquiera de las condiciones de fin."""
         if self.comboBox_tipomodelotest.currentIndex() == 1:
             self.tratarComboboxTipoModelo(self.comboBox_tipomodelotest, self.comboBox_test) # Para que actualice la lista de redes entrenadas
+        if self.comboBox_tipomodeloprobar.currentIndex() == 1:
+            self.tratarComboboxTipoModelo(self.comboBox_tipomodeloprobar, self.comboBox_probarpatron) # Para que actualice la lista de redes entrenadas
         self.mostrarPorConsola('>>Etapa de entrenamiento finalizada')
         self.activarEsto((self.groupBox_test, self.label_comboprobarpatron, self.comboBox_probarpatron, self.pushButton_guardarredesentrenadas))
         self.animarEsto((self.frame_entrenamiento3,))
