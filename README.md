@@ -88,7 +88,7 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 ## Generación del ejecutable (Windows y Linux)
 <details><summary>Ver Generación del ejecutable</summary>
 
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
   
 Para evitar la instalación de las librerias podemos obtener un ejecutable, tanto en Windows como en Linux, usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
@@ -173,7 +173,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 ## Partes de la aplicación
 <details><summary>Ver Partes de la aplicación</summary>
   
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
 
 La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** y **"Probar patrón"**.
 
@@ -231,21 +231,32 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ## Instrucciones de uso de la aplicación
 <details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
-> Descarga de la aplicación: [Windows](https://drive.google.com/file/d/1iiP4B_65N9h76z45Ne2s4CJaFQQOvwVq/view?usp=share_link) / [Linux](https://drive.google.com/file/d/1_5uiwBViu9-h9y94nx3bIIht9jZdGlKB/view?usp=share_link)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
 
-1. **Generar/Cargar dataset:** 
-     - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la ruta del ejecutable.
-       
-       ![2022-11-07 22_44_46-Window](https://user-images.githubusercontent.com/51035369/200431389-a95e57ff-46a4-4903-b72c-c0e95898df82.png)
-       
-     - La generación o la carga de un dataset produce la división del mismo en dos partes: entrenamiento y test. A su vez, con ejemplos del dataset de entrenamiento se forman los 3 conjuntos de validación. Por lo tanto, **los conjuntos o datasets resultantes son 5**.
-       
-       ![2022-11-07 22_29_20-Window](https://user-images.githubusercontent.com/51035369/200432193-eecdced6-9646-4d58-b746-2d9679c12888.png)
-       
-     - Luego, se habilita la **Sección 2** para crear una estructura de red, y los botones de la **Sección 6** para ver los diferentes conjuntos formados.
-       
-       ![2022-11-07 22_49_43-Window](https://user-images.githubusercontent.com/51035369/200432402-0466b0b8-1958-47a1-81f4-a8971f5fa602.png)
+1. **Generar/Cargar dataset o Seleccionar modelo precargado:**
+     
+     ![image](https://user-images.githubusercontent.com/51035369/208118316-89d9b5ee-1540-4d16-a0cf-36e23c91335b.png)
 
+     - **Generar/Cargar dataset**
+         - En la **Sección 1**, seleccionar el tamaño del dataset a generar, y presionar el botón **"Generar"** (se habilita después de seleccionar un tamaño). También es posible usar el botón **"Cargar"** para cargar el archivo .txt de un dataset guardado previamente con la aplicación. Opcionalmente, luego de cargar/generar un dataset, se habilita el botón **"Guardar"**, que guarda el dataset en la carpeta "datasets" en la ruta del ejecutable.
+       
+           ![2022-11-07 22_44_46-Window](https://user-images.githubusercontent.com/51035369/200431389-a95e57ff-46a4-4903-b72c-c0e95898df82.png)
+       
+         - La generación o la carga de un dataset produce la división del mismo en dos partes: entrenamiento y test. A su vez, con ejemplos del dataset de entrenamiento se forman los 3 conjuntos de validación. Por lo tanto, **los conjuntos o datasets resultantes son 5**.
+       
+           ![2022-11-07 22_29_20-Window](https://user-images.githubusercontent.com/51035369/200432193-eecdced6-9646-4d58-b746-2d9679c12888.png)
+       
+         - Luego, se habilita la **Sección 2** para crear una estructura de red, y los botones de la **Sección 6** para ver los diferentes conjuntos formados.
+       
+           ![2022-11-07 22_49_43-Window](https://user-images.githubusercontent.com/51035369/200432402-0466b0b8-1958-47a1-81f4-a8971f5fa602.png)
+     
+     - **Seleccionar modelo precargado**:
+         - Alternativamente, podemos ahorrarnos entrenar una red y cargar una red/modelo ya entrenado seleccionando uno de los 72 modelos precargados en la **Sección 4** (para hacer test) o en la **Sección 7** (para probar patrones). En el primer caso, se habilita el resto de la **Sección 4**, y en el segundo la **Sección 8** y la **Sección 9**:
+         
+           ![7](https://user-images.githubusercontent.com/51035369/208119635-bb938749-aa3b-4bda-b5d7-6f2908acab2a.png)
+         
+         - Seguir por el **Paso 4** o el **Paso 5**.
+  
 2. **Crear estructura de red**:
      - En la **Sección 2** tenemos 2 opciones:
        - **Seleccionar arquitectura predefinida de la lista**: En cuyo caso los campos de los de parámetros de abajo se rellenan automáticamente con los parámetros de la arquitectura seleccionada.
@@ -268,9 +279,10 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
        
        - **Seleccionar un error aceptable:** El entrenamiento termina cuando el Error de entrenamiento promedio (promedio de los MSE de cada patrón en una época) resulta por debajo del error aceptable ingresado. Opcionalmente, descomentando el código de la primera imágen (dentro de `entrenarRed()`) y comentando el código de la segunda, el entrenamiento terminará cuando el error de entrenamiento de CADA patrón esté por debajo del error aceptable.
          
-         ![1](https://user-images.githubusercontent.com/51035369/202963545-f234d764-2e4e-4682-8ed7-86340b8e6fb7.png)
+         ![2022-12-16 11_30_26-Window](https://user-images.githubusercontent.com/51035369/208120635-8c00443f-1c81-4492-90b5-f29cd6bd5b69.png)
 
-         ![2](https://user-images.githubusercontent.com/51035369/202963582-d5e2e3cd-e685-487d-aefb-a2cf6d769ffb.png)
+         ![2022-12-16 11_30_52-Window](https://user-images.githubusercontent.com/51035369/208120655-d23afab6-13e5-48f3-af8f-277ae96c0c98.png)
+         
          Con esta opción de fin, y para evitar que el entrenamiento se prolongue indefinidamente cuando la red no converge (o lo hace muy lento), la aplicación genera una alerta cuando detecta que el error de cierta cantidad de las últimas épocas es el mismo (comparando cierta cantidad de decimales de los errores). La alerta ofrece la opción de **Parar** el entrenamiento o **Seguir** con el mismo (hasta detectar la misma situación):
          
          ![2022-11-20 21_36_03-Acción requerida](https://user-images.githubusercontent.com/51035369/202963265-abf05e27-7aa7-4249-aef5-fddf37c3ace2.png)
@@ -283,48 +295,63 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
      - Al finalizar el entrenamiento, se muestran:
        - **Resultados:** Épocas que llevó el entrenamiento, Error de entrenamiento de la última época, y Error de validación de la última época.
        
-           ![2022-11-07 22_42_09-Window](https://user-images.githubusercontent.com/51035369/200434007-12138a54-c41c-4a38-ae2e-0d3ca24ad65e.png)
+           ![2022-12-16 11_33_00-TPI MLP 2022 - Inteligencia Artificial - UTN FRRe](https://user-images.githubusercontent.com/51035369/208121122-b7d0e3e0-ab07-4130-9111-9b7d69a8d0cb.png)
 
        - **Gráficos de MSE promedio vs. Épocas:** Cada gráfico representa el Error de entrenamiento y Error de validación por cada época.
 
-           ![Figure_1](https://user-images.githubusercontent.com/51035369/200580615-7399fd81-2541-4265-be1a-7b22d5c7bc80.png)
+           ![Figure_1](https://user-images.githubusercontent.com/51035369/208121238-6d0fc70c-5169-4a6b-926d-537ccef63b1d.png)
 
-     - Se habilita una parte de la **Sección 4** y la **Sección 7**.
+     - Se habilita el botón "Guardar redes", que guarda las 3 redes que se acaban de entrenar como archivos .json en la carpeta "redes_entrenadas" en la ruta del ejecutable.
+       
+       ![image](https://user-images.githubusercontent.com/51035369/208121507-fa854a29-72dc-4c02-bccd-2bf0d9350e11.png)
+
      
 En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña para probar patrones distorsionados
 
 4. **Realizar el test**:
-     - En la **Sección 4** seleccionar la red entrenada previamente con la que queremos realizar el test, y presionar el botón "Hacer test". Esto inserta los patrones del dataset de test guardado en la red seleccionada, en dicha red. Luego calcula las salidas, detecta la letra representada por las salidas y la compara con la salida deseada, obteniendo el número de clasificaciones correctas.
+     - En la **Sección 4** seleccionar, en primer lugar, el tipo de modelo a cargar:
+       - Uno de los 72 modelos precargados,
+       - Una de las redes que se entrenaron desde el inicio de la aplicación:
        
-       ![2022-11-07 23_19_17-Window](https://user-images.githubusercontent.com/51035369/200436074-77db6ca6-f7e6-4ef1-a793-6f40a487ff8f.png)
+       ![image](https://user-images.githubusercontent.com/51035369/208122011-3ddf988f-081e-4792-ae5e-3851e8841f01.png)
+  
+     - Luego seleccionar el modelo en la segunda lista (esto habilita el resto de la sección):
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123252-9fc07330-982b-4a03-aaef-33d419fd6a75.png)
 
+     - Presionar el botón "Hacer test". Esto inserta los patrones del dataset de test guardado en la red seleccionada, en dicha red. Luego calcula las salidas, detecta la letra representada por las salidas y la compara con la salida deseada, obteniendo el número de clasificaciones correctas.
      - Se muestran los resultados (Clasificaciones correctas, números de casos de prueba, y la precisión, calculada a partir de los dos primeros), junto con el gráfico de los Errores por cada patrón.
-
-       ![Figure_1](https://user-images.githubusercontent.com/51035369/200580836-fecba0e6-7d30-4c2f-9131-4eb72c2f4219.png)
-
-       ![2022-11-07 23_19_41-Window](https://user-images.githubusercontent.com/51035369/200436701-53e568e9-a6e4-42d2-914e-9bf8730f51e3.png)
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208122516-be282f34-1af3-4b37-9e96-7b583195c3bd.png)
+     
+       ![image](https://user-images.githubusercontent.com/51035369/208122354-e533d316-c010-4dff-a7b4-ee8ba32b5488.png)
 
 5. **Probar patrones** (segunda pestaña):
-     - En la **Sección 7** seleccionar la red entrenada previamente con la que queremos probar patrones distorsionados.
-     
-       ![2022-11-07 23_27_21-Window](https://user-images.githubusercontent.com/51035369/200437109-599be7fd-a506-4c4a-a6f0-30bca024d8ee.png)
+     - En la **Sección 7** seleccionar, en primer lugar, el tipo de modelo a cargar:
+       - Uno de los 72 modelos precargados,
+       - Una de las redes que se entrenaron desde el inicio de la aplicación:
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123056-d2205db5-0c5d-478b-b9c6-a71d324940c6.png)
 
-     - Esto carga la red seleccionada como red actual, junto con los datasets guardados con la misma (los datasets de entrenamiento y validación guardados en la red seleccionada se usan para comprobar si un patrón aleatorio fué usado en el entrenamiento de esa red), y habilita la **Sección 7** y la **Sección 8**.
+     - Luego seleccionar el modelo en la segunda lista. Esto carga la red seleccionada como red actual, junto con los datasets guardados con la misma (los datasets de entrenamiento y validación guardados en la red seleccionada se usan para comprobar si un patrón aleatorio fué usado en el entrenamiento de esa red), y habilita la **Sección 8** y la **Sección 9**:
+  
+       ![image](https://user-images.githubusercontent.com/51035369/208123597-42ec688c-2ad4-4620-a958-d269d6268f30.png)
+
      - Luego, tenemos 2 opciones:
-       - **Sección 7: Generar y clasificar un patrón con distorsión aleatoria**
+       - **Sección 8: Generar y clasificar un patrón con distorsión aleatoria**
 
-           ![image](https://user-images.githubusercontent.com/51035369/200440431-32251ae2-33b1-4f0b-8f45-317418c28496.png)
+           ![image](https://user-images.githubusercontent.com/51035369/208124414-a4b6a7e9-bce7-4b63-b956-492bf3906e94.png)
 
            - Seleccionar una letra con uno de los 3 botones (se muestra la letra en la matriz de pixeles).
            - Seleccionar la distorsión a generar. **ACLARACIÓN**: El programa comprueba si el patrón distorsionado resultante es uno de los patrones usados para entrenar la red. Si lo fué, se muestra "Si" en el label "¿Patrón usado para entrenar?", mientras que si no, se muestra "No".
-           - Presionar el botón "Distorsionar" (se muestra la letra distorsionada en la matriz de pixeles). Esto habilida la parte derecha de la Sección 7, donde clasificamos la letra distorsionada.
+           - Presionar el botón "Distorsionar" (se muestra la letra distorsionada en la matriz de pixeles). Esto habilita la parte derecha de la Sección 8, donde clasificamos la letra distorsionada.
            - Presionar el botón "Clasificar". Se muestra la letra que representa la salida de la red al insertar el patrón distorsionado, junto con los valores de salida que se usaron para clasificar la letra.
-       - **Sección 8: Generar y clasificar un número dado de patrones con distoriones aleatorias**:
+       - **Sección 9: Generar y clasificar un número dado de patrones con distoriones aleatorias**:
 
-           ![image](https://user-images.githubusercontent.com/51035369/200439675-bf7048ab-9a92-4c36-abb8-96a88aaf7650.png)
+           ![image](https://user-images.githubusercontent.com/51035369/208124626-dfce57a8-a0ca-405b-aedb-e9621ed5ccc8.png)
 
            - Ingresar el número de patrones distorsionados a generar.
-           - Presionar el botón "Probar patrones". Se muestra a la izquierda la matriz de pixeles con cada patrón generado, junto con la letra clasificada a la derecha. **ACLARACIÓN**: Al igual que en la Sección 7, se comprueba si cada patrón generado fué usado en el entrenamiento de la red, y solamente se usan aquellos que no lo fueron.
+           - Presionar el botón "Probar patrones". Se muestra a la izquierda la matriz de pixeles con cada patrón generado, junto con la letra clasificada a la derecha. **ACLARACIÓN**: Al igual que en la Sección 8, se comprueba si cada patrón generado fué usado en el entrenamiento de la red, y solamente se usan aquellos que no lo fueron.
            - Se muestran los resultados de precisión.
 </details>
 
@@ -380,37 +407,39 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
       - "Inicializaciones varias": de los atributos `letraIngresada` (más adelante sirve para saber si ya se presionó o no alguno de los botones de las letras de la segunda pestaña), `funcionDeActivacionSal` (define queé función de transferencia se usa en las neuronas de la capa de salida), `listaRedesEntrenadas` (guarda las redes que entrenamos desde el inicio de la aplicación), y `listaRedesPrecargadas` (guarda las redes/modelos ya entrenados que se cargan al inicio de la aplicación).
       - "Definición de arquitecturas predefinidas": Se define una tupla de diccionarios con las características de las arquitecturas dadas en el TPI.
       - "Inicialización de combobox de arquitecturas predefinidas": Para cada arquitectura listada en el combobox de la Sección 2 se carga por detrás los datos de su estructura, definidos en el ítem anterior.
-      - "Carga de redes precargadas": Se encarga de cargar, al inicio de la aplicación, las redes precargadas en el 2do combobox de la sección 4.
+      - "Carga de redes precargadas": Se encarga de cargar, al inicio de la aplicación, las redes precargadas en el 2do combobox de las secciónes 4 y 7.
     - **MÉTODOS DE CLASE:**
         - `center()`: Sirve para centrar la ventana en la pantalla. Llamado en `initUI()`.
         - `mostrarPorConsola()`: Concatena un string al contenido ya existente en el panel negro de la derecha.
-      - **MÉTODOS PARA LA PRIMERA PESTAÑA:**
         - `desactivarEsto()`: Recibe una tupla de cosas de la interfaz para desactivar.
         - `activarEsto()`: Recibe una tupla de cosas de la interfaz para activar.
         - `generarAlerta()`: Genera una alerta cuando se detecta que el entrenamiento produjo el mismo error (considerando cierta cantidad de dígitos decimales) durante cierta cantidad de décadas, brindando la opción de "Parar" o "Seguir" el entrenamiento. Su función es brindar al usuario la opción de parar el entrenamiento cuando el error no baja, o baja muy lentamente.
         - `animarEsto()`: Muestra una animación resaltando una sección cuando la misma se activa.
+      - **MÉTODOS PARA LA PRIMERA PESTAÑA:**
         - `generarDataset()`: Verifica si alguno de los radio buttons (100, 500 o 1000) se seleccionó y genera los datasets correspondientes. Llamado por el botón "Generar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
-        - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt en la misma ruta del ejecutable. Llamado por el botón "Guardar".
+        - `guardarDataset()`: Guarda el dataset generado/cargado como un .txt dentro de la carpeta "datasets" en la misma ruta del ejecutable. Llamado por el botón "Guardar".
         - `cargarDataset()`: Carga un .txt de un dataset guardado previamente con la aplicación, y genera los datasets correspondientes. Llamado por el botón "Cargar". Activa el botón "Guardar", la sección de "Arquitectura de la red" y los botones para ver los datasets de Entrenamiento, Test, Validación 10%, Validación 20%, y Validación 30%.
         - `desactivarSeñales()`: Bloquea las señales producidas por cambios de valores en los parámetros de la Sección 2 (cambios en spinboxes, combobox de función de transferencia, textedit de alfa y beta), para que los cambios en dichos valores producidos automáticamente **por la aplicación** cuando se selecciona una arquitectura predefinida de la lista del combobox de dicha Sección 2 no dispare la detección que se hace al cambiar dichos valores **manualmente** (dicha detección pretende detectar si la configuración manual de la arquitectura coincide con una predefinida y seleccionarla en la lista), lo que generaría resultados no deseados. De esta manera, la detección solamente se produce cuando los cambios de parámetros son manuales.
         - `tratarArquitecturaPredefinida()`: Carga automáticamente los parámetros de la arquitectura predefinida seleccionada en el combobox de la Sección 2. Usa `desactivarSeñales()` para desactivar la detección del cambio de valor en los parámetros, cambia los valores, y vuelve a activar las señales.
         - `tratarCambioParametrosArq()`: Por un lado comprueba, ante un cambio de parámetro de la Sección 2, si los parametros coinciden con los de una arquitectura predefinida, y la selecciona en la lista del combobox. Por el otro, activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, llamando a `tratarSpinBoxCapaOculta2()`.
         - `tratarSpinBoxCapaOculta2()`: Activa o desactiva el spinbox de tamaño de capa oculta 2 y su label, dependiendo del número de capas ocultas.
         - `crearRed()`: Toma los parámetros seleccionados para la red, y crea la estructura. Activa parte de la Sección 3 (Entrenamiento) y el botón de la esquina inferior derecha "Red actual" para ver el contenido de la red.
-        - `entrenarRed()`: Realiza 3 entrenamientos, en cada uno considerando un conjunto de validación diferente. De acuerdo a la condición de fin seleccionada, realiza cada entrenamiento hasta que el Error de entrenamiento (MSE promedio de una época) sea menor que el error aceptable ingresado, o durante un número fijo de épocas o iteraciones. Dentro de cada entrenamiento y por cada época también se calcula el Error de validación. Una vez finalizados los 3 entrenamientos, arroja los resultados por cada uno (épocas que consumió, Error de entrenamiento y Error de validación de la última época). Llamada por el botón "Entrenar". Activa parte de la Sección 4 (Hacer test) y la Sección 7.
+        - `entrenarRed()`: Realiza 3 entrenamientos, en cada uno considerando un conjunto de validación diferente. De acuerdo a la condición de fin seleccionada, realiza cada entrenamiento hasta que el Error de entrenamiento o Error global (MSE promedio de una época) sea menor que el error aceptable ingresado, o durante un número fijo de épocas o iteraciones. Dentro de cada entrenamiento y por cada época también se calcula el Error de validación. Una vez finalizados los 3 entrenamientos, arroja los resultados por cada uno (épocas que consumió, Error de entrenamiento y Error de validación de la última época). Llamada por el botón "Entrenar". Activa el botón "Guardar redes" de la misma sección.
         - `mostrarErrorEpoca()`: Usado dentro de `entrenarRed()`. Muestra por la consola de la aplicación el error de entrenamiento al terminar una época.
-        - `guardarRedEntrenada()`: Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista en los comboboex de las Secciones 4 y 7. Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura en el combobox de la Sección 2 y obtiene el texto que la describe. Si no, forma la descripción. Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier momento. Llamada dentro de `entrenarRed()`.
+        - `guardarRedEntrenada()`: Guarda una red entrenada para poder usarla en la etapa de test o para probar patrones distorsionados, y la lista en el 2do combobox de las Secciones 4 y 7. Para listarla, comprueba si tiene una arquitectura predefinida. Si la tiene, busca el ítem de dicha arquitectura en el combobox de la Sección 2 y obtiene el texto que la describe. Si no, forma la descripción. Además de la red, guarda su estructura (para actualizar atributos de clase cuando la cargo), el dataset de test, de entrenamiento y el conjunto de validación correspondiente al entrenamiento, de manera de poder usarlos en cualquier momento. Llamada dentro de `entrenarRed()`.
+        - `tratarComboboxTipoModelo()`: Es llamada cuando seleccionamos una de las 2 opciones del 1er. combobox de las Secciones 4 y 7, y se encarga de cargar la lista de redes precargadas o recién entrenadas en el 2do combobox de dichas secciones.
         - `esArquitecturaPredefinida()`: Comprueba si la red actual tiene una arquitectura predefinida. Si la tiene, retorna el string que la describe, tal como está en el combobox de la Sección 2. Si no, retorna string vacío. En ambos casos, retorna en segundo lugar la estructura de la arquitectura (necesaria par actualizar atributos al cargar una red). Llamada dentro de `guardarRedEntrenada()`.
         - `finalizarEntrenamiento()`: Agrupa operaciones comunes a los entrenamientos con las dos condiciones de fin, para evitar repetición de código. Llamada dentro de `entrenarRed()`.
+        - `guardarRedesEntrenadas()`: Guarda las últimas redes entrenadas en la Sección 3 (las 3 redes entrenadas, cada una con un conjunto de validación distinto), y los datasets de entrenamiento, test y validación asociados en archivos .json dentro de la carpeta "redes_entrenadas" en el directorio del ejecutable. 
         - `vaciarRed()`: Asigna al atributo "red" una estructura de red vacía. Se usa para resetear la red en cada entrenamiento. Llamado dentro de `entrenarRed()`.
         - `probarDataset()`: Calcula las clasificaciones correctas de los patrones de un dataset, la precisión, el error promedio y obtiene la lista de errores o MSEs, y retorna esos cuatro elementos. Llamada dentro de `hacerTest()`, `probarPatrones()`, y `entrenarRed()`.
         - `probarPatron()`: Presenta un patrón a la red, calcula la salida, comprueba si la salida obtenida es igual a la deseada, y devuelve 1 o 0 dependiendo de la coincidencia, el error, y las salidas obtenidas convertidas a binario, y sin convertir. Llamada dentro de `probarDataset()`, y `clasificarPatron()`.
-        - `graficarErrores()`: Genera un 3 gráficos, uno por cada uno de los 3 entrenamientos que se hacen al presionar el botón "Entrenar", comparando Errores de entrenamiento y Validación contra las épocas. Llamado por `entrenarRed()`.
-        - `hacerTest()`: Toma del combobox la red guardada seleccionada, prueba el dataset de test en ella, muestra resultados de precisión, y el gráfico de error de test. Llamada por el botón "Hacer test".
-        - `tratarComboboxTest()`: Llamada cuando se selecciona del combobox de la Sección 4 una red entrenada. Activa el resto de la sección "Test", carga como red actual la red seleccionada en el combobox, y resguarda el dataset de test correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test.
-        - `cargarRedSeleccionada()`: Llamada cuando se selecciona del combobox de la Sección 4 o de la Sección 7 una red entrenada. Carga en la red actual la red seleccionada en el combobox pasado, y retorna los datasets de entrenamiento, test y validación usados en el entrenamiento de la red cargada. Llamada en `tratarComboboxTest()` y en `tratarComboboxProbarpatron()`.
+        - `graficarErrores()`: Genera 3 gráficos, uno por cada uno de los 3 entrenamientos que se hacen al presionar el botón "Entrenar", comparando Errores de entrenamiento y Validación contra las épocas. Llamado por `entrenarRed()`.
+        - `hacerTest()`: Toma del 2do combobox de la Sección 4 la red seleccionada, prueba el dataset de test en ella, muestra resultados de precisión, y el gráfico de error de test. Llamada por el botón "Hacer test".
+        - `tratarComboboxTest()`: Llamada cuando se selecciona del 2do combobox de la Sección 4 una red entrenada o precargada. Activa el resto de la sección "Test", carga como red actual la red seleccionada en el combobox, y resguarda el dataset de test correspondiente al entrenamiento de la red cargada para poder usarlo en la etapa de test.
+        - `cargarRedSeleccionada()`: Llamada cuando se selecciona del 2do combobox de la Sección 4 o de la Sección 7 una red entrenada. Carga como red actual la red seleccionada en el combobox pasado, y retorna los datasets de entrenamiento, test y validación usados en el entrenamiento de la red cargada. Llamada en `tratarComboboxTest()` y en `tratarComboboxProbarpatron()`.
       - **MÉTODOS PARA LA SEGUNDA PESTAÑA:**
-        - `tratarComboboxProbarpatron()`:  Llamada cuando se selecciona del combobox de la Sección 7 una red entrenada. Activa nuevas funciones de la pestaña "Probar patrón", carga como red actual la red seleccionada en el combobox, y resguarda los datasets de entrenamiento y validación correspondiente al entrenamiento de la red cargada para poder usarlos en `comprobarPatron()`.
+        - `tratarComboboxProbarpatron()`:  Llamada cuando se selecciona del 2do. combobox de la Sección 7 una red entrenada o precargada. Activa nuevas funciones de la pestaña "Probar patrón", carga como red actual la red seleccionada en el combobox, y resguarda los datasets de entrenamiento y validación correspondiente al entrenamiento de la red cargada para poder usarlos en `comprobarPatron()`.
         - `tratarLineEditSlider()`: Traslada el valor del slider al line edit de la derecha, a medida que se lo mueve.
         - `tratarLetra()`: Llamado al presionar el botón de alguna de las letras (botones "b", "d", y "f"). Hace que se muestre por "consola" la letra seleccionada, que se muestre en la matriz de pixeles, y guarda dicha letra en su respectivo atributo.
         - `setLetraIngresada`: Guarda la letra seleccionada. Llamada en `tratarLetra()`.
@@ -443,16 +472,21 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 
 - Cambiada la presentación de resultados:
   - Los resultados ya no se muestran con notación científica.
-  - Los errores en los resultados del entrenamiento se muestran con una precisión de hasta 8 dígitos decimales.
+    <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208113320-9dd5aeee-0e60-43cc-8461-55f1d99fe484.png"></p>
+  - Los errores en los resultados del entrenamiento se muestran con una precisión de hasta 8 dígitos decimales.  
   - Los valores de precisión se muestran en forma de porcentaje con 2 dígitos decimales.
+    <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208113733-110dedc6-5bdf-4a14-89b4-0677e6b299ae.png"></p>
   - Al clasificar un patrón, las salidas de las neuronas de salida se muestran en forma de porcentaje con 2 dígitos decimales.
+    <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208113801-8e2e6a50-5583-48a9-abf1-061b77ca5762.png"></p>
 - Se dejó de usar el corte automático a las 200 épocas, que prolongaba demasiado el entrenamiento para datasets muy grandes (500 y 100 ejemplos), y, en cambio, se agregó una ventana de alerta cuando el entrenamiento produce el mismo error (considerando cierta cantidad de cifras decimales en el error) durante cierta cantidad de épocas, a fin de ofrecer la opción de cortar el entrenamiento cuando la red no converge (o converge muy lento). 
 <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202961615-cc5e8e9f-c4b7-4b7f-abd7-43a5c8b421bc.png"></p>
 
 - Los errores repetidos y la cantidad de cifras consideradas para comparar los errores se puede modificar en las siguientes líneas:
-<p align="center"><img width="80%" height="80%" src="https://user-images.githubusercontent.com/51035369/202961391-63233b5c-1dcb-474e-8394-c556d5890dbc.png"></p>
+<p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208113966-377954be-1a84-4910-9cc2-53a1d2b86c3f.png"></p>
 
 - Mejorada la representación de las informaciones mostradas por la consola de la aplicación. Se agregó espaciado entre renglones y ahora se listan los errores producidos por cada época durante el entrenamiento.
+<p align="center"><img width="50%" height="50%" src="https://user-images.githubusercontent.com/51035369/208114057-180a9813-f0d5-4d8f-8437-d4f1f62136dd.png"></p>
+
 - Se mejoró la representación del contenido de la red (botón "Red actual"). Se organizaron matricialmente las neuronas de entrada (para evitar una lista larga de 100 neuronas) y se agregó un recuadro a cada capa para distinguir mejor cuando comienza cada una.
 <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202963076-1cb53936-241f-4165-be1b-5efd4a797393.png"></p>
 
@@ -461,5 +495,11 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
   <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/202929260-9ae04f62-61d5-42e4-8e7d-06c9b793e4e1.gif"></p>
   
 - Se quitaron los "ticks" fijos del eje x en el gráfico de Errores vs Épocas, lo que provocaba que cuando las épocas eran muchas (>100), los números quedaran muy juntos. Ahora, matplotlib los genera automáticamente. Lo que antes era la época 1, ahora se indica con 0, y lo que era la época *n* ahora es la época *n-1*. Lo mismo para el gráfico de error de test.
+  <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208114256-3b1dd850-c89a-44fc-8211-55b65e22200d.png"></p>
+  <p align="center"><img width="" height="" src="https://user-images.githubusercontent.com/51035369/208114683-e1e96da5-43d3-418f-b175-5e18e383a0e5.png"></p>
+
+- Ahora se permite hacer las inferencias con modelos precargados, sin obligarme a entrenarlos antes. Dichos modelos se cargan al inicio de la aplicación, y son los 72 modelos generados en las 72 pruebas solicitadas en la consigna:
+
+  ![7](https://user-images.githubusercontent.com/51035369/208116225-5726087f-54ab-4445-a782-ba2996a48f03.png)
 
 </details>
