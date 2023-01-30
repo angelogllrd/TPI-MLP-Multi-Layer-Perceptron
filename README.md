@@ -88,7 +88,7 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 ## Generación del ejecutable (Windows y Linux)
 <details><summary>Ver Generación del ejecutable</summary>
 
-> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
   
 Para evitar la instalación de las librerias podemos obtener un ejecutable, tanto en Windows como en Linux, usando [**Auto PY to EXE**](https://dev.to/eshleron/how-to-convert-py-to-exe-step-by-step-guide-3cfi):
   ```
@@ -173,7 +173,7 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 ## Partes de la aplicación
 <details><summary>Ver Partes de la aplicación</summary>
   
-> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
 
 La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** y **"Probar patrón"**.
 
@@ -231,7 +231,7 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 ## Instrucciones de uso de la aplicación
 <details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
-> Descarga de la aplicación: [Windows](https://mega.nz/file/RN1BFCxb#wIpP6bi0jKIFc2AJOPP8Uby2qdYrUrbSWFJeeRgra1o) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
+> Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/pRUzlCZD#p9nYFErkMB_HrnVYR80nBEG7sZN6lrYFc96RSv_XGgc)
 
 1. **Generar/Cargar dataset o Seleccionar modelo precargado:**
      
