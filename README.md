@@ -1,5 +1,6 @@
 # Análisis MLP (Multi-Layer Perceptron) 
-TPI del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
+Trabajo Práctico Integrador del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
+> Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/tAU12SRS#VqHcc5a4op4hIj1YW2LPBH2J4wZek5jXty73OuoYqhk)
 
 ![Portada](https://user-images.githubusercontent.com/51035369/207970240-5a0e859f-dcec-4c65-b7be-68f1d4c2f88f.png)
 
