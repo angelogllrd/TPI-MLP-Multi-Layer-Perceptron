@@ -3,8 +3,18 @@ TPI del año 2022 para la asignatura Inteligencia Artificial de la UTN FRRe.
 
 ![Portada](https://user-images.githubusercontent.com/51035369/207970240-5a0e859f-dcec-4c65-b7be-68f1d4c2f88f.png)
 
+## Tabla de contenidos
+1. [Consigna](#consigna)
+2. [Requerimientos para ejecutar el .py](#requerimientos-para-ejecutar-el-py)
+3. [Generación del ejecutable (Windows y Linux)](#generación-del-ejecutable-windows-y-linux)
+4. [Estructura de los datasets](#estructura-de-los-datasets)
+5. [Estructura de la red neuronal](#estructura-de-la-red-neuronal)
+6. [Partes de la aplicación](#partes-de-la-aplicación)
+7. [Instrucciones de uso de la aplicación](#instrucciones-de-uso-de-la-aplicación)
+8. [Estructuración del código](#estructuración-del-código)
+9. [Últimos cambios](#últimos-cambios)
+
 ## Consigna
-<details><summary>Ver Consigna</summary>
 
 #### Objetivos:
 1. Implementar el algoritmo MLP.
@@ -53,8 +63,6 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 </details>
 
 ## Requerimientos para ejecutar el .py
-<details><summary>Ver Requerimientos para ejecutar el .py</summary>
-
   
 - [**Python 3**](https://www.python.org/downloads/)
 - [**pip**](https://pypi.org/project/pip/) (ya incluido con el instalador de Windows). En Linux:
@@ -86,7 +94,6 @@ Los patrones a detectar y clasificar estarán contenidos en una matriz de 10x10 
 </details>
 
 ## Generación del ejecutable (Windows y Linux)
-<details><summary>Ver Generación del ejecutable</summary>
 
 > Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/tAU12SRS#VqHcc5a4op4hIj1YW2LPBH2J4wZek5jXty73OuoYqhk)
   
@@ -96,9 +103,9 @@ Para evitar la instalación de las librerias podemos obtener un ejecutable, tant
   auto-py-to-exe
   ```
 <p align="center">
-<img width="" height="" src="https://user-images.githubusercontent.com/51035369/199046470-f7a59d19-6258-423f-ac75-3876d7c3eb2e.png">
+<img width="" height="" src="https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/assets/51035369/22d74466-2686-4c99-a8b6-379bdebbde45">
 </p>
-  
+
 O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
   ```
   pip install pyinstaller
@@ -115,7 +122,6 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 </details>
 
 ## Estructura de los datasets
-<details><summary>Ver Estructura de los datasets</summary>
 
 - Como se pide en la consigna, los datasets se generan cumpliendo el 10% sin distorsión, y el restante 90% distorsionado entre 1% y 30%. 
 - Los datasets se representan usando listas de listas, donde cada sublista es un patrón de entrada o fila del dataset con 103 elementos (1s y 0s), donde los primeros 100 corresponden al patrón y los últimos 3 a las clases, una para cada letra (b, d y f).
@@ -153,7 +159,6 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 </details>
 
 ## Estructura de la red neuronal
-<details><summary>Ver Estructura de la red neuronal</summary>
   
 ![200857729-afc1c9ad-a962-4396-a839-d6a528fbf9fc](https://user-images.githubusercontent.com/51035369/202927141-dcfe2b93-417a-4bf3-9c08-080e58c20098.png)
 
@@ -171,7 +176,6 @@ O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
 </details>
   
 ## Partes de la aplicación
-<details><summary>Ver Partes de la aplicación</summary>
   
 > Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/tAU12SRS#VqHcc5a4op4hIj1YW2LPBH2J4wZek5jXty73OuoYqhk)
 
@@ -229,7 +233,6 @@ La aplicación se divide en 2 pestañas principales: **"Entrenamiento y test"** 
 </details>
   
 ## Instrucciones de uso de la aplicación
-<details><summary>Ver Instrucciones de uso de la aplicación</summary>
 
 > Descarga de la aplicación: [Windows](https://mega.nz/file/oU8FyKSD#-RtbxVG-4oHusGubdogGGYl_SYHAVaoVxt71JoBLX_U) / [Linux](https://mega.nz/file/tAU12SRS#VqHcc5a4op4hIj1YW2LPBH2J4wZek5jXty73OuoYqhk)
 
@@ -356,7 +359,6 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 </details>
 
 ## Estructuración del código
-<details><summary>Ver Estructuración del código</summary>
   
 - Importación de librerias necesarias (PyQt5, sys, os, random, time, math, json, matplotlib, numpy).
 - `resource_path()`: Función para no tener problemas con las rutas en la conversion a .exe. Todos los paths que referencian a archivos externos se pasan a esta función. 
@@ -464,7 +466,6 @@ En este momento podemos elegir realizar el test, o bien ir a la segunda pestaña
 </details>
 
 ## Últimos cambios
-<details><summary>Ver Últimos cambios</summary>
 
 ### Cambios posteriores a la entrega del 9/11
 - Agregados tooltips a todos los botones y comboboxes.
