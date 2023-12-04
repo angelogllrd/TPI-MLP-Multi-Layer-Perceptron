@@ -103,13 +103,13 @@ Para evitar la instalación de las librerias podemos obtener un ejecutable, tant
   auto-py-to-exe
   ```
 <p align="center">
-<img width="" height="" src="https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/assets/51035369/22d74466-2686-4c99-a8b6-379bdebbde45">
+<img width="" height="" src="https://github.com/angelogllrd/TPI-MLP-Multi-Layer-Perceptron/assets/51035369/00fa3994-70be-4b1d-9a84-263091c0fa4c">
 </p>
 
 O directamente con **pyinstaller** (lo que usa Auto PY to EXE por detrás):
   ```
   pip install pyinstaller
-  pyinstaller --noconfirm --onefile --windowed --icon "path_a_la_carpeta/tpi/icons/icon.ico" --add-data "path_a_la_carpeta/tpi/icons;icons/" --add-data "path_a_la_carpeta/tpi/ui;ui/"  "path_a_la_carpeta/tpi/tpi.py"
+  pyinstaller --noconfirm --onefile --windowed --icon "path_a_la_carpeta/tpi/icons/icon.ico" --add-data "path_a_la_carpeta/tpi/icons;icons/" --add-data "path_a_la_carpeta/tpi/ui;ui/" --add-data "path_a_la_carpeta/tpi/redes_precargadas;redes_precargadas/" "path_a_la_carpeta/tpi/tpi.py"
   ```
   En cualquier caso, para no tener problemas con las referencias relativas en el .exe final, el developer de Auto PY to EXE recomienda agregar al código [esto](https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/#the-one-file-resource-wrapper), y pasar cada path de los archivos referenciados a la función `resource_path()`. Por ejemplo, en lugar de:
   ```
